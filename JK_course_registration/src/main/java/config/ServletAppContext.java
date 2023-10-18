@@ -51,7 +51,7 @@ public class ServletAppContext implements WebMvcConfigurer{
 		registry.addResourceHandler("/**").addResourceLocations("/resources/");
 	}
 	
-	//BasicDataSource
+	// 데이터베이스 접속 정보를 관리하는 Bean
 	public BasicDataSource dataSource() {
 		
 		BasicDataSource source = new BasicDataSource();
@@ -63,6 +63,8 @@ public class ServletAppContext implements WebMvcConfigurer{
 		return source;
 	}
 	
+	// SqlSessionFactory : SqlSessionFactory는 MyBatis의 핵심 객체로, JDBC 연결 및 SQL 세션을 관리합니다. 
+	// 이 메서드는 데이터베이스 접속 정보를 받아와서 SqlSessionFactoryBean을 설정하고 SqlSessionFactory를 생성한 후 반환합니다.
 	public SqlSessionFactory factory(BasicDataSource source) throws Exception {
 		
 		SqlSessionFactoryBean factoryBean = new SqlSessionFactoryBean();
