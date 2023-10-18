@@ -10,5 +10,6 @@
 	<h1>Hello Spring MVC Java</h1>
 	<img src="image/spring.png"/>
 	h2
+	h2
 </body>
 </html>
