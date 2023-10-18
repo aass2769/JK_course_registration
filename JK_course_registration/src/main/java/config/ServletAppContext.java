@@ -12,7 +12,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 // Controller 어노테이션이 셋팅되어 있는 클래스를 Controller로 등록한다.
 @EnableWebMvc
 // 스캔할 패키지를 지정한다.
-@ComponentScan("com.woomin.controller")
+@ComponentScan("controller")
 public class ServletAppContext implements WebMvcConfigurer{
 
 	//Controller의 메서드가 반환하는 jsp의 이름 앞뒤에 경로와 확장자를 붙혀주도록 설정한다.
