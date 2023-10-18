@@ -9,8 +9,5 @@
 <body>
 	<h1>Hello Spring MVC Java</h1>
 	<img src="image/spring.png"/>
-	h2
-	h2
-	된다~~
 </body>
 </html>
