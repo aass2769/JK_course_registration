@@ -3,14 +3,23 @@ package config;
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
+import org.mybatis.spring.mapper.MapperFactoryBean;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistration;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+import interceptor.TopInterceptor;
+import mapper.TopMapper;
+import service.TopService;
 
 // Spring MVC 프로젝트에 관련된 설정을 하는 클래스
 @Configuration
@@ -34,6 +43,9 @@ public class ServletAppContext implements WebMvcConfigurer{
 	
 	@Value("${db.password}")
 	private String db_password;
+	
+	@Autowired
+	private TopService topService;
 	
 	//Controller의 메서드가 반환하는 jsp의 이름 앞뒤에 경로와 확장자를 붙혀주도록 설정한다.
 	@Override
@@ -72,6 +84,26 @@ public class ServletAppContext implements WebMvcConfigurer{
 		SqlSessionFactory factory = factoryBean.getObject();
 		
 		return factory;
+	}
+	
+	@Bean
+	public MapperFactoryBean<TopMapper> getTopMapper(SqlSessionFactory factory) throws Exception{
+		
+		MapperFactoryBean<TopMapper> factoryBean = new MapperFactoryBean<TopMapper>(TopMapper.class);
+		factoryBean.setSqlSessionFactory(factory);
+		
+		return factoryBean;
+	}
+	
+	@Override
+	public void addInterceptors(InterceptorRegistry registry) {
+		// TODO Auto-generated method stub
+		WebMvcConfigurer.super.addInterceptors(registry);
+		
+		TopInterceptor topInterceptor = new TopInterceptor(topService);
+		
+		InterceptorRegistration reg1 = registry.addInterceptor(topInterceptor);
+		reg1.addPathPatterns("/**");
 	}
 	
 	
