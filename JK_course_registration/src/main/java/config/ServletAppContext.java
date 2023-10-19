@@ -32,6 +32,7 @@ import service.TopService;
 @PropertySource("/WEB-INF/properties/db.properties")
 public class ServletAppContext implements WebMvcConfigurer{
 
+	//@Value를 사용하여 properties 파일에 있는 변수 이름으로 프로퍼티 값을 주입할 수 있다.
 	@Value("${db.classname}")
 	private String db_classname;
 	
@@ -64,6 +65,7 @@ public class ServletAppContext implements WebMvcConfigurer{
 	}
 	
 	// 데이터베이스 접속 정보를 관리하는 Bean
+	@Bean
 	public BasicDataSource dataSource() {
 		
 		BasicDataSource source = new BasicDataSource();
@@ -77,7 +79,8 @@ public class ServletAppContext implements WebMvcConfigurer{
 	
 	// SqlSessionFactory : SqlSessionFactory는 MyBatis의 핵심 객체로, JDBC 연결 및 SQL 세션을 관리합니다. 
 	// 이 메서드는 데이터베이스 접속 정보를 받아와서 SqlSessionFactoryBean을 설정하고 SqlSessionFactory를 생성한 후 반환합니다.
-	public SqlSessionFactory factory(BasicDataSource source) throws Exception {
+	@Bean
+	public SqlSessionFactory factory(BasicDataSource source) throws Exception{
 		
 		SqlSessionFactoryBean factoryBean = new SqlSessionFactoryBean();
 		factoryBean.setDataSource(source);
