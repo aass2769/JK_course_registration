@@ -62,12 +62,12 @@
 							<div class="form-group">
 								<form:label path="user_pw">Password</form:label> 
 								<i class="fa fa-eye-slash" id="eye_icon_signup"></i> 
-								<form:input path="user_pw" class="form-control" id="signup_password"/>
+								<form:password path="user_pw" class="form-control" id="signup_password"/>
 								<form:errors path="user_pw" style="color:red"/>
 							</div>
 							<div class="form-group">
 								<form:label path="user_pw2">Confirm Password</form:label>
-								<form:input path="user_pw2" class="form-control" id="cpass"/>
+								<form:password path="user_pw2" class="form-control" id="cpass"/>
 								<form:errors path="user_pw2" style="color:red"/>
 							</div>
 							<div class="form-group">
