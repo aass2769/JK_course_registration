@@ -10,6 +10,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
+import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -19,6 +21,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import interceptor.TopInterceptor;
 import mapper.TopMapper;
+import mapper.UserMapper;
 import service.TopService;
 
 // Spring MVC 프로젝트에 관련된 설정을 하는 클래스
@@ -98,6 +101,16 @@ public class ServletAppContext implements WebMvcConfigurer{
 		return factoryBean;
 	}
 	
+	@Bean
+	public MapperFactoryBean<UserMapper> getUserMapper(SqlSessionFactory factory) throws Exception{
+		
+		MapperFactoryBean<UserMapper> factoryBean = new MapperFactoryBean<UserMapper>(UserMapper.class);
+		factoryBean.setSqlSessionFactory(factory);
+		
+		return factoryBean;
+		
+	}
+	
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		// TODO Auto-generated method stub
@@ -108,6 +121,24 @@ public class ServletAppContext implements WebMvcConfigurer{
 		InterceptorRegistration reg1 = registry.addInterceptor(topInterceptor);
 		reg1.addPathPatterns("/**");
 	}
+	
+	//@PropertySource로 등록한 properties파일과 메시지로 등록한 properties파일이 충돌해서 오류가 나기 떄문에
+	//PropertySourcesPlaceholderConfigurer 객체를 생성해준다.
+	//정적으로 구성하는 이유는 이 빈이 매우 일찍 초기화되어야 프로퍼티 파일의 값을 초기 단계에서 사용할 수 있다. 빈 초기화 과정에서 정확한 프로퍼티 값을 보장하고 다른 빈들이 올바르게 초기화될 수 있도록 정적으로 작성.
+	@Bean
+	public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
+		return new PropertySourcesPlaceholderConfigurer();
+	}
+	
+	//Properties 파일을 Message로 등록한다.
+	@Bean
+	public ReloadableResourceBundleMessageSource messageSource() {
+		ReloadableResourceBundleMessageSource res = new ReloadableResourceBundleMessageSource();
+		res.setBasenames("/WEB-INF/properties/userErrors");
+		
+		return res;
+	}
+		
 	
 	
 }

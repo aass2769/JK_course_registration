@@ -11,7 +11,7 @@
 <meta name="keywords" content="Sign up, Sign in">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Login</title>
+<title>JK_course_registration</title>
 <!--Bootstrap Css-->
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
@@ -44,37 +44,39 @@
 						<!--title-->
 						<form:form action="join_pro" method="post" modelAttribute="userBean" name="form" class="form w-100 p-4" id="form" style="padding-top: 0 !important; padding-bottom: 0 !important;">
 							<div class="form-group">
-								<form:label path="user_name"/>
-								<input type="text" name="name" class="form-control" id="name" />
+								<form:label path="user_name">Name</form:label>
+								<form:input path="user_name" class="form-control" id="name"/>
+								<form:errors path="user_name" style="color:red"/>
 							</div>
 							<!--form-row-->
 							<div class="form-group">
-								<label for="text">ID</label>
+								<form:label path="user_id">ID</form:label>
 								<div class="input-group">
-								<input path="user_id" class="form-control" onkeypress="resetUserIdExist()"/>
+								<form:input path="user_id" class="form-control" onkeypress="resetUserIdExist()"/>
 								<div class="input-group-append">
 									<button type="button" class="btn btn-primary" onclick="checkUserIdExist()">중복확인</button>
 								</div>
 							</div>
+							<form:errors path="user_id" style="color:red"/>
 							</div>
 							<div class="form-group">
-								<label for="signup_password">Password</label> <i
-									class="fa fa-eye-slash" id="eye_icon_signup"></i> <input
-									type="password" name="pass" class="form-control"
-									id="signup_password" />
+								<form:label path="user_pw">Password</form:label> 
+								<i class="fa fa-eye-slash" id="eye_icon_signup"></i> 
+								<form:input path="user_pw" class="form-control" id="signup_password"/>
+								<form:errors path="user_pw" style="color:red"/>
 							</div>
 							<div class="form-group">
-								<label for="cpass">Confirm Password</label> <input
-									type="password" name="cpass" class="form-control" id="cpass" />
+								<form:label path="user_pw2">Confirm Password</form:label>
+								<form:input path="user_pw2" class="form-control" id="cpass"/>
+								<form:errors path="user_pw2" style="color:red"/>
 							</div>
 							<div class="form-group">
-								<button type="submit" class="btn btn-primary register_btn w-100">Sign
-									Up</button>
+								<form:button class="btn btn-primary register_btn w-100">Sign Up</form:button>
 							</div>
 						</form:form>
 
 						<div class="already_member_box">
-							<p class="text-center" id="to_login">I am already member</p>
+							<p class="text-center" id="to_login"><a href="${root }user/login">I am already member</a></p>
 						</div>
 					</div>
 				</div>

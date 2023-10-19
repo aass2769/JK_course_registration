@@ -62,8 +62,8 @@
 
 						<div
 							class="already_member_box d-flex justify-content-between px-4">
-							<span class="text-center" id="to_signup">Create an
-								account?</span> <span class="text-center">Forgot password</span>
+							<span class="text-center" id="to_signup"><a href="${root }/user/join">Create an account?</a></span> 
+							<span class="text-center">Forgot password</span>
 						</div>
 					</div>
 				</div>
