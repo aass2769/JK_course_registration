@@ -37,7 +37,7 @@
 							<input type="password" id="user_pw" name="user_pw" class="form-control"/>
 						</div>
 						<div class="form-group text-right">
-							<button type="submit" class="btn btn-primary">로그인</button>
+							<button type="submit" class="btn btn-primary" style="background-color: green;">로그인</button>
 							<a href="join.html" class="btn btn-danger">회원가입</a>
 						</div>
 					</form>

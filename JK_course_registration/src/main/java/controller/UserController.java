@@ -18,6 +18,11 @@ public class UserController {
 		return "user/login";
 	}
 	
+	@GetMapping("/login2")
+	public String login2() {
+		return "user/login2";
+	}
+	
 	@GetMapping("/modify_user")
 	public String modify_user() {
 		return "user/modify_user";
