@@ -10,21 +10,13 @@
 		<span class="navbar-toggler-icon"></span>        
 	</button>
 	<div class="collapse navbar-collapse" id="navMenu">
+	<c:forEach var="major" items="{major_list}">
 		<ul class="navbar-nav">
 			<li class="nav-item">
-				<a href="board_main.html" class="nav-link">자유게시판</a>
-			</li>
-			<li class="nav-item">
-				<a href="board_main.html" class="nav-link">유머게시판</a>
-			</li>
-			<li class="nav-item">
-				<a href="board_main.html" class="nav-link">정치게시판</a>
-			</li>
-			<li class="nav-item">
-				<a href="board_main.html" class="nav-link">스포츠게시판</a>
+				<a href="${root}main" class="nav-link">${major}</a>
 			</li>
 		</ul>
-		
+	</c:forEach>
 		<ul class="navbar-nav ml-auto">
 			<li class="nav-item">
 				<a href="login.html" class="nav-link">로그인</a>
