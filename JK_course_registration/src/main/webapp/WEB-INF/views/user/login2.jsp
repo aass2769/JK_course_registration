@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="root" value="${pageContext.request.contextPath}/"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,11 +26,11 @@
 <body>
 	<section class="login_section">
 		<div class="container outer_container accounts_container">
-			<div class="row h-100">
+			<div class="row h-100" style="margin-top: 70px;">
 				<div
 					class="col col-sm-12 col-md-12 col-lg-8 m-0 p-0 w-100 h-100 accounts_col">
 					<div class="accounts_image w-100 h-100">
-						<img src="image/spring.png"/>
+						<img src="${root}image/loginlogo.jpg" width="755" height="505" />
 					</div>
 					<!--accounts_image-->
 				</div>
