@@ -21,4 +21,9 @@ public class UserDao {
 	public String checkDuplicateId(String user_id) {
 		return userMapper.checkDuplicateId(user_id);
 	}
+	
+	//로그인 메서드
+	public UserBean userLoginIn(UserBean loginUserBean) {
+		return userMapper.userLoginIn(loginUserBean);
+	}
 }

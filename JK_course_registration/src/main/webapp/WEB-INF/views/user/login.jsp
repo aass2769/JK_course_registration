@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <c:set var="root" value="${pageContext.request.contextPath}/"/>
 <!DOCTYPE html>
 <html>
@@ -42,24 +43,28 @@
 						<div class="title  mt-4 p-4 w-100">
 							<h1>수강신청 사이트</h1>
 							<p class="mt-3">COURSE REGISTRATION</p>
+							<c:if test="${fail == true }">
+								<p style="color:red">아이디 또는 비밀번호를 잘못입력했습니다.</p>
+							</c:if>
 						</div>
 						<!--title-->
-						<form method="post" name="form" class="form  w-100 p-4" id="form">
+						<form:form action="${root }user/login_pro" method="post" modelAttribute="loginUserBean" class="form  w-100 p-4" id="form">
 							<div class="form-group">
-								<label for="email">ID</label> <input type="email"
-									name="email" class="form-control" id="email"/>
+								<form:label path="user_id">ID</form:label>
+								<form:input path="user_id" class="form-control"/>
+								<form:errors path="user_id" style="color:red"/>
 							</div>
 							<div class="form-group">
-								<label for="login_password">Password</label> <i
-									class="fa fa-eye-slash" id="eye_icon_login"></i> <input
-									type="password" name="pass" class="form-control"/>
+								<form:label path="user_pw">Password</form:label>
+								 <i class="fa fa-eye-slash" id="eye_icon_login"></i> 
+								<form:password path="user_pw" class="form-control"/>
+								<form:errors path="user_pw" style="color:red"/>
 							</div>
 							<div class="form-group mb-0">
-								<button type="submit" class="btn btn-primary register_btn w-100">Sign
-									In</button>
+								<form:button class="btn btn-primary register_btn w-100">Sign In</form:button>
 							</div>
-						</form>
-
+						</form:form>
+						
 						<div
 							class="already_member_box d-flex justify-content-between px-4">
 							<span class="text-center" id="to_signup"><a href="${root }/user/join">Create an account?</a></span> 

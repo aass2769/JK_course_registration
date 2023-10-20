@@ -13,8 +13,14 @@ public interface UserMapper {
 	void setUserSignUp(UserBean joinUserBean);
 	
 	//중복확인을 위해 유저아이디를 가져오는 메서드
-	@Select("select USER_ID "
-			+ "from USER_TABLE "
-			+ "WHERE USER_ID = #{user_id}")
+	@Select("SELECT user_id "
+			+ "FROM user_table "
+			+ "WHERE user_id = #{user_id}")
 	String checkDuplicateId(String user_id);
+	
+	//로그인 메서드
+	@Select("SELECT user_key, user_id, user_pw "
+			+ "FROM user_table "
+			+ "WHERE user_id = #{user_id} AND user_pw = #{user_pw}")
+	UserBean userLoginIn(UserBean loginUserBean);
 }

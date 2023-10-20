@@ -57,8 +57,9 @@ public class SpringConfigClass extends AbstractAnnotationConfigDispatcherServlet
 	@Override
 	protected Class<?>[] getRootConfigClasses() {
 		// TODO Auto-generated method stub
-		return new Class[] {RootAppContext.class};
+		return new Class[] {RootAppContext.class, UserConfig.class};
 	}
+	
 	
 	// 파라미터 인코딩 필터 설정
 	@Override

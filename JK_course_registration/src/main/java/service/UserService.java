@@ -1,5 +1,7 @@
 package service;
 
+import javax.annotation.Resource;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,6 +13,10 @@ public class UserService {
 
 	@Autowired
 	private UserDao userDao;
+	
+	//로그인 sessionScope 빈
+	@Resource(name = "userSession")
+	private UserBean userSession;
 	
 	//회원가입
 	public void setUserSignUp(UserBean joinUserBean) {
@@ -28,5 +34,20 @@ public class UserService {
 		} else {
 			return false;
 		}
+	}
+	
+	//로그인 메서드
+	public UserBean userLoginIn(UserBean loginUserBean) {
+		
+		UserBean userCheck = userDao.userLoginIn(loginUserBean);
+		
+		if(userCheck != null) {
+			userSession.setUser_key(userCheck.getUser_key());
+			userSession.setUser_id(userCheck.getUser_id());
+			userSession.setUser_name(userCheck.getUser_name());
+			userSession.setUserLogin(true);
+		}
+		
+		return userCheck;
 	}
 }

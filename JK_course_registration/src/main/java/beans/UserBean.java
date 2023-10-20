@@ -26,8 +26,12 @@ public class UserBean {
 	//유저 중복확인
 	private boolean duplicate_id;
 	
+	//유저 로그인상태 (true면 로그인상태, false면 로그인 안된상태)
+	private boolean userLogin;
+	
 	public UserBean() {
 		this.duplicate_id = false;
+		this.userLogin = false;
 	}
 	
 	public int getUser_key() {
@@ -66,6 +70,12 @@ public class UserBean {
 	}
 	public void setDuplicate_id(boolean duplicate_id) {
 		this.duplicate_id = duplicate_id;
+	}
+	public boolean isUserLogin() {
+		return userLogin;
+	}
+	public void setUserLogin(boolean userLogin) {
+		this.userLogin = userLogin;
 	}
 	
 	

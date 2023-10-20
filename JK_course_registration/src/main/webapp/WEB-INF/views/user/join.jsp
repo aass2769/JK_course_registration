@@ -75,7 +75,7 @@
 							<h1>Sign Up</h1>
 						</div>
 						<!--title-->
-						<form:form action="join_pro" method="post" modelAttribute="joinUserBean" name="form" class="form w-100 p-4" id="form" style="padding-top: 0 !important; padding-bottom: 0 !important;">
+						<form:form action="${root }user/join_pro" method="post" modelAttribute="joinUserBean" name="form" class="form w-100 p-4" id="form" style="padding-top: 0 !important; padding-bottom: 0 !important;">
 							<form:hidden path="duplicate_id"/>
 							<div class="form-group">
 								<form:label path="user_name">Name</form:label>
