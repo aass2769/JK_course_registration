@@ -13,7 +13,7 @@
 	<c:forEach var="major" items="${major_list}">
 		<ul class="navbar-nav">
 			<li class="nav-item">
-				<a href="${root}main" class="nav-link">${major.mj_title}</a>
+				<a href="${root}board/detail?mj_key=${major.mj_key}&mj_title=${major.mj_title}" class="nav-link">${major.mj_title}</a>
 			</li>
 		</ul>
 	</c:forEach>

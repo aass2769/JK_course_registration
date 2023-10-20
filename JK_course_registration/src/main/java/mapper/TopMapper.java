@@ -8,7 +8,7 @@ import beans.MajorBean;
 
 public interface TopMapper {
 
-	@Select("select mj_title from major_table")
+	@Select("select mj_key,mj_title from major_table")
 	List<MajorBean> majorList();	
 	
 }
