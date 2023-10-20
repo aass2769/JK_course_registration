@@ -23,6 +23,12 @@ public class UserBean {
 	@Pattern(regexp = "[가-힣]*")
 	private String user_name;
 	
+	//유저 중복확인
+	private boolean duplicate_id;
+	
+	public UserBean() {
+		this.duplicate_id = false;
+	}
 	
 	public int getUser_key() {
 		return user_key;
@@ -55,6 +61,14 @@ public class UserBean {
 	public void setUser_name(String user_name) {
 		this.user_name = user_name;
 	}
+	public boolean isDuplicate_id() {
+		return duplicate_id;
+	}
+	public void setDuplicate_id(boolean duplicate_id) {
+		this.duplicate_id = duplicate_id;
+	}
+	
+	
 	
 	
 }
