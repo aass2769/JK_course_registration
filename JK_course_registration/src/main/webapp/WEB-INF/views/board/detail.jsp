@@ -30,78 +30,89 @@
 						<th class="text-center d-none d-md-table-cell">작성자</th>
 						<th class="text-center d-none d-md-table-cell">작성날짜</th>
 						<th class="text-center d-none d-md-table-cell">조회</th>
+						<th class="text-center d-none d-md-table-cell">좋아요</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr>
 						<td class="text-center d-none d-md-table-cell">10</td>
-						<td><a href="${root}read">글 제목 입니다</a></td>
-						<td class="text-center d-none d-md-table-cell">홍길동</td>
-						<td class="text-center d-none d-md-table-cell">2018-12-12</td>
+						<td><a href="${root}read">오늘 점메추 받습니다..</a></td>
+						<td class="text-center d-none d-md-table-cell">혜미</td>
+						<td class="text-center d-none d-md-table-cell">2023.10.21</td>
 						<td class="text-center d-none d-md-table-cell">5</td>
+						<td class="text-center d-none d-md-table-cell">20</td>
 					</tr>
 					<tr>
 						<td class="text-center d-none d-md-table-cell">10</td>
 						<td><a href='board/read.html'>글 제목 입니다</a></td>
 						<td class="text-center d-none d-md-table-cell">홍길동</td>
-						<td class="text-center d-none d-md-table-cell">2018-12-12</td>
+						<td class="text-center d-none d-md-table-cell">2023.10.21</td>
 						<td class="text-center d-none d-md-table-cell">5</td>
+						<td class="text-center d-none d-md-table-cell">20</td>
 					</tr>
 					<tr>
 						<td class="text-center d-none d-md-table-cell">10</td>
 						<td><a href='board_read.html'>글 제목 입니다</a></td>
 						<td class="text-center d-none d-md-table-cell">홍길동</td>
-						<td class="text-center d-none d-md-table-cell">2018-12-12</td>
+						<td class="text-center d-none d-md-table-cell">2023.10.21</td>
 						<td class="text-center d-none d-md-table-cell">5</td>
+						<td class="text-center d-none d-md-table-cell">20</td>
 					</tr>
 					<tr>
 						<td class="text-center d-none d-md-table-cell">10</td>
 						<td><a href='board_read.html'>글 제목 입니다</a></td>
 						<td class="text-center d-none d-md-table-cell">홍길동</td>
-						<td class="text-center d-none d-md-table-cell">2018-12-12</td>
+						<td class="text-center d-none d-md-table-cell">2023.10.21</td>
 						<td class="text-center d-none d-md-table-cell">5</td>
+						<td class="text-center d-none d-md-table-cell">20</td>
 					</tr>
 					<tr>
 						<td class="text-center d-none d-md-table-cell">10</td>
 						<td><a href='board_read.html'>글 제목 입니다</a></td>
 						<td class="text-center d-none d-md-table-cell">홍길동</td>
-						<td class="text-center d-none d-md-table-cell">2018-12-12</td>
+						<td class="text-center d-none d-md-table-cell">2023.10.21</td>
 						<td class="text-center d-none d-md-table-cell">5</td>
+						<td class="text-center d-none d-md-table-cell">20</td>
 					</tr>
 					<tr>
 						<td class="text-center d-none d-md-table-cell">10</td>
 						<td><a href='board_read.html'>글 제목 입니다</a></td>
 						<td class="text-center d-none d-md-table-cell">홍길동</td>
-						<td class="text-center d-none d-md-table-cell">2018-12-12</td>
+						<td class="text-center d-none d-md-table-cell">2023.10.21</td>
 						<td class="text-center d-none d-md-table-cell">5</td>
+						<td class="text-center d-none d-md-table-cell">20</td>
 					</tr>
 					<tr>
 						<td class="text-center d-none d-md-table-cell">10</td>
 						<td><a href='board_read.html'>글 제목 입니다</a></td>
 						<td class="text-center d-none d-md-table-cell">홍길동</td>
-						<td class="text-center d-none d-md-table-cell">2018-12-12</td>
+						<td class="text-center d-none d-md-table-cell">2023.10.21</td>
 						<td class="text-center d-none d-md-table-cell">5</td>
+						<td class="text-center d-none d-md-table-cell">20</td>
 					</tr>
 					<tr>
 						<td class="text-center d-none d-md-table-cell">10</td>
 						<td><a href='board_read.html'>글 제목 입니다</a></td>
 						<td class="text-center d-none d-md-table-cell">홍길동</td>
-						<td class="text-center d-none d-md-table-cell">2018-12-12</td>
+						<td class="text-center d-none d-md-table-cell">2023.10.21</td>
 						<td class="text-center d-none d-md-table-cell">5</td>
+						<td class="text-center d-none d-md-table-cell">20</td>
 					</tr>
 					<tr>
 						<td class="text-center d-none d-md-table-cell">10</td>
 						<td><a href='board_read.html'>글 제목 입니다</a></td>
 						<td class="text-center d-none d-md-table-cell">홍길동</td>
-						<td class="text-center d-none d-md-table-cell">2018-12-12</td>
+						<td class="text-center d-none d-md-table-cell">2023.10.21</td>
 						<td class="text-center d-none d-md-table-cell">5</td>
+						<td class="text-center d-none d-md-table-cell">20</td>
 					</tr>
 					<tr>
 						<td class="text-center d-none d-md-table-cell">10</td>
 						<td><a href='board_read.html'>글 제목 입니다</a></td>
 						<td class="text-center d-none d-md-table-cell">홍길동</td>
-						<td class="text-center d-none d-md-table-cell">2018-12-12</td>
+						<td class="text-center d-none d-md-table-cell">2023.10.21</td>
 						<td class="text-center d-none d-md-table-cell">5</td>
+						<td class="text-center d-none d-md-table-cell">20</td>
 					</tr>
 				</tbody>
 			</table>
