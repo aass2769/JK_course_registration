@@ -1,6 +1,7 @@
 package controller;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,7 @@ public class UserController {
 
 	@GetMapping("/join")
 	public String join(@ModelAttribute("joinUserBean") UserBean joinUserBean) {
+		
 		return "user/join";
 	}
 	
@@ -97,6 +99,14 @@ public class UserController {
 		userService.setModifyUserInfo(modifyUserBean);
 		
 		return "user/modify_success";
+	}
+	
+	@GetMapping("/logout")
+	public String logout(HttpSession session) {
+		//세션을 종료(무효)시키는 메서드
+		session.invalidate();
+		
+		return "user/logout_success";
 	}
 	
 	//@InitBinder 어노테이션은 컨트롤러 내에서 데이터 바인딩 및 유효성 검사를 커스터마이징할 떄 사용됨.

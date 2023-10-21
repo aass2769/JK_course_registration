@@ -20,7 +20,7 @@ public interface UserMapper {
 	String checkDuplicateId(String user_id);
 	
 	//로그인 메서드
-	@Select("SELECT user_key, user_id, user_pw "
+	@Select("SELECT user_key, user_id, user_name "
 			+ "FROM user_table "
 			+ "WHERE user_id = #{user_id} AND user_pw = #{user_pw}")
 	UserBean userLoginIn(UserBean loginUserBean);
