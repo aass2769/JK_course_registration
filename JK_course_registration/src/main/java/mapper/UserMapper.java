@@ -2,6 +2,7 @@ package mapper;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import beans.UserBean;
 
@@ -23,4 +24,17 @@ public interface UserMapper {
 			+ "FROM user_table "
 			+ "WHERE user_id = #{user_id} AND user_pw = #{user_pw}")
 	UserBean userLoginIn(UserBean loginUserBean);
+	
+	//정보수정 유저 정보가져오는 메서드
+	@Select("SELECT user_key, user_id, user_name "
+			+ "FROM user_table "
+			+ "WHERE user_key = #{user_key}")
+	UserBean getModifyUserInfo(int user_key);
+	
+	//정보수정하는 메서드
+	@Update("UPDATE user_table "
+			+ "SET user_pw = #{user_pw} "
+			+ "WHERE user_key = #{user_key} AND user_id = #{user_id}")
+	void setModifyUserInfo(UserBean modifyUserBean);
+	
 }

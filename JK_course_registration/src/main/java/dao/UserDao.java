@@ -26,4 +26,14 @@ public class UserDao {
 	public UserBean userLoginIn(UserBean loginUserBean) {
 		return userMapper.userLoginIn(loginUserBean);
 	}
+	
+	//정보수정 유저 정보가져오기 메서드
+	public UserBean getModifyUserInfo(int user_key) {
+		return userMapper.getModifyUserInfo(user_key);
+	}
+	
+	public void setModifyUserInfo(UserBean modifyUserBean) {
+		System.out.println("dao");
+		userMapper.setModifyUserInfo(modifyUserBean);
+	}
 }

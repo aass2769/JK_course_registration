@@ -50,4 +50,20 @@ public class UserService {
 		
 		return userCheck;
 	}
+	
+	//정보수정 유저 정보가져오기 메서드
+	public void getModifyUserInfo(UserBean modifyUserBean) {
+		
+		UserBean tempModifyUserBean = userDao.getModifyUserInfo(userSession.getUser_key());
+		System.out.println("modify");
+		modifyUserBean.setUser_id(tempModifyUserBean.getUser_id());
+		modifyUserBean.setUser_name(tempModifyUserBean.getUser_name());
+	}
+	
+	public void setModifyUserInfo(UserBean modifyUserBean) {
+		System.out.println("service");
+		modifyUserBean.setUser_key(userSession.getUser_key());
+		System.out.println(userSession.getUser_key());
+		userDao.setModifyUserInfo(modifyUserBean);
+	}
 }

@@ -26,7 +26,7 @@ public class UserValidator implements Validator{
 		String beanName = errors.getObjectName();
 		
 		//폼 유효성 검사에 사용된 객체의 이름이 joinUserBean일 경우 아래 유효성검사를 한다.
-		if(beanName.equals("joinUserBean")) {
+		if(beanName.equals("joinUserBean") || beanName.equals("modifyUserBean")) {
 			if(userBean.getUser_pw().equals(userBean.getUser_pw2()) == false) {
 				//user_pw의 오류를 NotEquals로 한다.
 				errors.rejectValue("user_pw", "NotEquals");
@@ -34,12 +34,14 @@ public class UserValidator implements Validator{
 				errors.rejectValue("user_pw2", "NotEquals");
 			}
 			
-			if(userBean.isDuplicate_id() == false) {
+			//회원가입 아이디 중복검사 유효성검사
+			if(beanName.equals("joinUserBean")) {
+				if(userBean.isDuplicate_id() == false) {
 				
 				errors.rejectValue("user_id", "NotCheckDuplicate");
+				}
 			}
 		}
-		
 	}
 
 }
