@@ -107,6 +107,7 @@
 
 	<div class="container">
 		<div class="post">
+		<a href="#" class="btn btn-link text-dark">IT/SW개발 ></a>
 			<h2>오늘 점메추 받습니다..</h2>
 			<p>혜미</p>
 			<p>2023.10.21. 15:00 조회 5</p>
@@ -142,15 +143,29 @@
 				<p>돈까스 어때요?ㅎㅎ전 치돈이 좋거든요</p>
 				<p>2023.10.21. 15:01</p>
 			</div>
+			<div class="divider divider-1" style="border-top-color: #ede8f1;"></div>
 			<div class="comment">
 				<p>올챙</p>
 				<p>날씨가 추워져서 국밥도 괜찮지 않나요?ㅋㅋ</p>
 				<p>2023.10.21. 15:03</p>
 			</div>
+			<div class="divider divider-1" style="border-top-color: #ede8f1;"></div>
 			<div class="comment">
 				<p>깨꾹</p>
 				<p>전 떡볶이 강추합니당!! 떡볶이가 짱이죠</p>
 				<p>2023.10.21. 15:06</p>
+			</div>
+			<div class="divider divider-1" style="border-top-color: #ede8f1;"></div>
+			<div class="comment">
+				<p>혜미</p>
+				<p>ㅎㅎ다른 분들 모두 감사합니다. 생각해보고 골라서 먹을게요!</p>
+				<div class="d-flex justify-content-between align-items-center">
+					<p>2023.10.21. 15:06</p>
+					<div class="d-flex justify-content-end">
+                        <button class="btn btn-link text-dark mr-2">수정</button>
+                        <button class="btn btn-link text-dark">삭제</button>
+                    </div>
+                </div>
 			</div>
 			<div class="divider"></div>
 			<div class="comment-form">
@@ -180,7 +195,7 @@
 				<button class="btn btn-secondary mr-2"
 					style="background-color: #1D202E;">목록</button>
 				<!-- Top 버튼 -->
-				<button class="btn btn-secondary" style="background-color: #1D202E;">Top</button>
+				<button class="btn btn-secondary" style="background-color: #1D202E;">TOP</button>
 			</div>
 		</div>
 	</div>
