@@ -10,12 +10,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping("/board")
 public class BoardController {
 
-	@GetMapping("/main")
-	public String main() {
-		
-		return "board/main";
-	}
-	
 	@GetMapping("/detail")
 	public String detail(@RequestParam("mj_key") int mj_key, @RequestParam("mj_title") String mj_title, Model model) {
 		
