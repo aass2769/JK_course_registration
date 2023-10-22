@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import beans.MajorBean;
+import beans.CourseBean;
 import mapper.TopMapper;
 
 @Repository
@@ -14,9 +14,9 @@ public class TopDao {
 	@Autowired
 	private TopMapper topMapper;
 	
-	public List<MajorBean> majorList(){
+	public List<CourseBean> majorList(){
 		
-		List<MajorBean> major_list = topMapper.majorList();
+		List<CourseBean> major_list = topMapper.majorList();
 		
 		return major_list;
 	}

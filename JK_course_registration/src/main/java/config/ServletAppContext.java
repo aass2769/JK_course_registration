@@ -20,6 +20,7 @@ import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import interceptor.TopInterceptor;
+import mapper.CourseMapper;
 import mapper.TopMapper;
 import mapper.UserMapper;
 import service.TopService;
@@ -102,10 +103,22 @@ public class ServletAppContext implements WebMvcConfigurer{
 		return factoryBean;
 	}
 	
+	//UserMapper추가
 	@Bean
 	public MapperFactoryBean<UserMapper> getUserMapper(SqlSessionFactory factory) throws Exception{
 		
 		MapperFactoryBean<UserMapper> factoryBean = new MapperFactoryBean<UserMapper>(UserMapper.class);
+		factoryBean.setSqlSessionFactory(factory);
+		
+		return factoryBean;
+		
+	}
+	
+	//CourseMapper추가
+	@Bean
+	public MapperFactoryBean<CourseMapper> getCourseMapper(SqlSessionFactory factory) throws Exception{
+		
+		MapperFactoryBean<CourseMapper> factoryBean = new MapperFactoryBean<CourseMapper>(CourseMapper.class);
 		factoryBean.setSqlSessionFactory(factory);
 		
 		return factoryBean;

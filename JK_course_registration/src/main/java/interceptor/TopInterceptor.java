@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.servlet.HandlerInterceptor;
 
-import beans.MajorBean;
+import beans.CourseBean;
 import service.TopService;
 
 public class TopInterceptor implements HandlerInterceptor {
@@ -21,7 +21,7 @@ public class TopInterceptor implements HandlerInterceptor {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		
-		List<MajorBean> major_list = topService.majorList();
+		List<CourseBean> major_list = topService.majorList();
 		
 		request.setAttribute("major_list", major_list);
 		

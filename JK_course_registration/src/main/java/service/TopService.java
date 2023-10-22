@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import beans.MajorBean;
+import beans.CourseBean;
 import dao.TopDao;
 
 @Service
@@ -14,9 +14,9 @@ public class TopService {
 	@Autowired
 	private TopDao topDao;
 	
-	public List<MajorBean> majorList(){
+	public List<CourseBean> majorList(){
 		
-		List<MajorBean> major_list = topDao.majorList();
+		List<CourseBean> major_list = topDao.majorList();
 		
 		return major_list;
 	}

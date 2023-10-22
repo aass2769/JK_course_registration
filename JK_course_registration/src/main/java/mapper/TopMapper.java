@@ -4,11 +4,11 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Select;
 
-import beans.MajorBean;
+import beans.CourseBean;
 
 public interface TopMapper {
 
 	@Select("select mj_key,mj_title from major_table")
-	List<MajorBean> majorList();	
+	List<CourseBean> majorList();	
 	
 }
