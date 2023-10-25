@@ -7,6 +7,6 @@ import beans.CourseBean;
 public interface CourseMapper {
 
 	@Select("SELECT * FROM major_table "
-			+ "WHERE mj_key = #{mj_key}")
-	public CourseBean getMajorInfo(int mj_key);
+			+ "WHERE cr_key = #{cr_key}")
+	public CourseBean getCourseInfo(int cr_key);
 }

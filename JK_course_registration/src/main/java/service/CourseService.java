@@ -12,7 +12,7 @@ public class CourseService {
 	@Autowired
 	private CourseDao courseDao;
 	
-	public CourseBean getMajorInfo(int mj_key) {
-		return courseDao.getMajorInfo(mj_key);
+	public CourseBean getCourseInfo(int cr_key) {
+		return courseDao.getCourseInfo(cr_key);
 	}
 }

@@ -32,7 +32,7 @@
     </div>
   </section>
   
-  	<p>${courseBean.mj_content }</p>
+  	<p>${courseBean.sb_content }</p>
   
 	<!-- 하단 정보 부분 -->
 	<c:import url="/WEB-INF/views/include/bottom_info.jsp" />

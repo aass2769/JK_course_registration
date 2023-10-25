@@ -8,7 +8,7 @@ import beans.CourseBean;
 
 public interface TopMapper {
 
-	@Select("select mj_key,mj_title from major_table")
-	List<CourseBean> majorList();	
+	@Select("select cr_key,cr_course from course_table")
+	List<CourseBean> courseList();
 	
 }

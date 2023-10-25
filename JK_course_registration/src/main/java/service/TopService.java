@@ -14,10 +14,10 @@ public class TopService {
 	@Autowired
 	private TopDao topDao;
 	
-	public List<CourseBean> majorList(){
+	public List<CourseBean> courseList(){
 		
-		List<CourseBean> major_list = topDao.majorList();
+		List<CourseBean> course_list = topDao.courseList();
 		
-		return major_list;
+		return course_list;
 	}
 }

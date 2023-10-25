@@ -13,7 +13,7 @@ public class CourseDao {
 	private CourseMapper courseMapper;
 	
 	
-	public CourseBean getMajorInfo(int mj_key) {
-		return courseMapper.getMajorInfo(mj_key);
+	public CourseBean getCourseInfo(int cr_key) {
+		return courseMapper.getCourseInfo(cr_key);
 	}
 }

@@ -14,10 +14,10 @@ public class TopDao {
 	@Autowired
 	private TopMapper topMapper;
 	
-	public List<CourseBean> majorList(){
+	public List<CourseBean> courseList(){
 		
-		List<CourseBean> major_list = topMapper.majorList();
+		List<CourseBean> course_list = topMapper.courseList();
 		
-		return major_list;
+		return course_list;
 	}
 }

@@ -24,7 +24,7 @@ public class CourseController {
 	@GetMapping("/subject_view")
 	public String subject_view(Model model) {
 		
-		CourseBean courseBean = courseService.getMajorInfo(1);
+		CourseBean courseBean = courseService.getCourseInfo(1);
 		model.addAttribute("courseBean", courseBean);
 		
 		return "course/subject_view";

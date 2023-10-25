@@ -21,9 +21,9 @@ public class TopInterceptor implements HandlerInterceptor {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		
-		List<CourseBean> major_list = topService.majorList();
+		List<CourseBean> course_list = topService.courseList();
 		
-		request.setAttribute("major_list", major_list);
+		request.setAttribute("course_list", course_list);
 		
 		return true;
  		

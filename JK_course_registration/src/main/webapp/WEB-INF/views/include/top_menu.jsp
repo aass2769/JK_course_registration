@@ -3,33 +3,95 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="root" value="${pageContext.request.contextPath }/"/>
 <!-- 상단 메뉴 부분 -->
-<nav class="navbar navbar-expand-md bg-dark navbar-dark fixed-top shadow-lg">
-	<a class="navbar-brand" href="index.html">JK_course_registration</a>
-	<button class="navbar-toggler" type="button" data-toggle="collapse"
-	        data-target="#navMenu">
-		<span class="navbar-toggler-icon"></span>        
-	</button>
-	<div class="collapse navbar-collapse" id="navMenu">
-	<c:forEach var="major" items="${major_list}">
-		<ul class="navbar-nav">
-			<li class="nav-item">
-				<a href="${root}board/detail?mj_key=${major.mj_key}&mj_title=${major.mj_title}" class="nav-link">${major.mj_title}</a>
-			</li>
-		</ul>
-	</c:forEach>
-		<ul class="navbar-nav ml-auto">
-			<li class="nav-item">
-				<a href="login.html" class="nav-link">로그인</a>
-			</li>
-			<li class="nav-item">
-				<a href="join.html" class="nav-link">회원가입</a>
-			</li>
-			<li class="nav-item">
-				<a href="${root }user/modify" class="nav-link">정보수정</a>
-			</li>
-			<li class="nav-item">
-				<a href="${root }user/logout" class="nav-link">로그아웃</a>
-			</li>
-		</ul>
-	</div>
-</nav>
+<head>
+
+    <style>
+        .navbar {
+            background-color: #ffffff;
+            border-bottom: 5px solid #670AC5;
+            margin-bottom: 30px;
+            padding-left: 200px;
+        }
+
+        .navbar-brand img {
+            max-height: 200px;
+            margin-left: 50px;
+        }
+
+        .navbar-toggler {
+            margin-left: 20px;
+        }
+
+        .navbar-nav .nav-link {
+            color: #670AC5;
+            font-weight: bold;
+            line-height: 40px;
+        }
+
+        .dropdown-menu a {
+            display: block;
+        }
+
+        #logo {
+            padding-right: 200px;
+        }
+
+        .navbar-nav .dropdown-menu {
+            display: none;
+        }
+
+        .navbar-nav .dropdown:hover .dropdown-menu {
+            display: block;
+        }
+
+        .navbar-nav .dropdown-item:hover {
+            background-color: #f8f9fa;
+        }
+    </style>
+</head>
+
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" style="color: #670AC5; margin-top: 100px;" >수업과정</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" href="#" id="navbarDropdownMenuLink" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: #670AC5; margin-top: 100px;">
+                            게시판
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style="color: #35016D;">
+                        	<c:forEach var="course" items="${course_list}">
+                            	<a class="dropdown-item" href="${root}board/detail?cr_key=${course.cr_key}&cr_course=${course.cr_course}">${course.cr_course}</a>
+                            </c:forEach>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" style="color: #670AC5; margin-top: 100px;">수강신청</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" style="color: #670AC5; margin-top: 100px;">수강조회</a>
+                    </li>
+                </ul>
+                <a class="navbar-brand" href="#" id="logo">
+                    <img src="${root }image/JK_logo.jpg" alt="Logo">
+                </a>
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" style="color: #670AC5; margin-top: 100px;">정보수정</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" style="color: #670AC5; margin-top: 100px;">로그아웃</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+

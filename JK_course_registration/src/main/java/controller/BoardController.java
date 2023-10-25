@@ -11,11 +11,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class BoardController {
 
 	@GetMapping("/detail")
-	public String detail(@RequestParam("mj_key") int mj_key, @RequestParam("mj_title") String mj_title, Model model) {
+	public String detail(@RequestParam("cr_key") int cr_key, @RequestParam("cr_course") String cr_course, Model model) {
 		
 		//게시판 식별을 위한 키, 일단 model에 저장함..후에 로그인한 회원의 빈에 담을지..고민..
-		model.addAttribute("mj_key", mj_key);
-		model.addAttribute("mj_title", mj_title);
+		model.addAttribute("cr_key", cr_key);
+		model.addAttribute("cr_course", cr_course);
 		
 		return "board/detail";
 	}
