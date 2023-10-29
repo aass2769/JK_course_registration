@@ -87,8 +87,9 @@
 }
 
 .btn-secondary.mr-2 {
-	margin-left: 15px; /* 원하는 여백 크기로 설정 */
+	margin-left: 0px; /* 원하는 여백 크기로 설정 */
 }
+
 </style>
 
 </head>
@@ -175,11 +176,13 @@
 		</div>
 		<div class="d-flex justify-content-between mt-2">
 			<div class="row">
+			<form class="form-inline">
 				<!-- 글쓰기 버튼 -->
-				<button class="btn btn-secondary mr-2"
-					style="background-color: #1D202E;">글쓰기</button>
+				<button class="btn btn-secondary"
+					style="background-color: #1D202E; margin-right: -5px;">글쓰기</button>
 				<!-- 답글 버튼 -->
 				<button class="btn btn-secondary" style="background-color: #1D202E;">답글</button>
+				</form>
 			</div>
 			<div class="d-flex justify-content-end">
 				<!-- 목록 버튼 -->

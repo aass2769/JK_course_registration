@@ -20,6 +20,12 @@ public class BoardController {
 		return "board/detail";
 	}
 	
+	@GetMapping("/create")
+	public String create() {
+		
+		return "board/create";
+	}
+	
 	@GetMapping("/read")
 	public String read() {
 		

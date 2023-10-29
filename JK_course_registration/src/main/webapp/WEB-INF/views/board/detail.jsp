@@ -25,22 +25,26 @@
     }
     
 	td a {
-		color: black;
+		color: #1D202E;
+		 text-decoration: none;
 	}
 	
-	.category-select {
-		width: 150px; /* 너비를 원하는 크기로 조정하세요 */
+	.form-select {
+    width: 150px; /* 원하는 너비 값으로 설정하세요 */
+    margin-left: 860px;
 	}
 
 	.search-form {
 		display: flex;
 		align-items: center;
 		margin-bottom: 20px;
+		margin-right: 20px;
 	}
 
 	.search-button {
-		width: 100px; /* 버튼 너비 조정 */
+		width: 60px; /* 버튼 너비 조정 */
 		background-color: #1D202E;
+		
 	}
 
 	.search-container {
@@ -55,6 +59,7 @@
         border-bottom: 3px solid #1D202E; /* thead의 선 색상 변경 */
         color: #1D202E; /* thead의 글자 색상 변경 */
     }
+   
 </style>
 
 </head>
@@ -67,18 +72,20 @@
 <div class="container" style="margin-top:100px">
 	<div class="card shadow">
 		<div class="card-body">
+		<h4 class="card-title" >${cr_course}</h4>
                 <div class="search-container">
-                    <h4 class="card-title">${cr_course}</h4>
                     <!-- 카테고리 선택(select 옵션) -->
-                    <select class="form-control category-select ml-auto">
-                        <option value="a">글작성자</option>
-                        <option value="b">제목</option>
-                        <option value="c">게시글</option>
-                    </select>
+                    <select class="form-select" aria-label="Default select">
+					  <option selected>글작성자</option>
+					  <option value="1">제목</option>
+					  <option value="2">게시글</option>
+					</select>
                     <!-- 검색 폼과 버튼 -->
                     <div class="search-form">
                         <form class="form-inline">
                             <input type="text" class="form-control search-input" placeholder="검색어를 입력하세요">
+                        </form>
+                        <form class="form-inline">
                             <button type="submit" class="btn btn-primary search-button">검색</button>
                         </form>
                     </div>
@@ -96,7 +103,7 @@
 				</thead>
 				<tbody>
 					<tr>
-						<td class="text-center d-none d-md-table-cell">10</td>
+						<td class="text-center d-none d-md-table-cell" >10</td>
 						<td><a href="${root}read">오늘 점메추 받습니다..</a></td>
 						<td class="text-center d-none d-md-table-cell">혜미</td>
 						<td class="text-center d-none d-md-table-cell">2023.10.21</td>
@@ -231,7 +238,7 @@
 			</div>
     
 			<div class="text-right">
-				<a href="board_write.html" class="btn btn-primary"  style="background-color: #1D202E;">글쓰기</a>
+				<a href="${root}create" class="btn btn-primary"  style="background-color: #670AC5; margin-left: 1170px;">글쓰기</a>
 			</div>
 			
 		</div>
