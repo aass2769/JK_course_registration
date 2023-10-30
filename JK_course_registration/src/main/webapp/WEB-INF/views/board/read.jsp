@@ -178,16 +178,14 @@
 			<div class="row">
 			<form class="form-inline">
 				<!-- 글쓰기 버튼 -->
-				<button class="btn btn-secondary"
-					style="background-color: #1D202E; margin-right: -5px;">글쓰기</button>
+				<a href="${root}create"class="btn btn-secondary" style="background-color: #1D202E; margin-right: -5px;">글쓰기</a>
 				<!-- 답글 버튼 -->
 				<button class="btn btn-secondary" style="background-color: #1D202E;">답글</button>
 				</form>
 			</div>
 			<div class="d-flex justify-content-end">
 				<!-- 목록 버튼 -->
-				<button class="btn btn-secondary mr-2"
-					style="background-color: #1D202E;">목록</button>
+				<a href="${root}detail?cr_key=${cr_key}&cr_course=${cr_course}"class="btn btn-secondary mr-2" style="background-color: #1D202E;">목록</a>
 				<!-- Top 버튼 -->
 				<button class="btn btn-secondary" style="background-color: #1D202E;">TOP</button>
 			</div>

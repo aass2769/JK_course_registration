@@ -104,7 +104,7 @@
 				<tbody>
 					<tr>
 						<td class="text-center d-none d-md-table-cell" >10</td>
-						<td><a href="${root}read">오늘 점메추 받습니다..</a></td>
+						<td><a href="${root}read?cr_key=${cr_key}&cr_course=${cr_course}">오늘 점메추 받습니다..</a></td>
 						<td class="text-center d-none d-md-table-cell">혜미</td>
 						<td class="text-center d-none d-md-table-cell">2023.10.21</td>
 						<td class="text-center d-none d-md-table-cell">5</td>
@@ -240,7 +240,6 @@
 			<div class="text-right">
 				<a href="${root}create" class="btn btn-primary"  style="background-color: #670AC5; margin-left: 1170px;">글쓰기</a>
 			</div>
-			
 		</div>
 	</div>
 </div>

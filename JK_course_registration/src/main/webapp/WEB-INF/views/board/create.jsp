@@ -30,8 +30,14 @@
             font-weight: bold;
             margin-bottom: 10px;
         }
-       
         
+       #exampleFormControlTextarea1 {
+	    resize: none;
+	  	}
+        
+        .form-label{
+        font-weight: bold;
+        }
 
     </style>
 
@@ -45,17 +51,16 @@
             	<h2>게시판 글쓰기</h2>
             	</form>
             	<form class="form-inline">
-				<a href="${root}create" class="btn btn-primary"  style="background-color: #670AC5; margin-left: 750px;">등록</a>
+				<a href="${root}create" class="btn btn-primary"  style="background-color: #670AC5; margin-left: 740px;">등록</a>
 			</form>
         </div>
         <div class="divider"></div>
         <div class="form-group">
             <label for="category">게시판 선택</label>
-            <select class="form-select" aria-label="Default select example">
-			  <option selected>Open this select menu</option>
-			  <option value="1">One</option>
-			  <option value="2">Two</option>
-			  <option value="3">Three</option>
+            <select class="form-select form-select-lg" aria-label="Default select example">
+            	<c:forEach var="course" items="${course_list}">
+			  		<option value="${course.cr_course}">${course.cr_course}</option>
+			  </c:forEach>
 			</select>
         </div>
         <div class="form-group">

@@ -17,7 +17,7 @@ public class TopService {
 	public List<CourseBean> courseList(){
 		
 		List<CourseBean> course_list = topDao.courseList();
-		
+	
 		return course_list;
 	}
 }
