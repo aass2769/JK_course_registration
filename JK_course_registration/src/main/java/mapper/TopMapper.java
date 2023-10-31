@@ -8,7 +8,10 @@ import beans.CourseBean;
 
 public interface TopMapper {
 
-	@Select("select cr_key, cr_course from course_table")
+	@Select("SELECT a.cr_key, a.cr_course, b.sb_category "
+			+ "FROM COURSE_TABLE a "
+			+ "INNER JOIN subject_table b "
+			+ "on a.sb_key = b.sb_key;")
 	List<CourseBean> courseList();
 }
 	

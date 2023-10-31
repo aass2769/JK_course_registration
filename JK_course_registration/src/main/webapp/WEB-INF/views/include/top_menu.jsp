@@ -58,8 +58,16 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#" style="color: #670AC5; margin-top: 100px;" >수업과정</a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" href="#" id="navbarDropdownMenuLink" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: #670AC5; margin-top: 100px;">
+                            수업과정
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style="color: #35016D;">
+                        	<c:forEach var="course" items="${course_list}">
+                            	<a class="dropdown-item" href="${root}course/subjects?sb_category=${course.cr_key}&cr_course=${course.cr_course}">${course.cr_course}</a>
+                            </c:forEach>
+                        </div>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link" href="#" id="navbarDropdownMenuLink" role="button"
@@ -72,8 +80,16 @@
                             </c:forEach>
                         </div>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#" style="color: #670AC5; margin-top: 100px;">수강신청</a>
+                   <li class="nav-item dropdown">
+                        <a class="nav-link" href="#" id="navbarDropdownMenuLink" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: #670AC5; margin-top: 100px;">
+                            수강신청
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style="color: #35016D;">
+                        	<c:forEach var="course" items="${course_list}">
+                            	<a class="dropdown-item" href="${root}board/detail?cr_key=${course.cr_key}&cr_course=${course.cr_course}">${course.cr_course}</a>
+                            </c:forEach>
+                        </div>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#" style="color: #670AC5; margin-top: 100px;">수강조회</a>
