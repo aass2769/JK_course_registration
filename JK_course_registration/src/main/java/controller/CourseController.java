@@ -1,5 +1,7 @@
 package controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,15 +19,21 @@ public class CourseController {
 	private CourseService courseService;
 	
 	@GetMapping("/subjects")
-	public String subjects() {
+	public String subjects(int sb_category, Model model) {
+		
+		//한 과정의 과목들에 대한 정보를 가져오는 메서드
+		List<CourseBean> subjectsList = courseService.getSubjectsCategory(sb_category);
+		model.addAttribute("subjectsList", subjectsList);
+		
 		return "course/subjects";
 	}
 	
 	@GetMapping("/subject_view")
-	public String subject_view(Model model) {
+	public String subject_view(int cr_key, Model model) {
 		
-		CourseBean courseBean = courseService.getCourseInfo(1);
-		model.addAttribute("courseBean", courseBean);
+		//한 과목의 정보를 가져오는 메서드
+		List<CourseBean> subjectInfoList = courseService.getSubjectInfo(cr_key);
+		model.addAttribute("subjectInfoList", subjectInfoList);
 		
 		return "course/subject_view";
 	}

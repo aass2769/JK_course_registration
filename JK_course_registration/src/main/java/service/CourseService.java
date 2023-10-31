@@ -1,5 +1,7 @@
 package service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +14,17 @@ public class CourseService {
 	@Autowired
 	private CourseDao courseDao;
 	
-	public CourseBean getCourseInfo(int cr_key) {
-		return courseDao.getCourseInfo(cr_key);
+	public List<CourseBean> getSubjectsCategory(int sb_category){
+		
+		List<CourseBean> subjectsList = courseDao.getSubjectsCategory(sb_category);
+		
+		return subjectsList;
+	}
+	
+	public List<CourseBean> getSubjectInfo(int cr_key){
+		
+		List<CourseBean> subjectInfoList = courseDao.getSubjectInfo(cr_key);
+		
+		return subjectInfoList;
 	}
 }

@@ -65,7 +65,7 @@
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style="color: #35016D;">
                         	<c:forEach var="course" items="${course_list}">
-                            	<a class="dropdown-item" href="${root}course/subjects?sb_category=${course.cr_key}&cr_course=${course.cr_course}">${course.cr_course}</a>
+                            	<a class="dropdown-item" href="${root}course/subjects?sb_category=${course.sb_category}">${course.cr_course}</a>
                             </c:forEach>
                         </div>
                     </li>

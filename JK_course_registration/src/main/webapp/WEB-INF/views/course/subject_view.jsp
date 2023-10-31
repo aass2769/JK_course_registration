@@ -23,19 +23,6 @@
     <div class="row py-lg-5" style="height: 50vh;">
       <div class="col-lg-6 col-md-8 mx-auto" style="margin: auto">
         <h1 class="fw-light">열정과 꿈을 향한 여정</h1>
-        <p class="lead text-body-secondary">여러분이 학원에 발을 디뎠을 때, 이것은 미래를 개척하는 여정의 시작입니다. 컴퓨터와 기술의 세계는 끊임없이 진화하고 있습니다. 이곳에서 배우고 성장함으로써, 여러분은 이 변화를 주도하고 미래의 혁신을 만드는 일원이 될 것입니다.</p>
-        <p>
-          <a href="#" class="btn btn-primary my-2">Main call to action</a>
-          <a href="#" class="btn btn-secondary my-2">Secondary action</a>
-        </p>
-      </div>
-    </div>
-  </section>
-  
-  	<section class="py-5 text-center container ">
-    <div class="row py-lg-5">
-      <div class="col-lg-6 col-md-8 mx-auto" style="margin: auto">
-        <h1 class="fw-light">커리큘럼</h1>
         <div class="container text-center">
 		  <div class="row">
 		    <div class="col-1">
@@ -48,17 +35,43 @@
 		      3 of 3
 		    </div>
 		  </div>
-		  <div class="row">
-		     <div class="col-1">
-		      1 of 3
+		</div>
+          <a href="#" class="btn btn-primary my-2">Main call to action</a>
+          <a href="#" class="btn btn-secondary my-2">Secondary action</a>
+      </div>
+      </div>
+  </section>
+  
+  	<section class="py-5 text-center container ">
+    <div class="row py-lg-5">
+      <div class="col-lg-10 col-md-8 mx-auto" style="margin: auto">
+        <h1 class="fw-light">커리큘럼</h1>
+        <div class="container text-center">
+		  <div class="row" style="padding-bottom: 12px;">
+		    <div class="col-1">
+		      단계
 		    </div>
 		    <div class="col-5">
-		      2 of 3 (wider)
+		      제목
 		    </div>
 		    <div class="col-6">
-		      3 of 3
+		      내용
 		    </div>
 		  </div>
+		  <c:forEach var="sb_info" items="${subjectInfoList }">
+			 <div class="row" style="padding-bottom: 12px;">
+			     <div class="col-1">
+					${sb_info.ct_key }
+			     </div>
+			     <div class="col-5">
+			    	${sb_info.ct_title }
+			     </div>
+		    	 <div class="col-6">
+		    		${sb_info.ct_description }
+		    	 </div>
+		  	</div>
+		  </c:forEach>
+		 
 		</div>
           <a href="#" class="btn btn-primary my-2">Main call to action</a>
           <a href="#" class="btn btn-secondary my-2">Secondary action</a>

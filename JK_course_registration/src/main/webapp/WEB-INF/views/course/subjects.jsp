@@ -38,65 +38,30 @@
 
   <div class="album py-5 bg-body-tertiary" style="height: 50vh;">
     <div class="container">
-	<h1 class="col text-center" style="color:#670AC5; margin-bottom:30px">일반과정</h1>
+	<h1 class="col text-center" style="color:#670AC5; margin-bottom:30px">
+		<c:forEach var="courseName" items="${subjectsList}" varStatus="loop">
+	       <c:if test="${loop.index == 0}">
+	           <p style="color:#670AC5">${courseName.cr_course} 일반과정</p>
+	       </c:if>
+	   </c:forEach>
+	</h1>
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-3" >
-
-		<div class="col">
-			<div class="card shadow-sm">
-				<img src="${root }image/course1_1.jpg" class="card-img-top"	alt="Course Image">
+		<c:forEach var="subjects" items="${subjectsList}">
+			<div class="col">
+				<div class="card shadow-sm">
+					<img src="${root }image/${subjects.sb_photo}.jpg" class="card-img-top"	alt="Course Image">
 					<div class="card-body">
-						<p class="card-text fs-4">JAVA 과정</p>
+						<p class="card-text fs-4">${subjects.sb_subject }</p>
 						<div class="d-flex justify-content-center align-items-center">
 							<div class="btn-group">
-								<button type="button" class="btn btn-sm btn-outline-secondary">커리큘럼</button>
+								<a href="${root }course/subject_view?cr_key=${subjects.cr_key}"><button type="button" class="btn btn-sm btn-outline-secondary">커리큘럼</button></a>
 							</div>
 						</div>
 					</div>
 				</div>
-		</div>
-
-		<div class="col">
-			<div class="card shadow-sm">
-				<img src="${root }image/course1_2.jpg" class="card-img-top"	alt="Course Image">
-					<div class="card-body">
-						<p class="card-text fs-4">JAVA 과정</p>
-						<div class="d-flex justify-content-center align-items-center">
-							<div class="btn-group">
-								<button type="button" class="btn btn-sm btn-outline-secondary">커리큘럼</button>
-							</div>
-						</div>
-					</div>
-				</div>
-		</div>
-        
-        <div class="col">
-			<div class="card shadow-sm">
-				<img src="${root }image/course1_3.jpg" class="card-img-top"	alt="Course Image">
-					<div class="card-body">
-						<p class="card-text fs-4">JAVA 과정</p>
-						<div class="d-flex justify-content-center align-items-center">
-							<div class="btn-group">
-								<button type="button" class="btn btn-sm btn-outline-secondary">커리큘럼</button>
-							</div>
-						</div>
-					</div>
-				</div>
-		</div>
-
-       <div class="col">
-			<div class="card shadow-sm">
-				<img src="${root }image/course1_4.jpg" class="card-img-top"	alt="Course Image">
-					<div class="card-body">
-						<p class="card-text fs-4">JAVA 과정</p>
-						<div class="d-flex justify-content-center align-items-center">
-							<div class="btn-group">
-								<button type="button" class="btn btn-sm btn-outline-secondary">커리큘럼</button>
-							</div>
-						</div>
-					</div>
-				</div>
-		</div>
-        
+			</div>
+			
+		</c:forEach>
       </div>
     </div>
   </div>

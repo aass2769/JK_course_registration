@@ -1,5 +1,7 @@
 package dao;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -12,8 +14,17 @@ public class CourseDao {
 	@Autowired
 	private CourseMapper courseMapper;
 	
+	public List<CourseBean> getSubjectsCategory(int sb_category){
+		
+		List<CourseBean> subjectsList = courseMapper.getSubjectsCategory(sb_category);
+		
+		return subjectsList;
+	}
 	
-	public CourseBean getCourseInfo(int cr_key) {
-		return courseMapper.getCourseInfo(cr_key);
+	public List<CourseBean> getSubjectInfo(int cr_key){
+		
+		List<CourseBean> subjectInfoList = courseMapper.getSubjectInfo(cr_key);
+		
+		return subjectInfoList;
 	}
 }
