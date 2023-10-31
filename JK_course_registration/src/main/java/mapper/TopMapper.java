@@ -10,5 +10,5 @@ public interface TopMapper {
 
 	@Select("select cr_key, cr_course from course_table")
 	List<CourseBean> courseList();
-	
 }
+	
