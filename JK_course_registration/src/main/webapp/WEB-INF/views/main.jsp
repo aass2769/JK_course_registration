@@ -255,6 +255,7 @@ td a {
 					</div>
 				</div>
 			</div>
+			
 			<div class="col-lg-6" style="margin-top: 20px">
 				<div class="card shadow">
 					<div class="card-body">
