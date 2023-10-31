@@ -32,7 +32,39 @@
     </div>
   </section>
   
-  	<p>${courseBean.sb_content }</p>
+  	<section class="py-5 text-center container ">
+    <div class="row py-lg-5">
+      <div class="col-lg-6 col-md-8 mx-auto" style="margin: auto">
+        <h1 class="fw-light">커리큘럼</h1>
+        <div class="container text-center">
+		  <div class="row">
+		    <div class="col-1">
+		      1 of 3
+		    </div>
+		    <div class="col-5">
+		      2 of 3 (wider)
+		    </div>
+		    <div class="col-6">
+		      3 of 3
+		    </div>
+		  </div>
+		  <div class="row">
+		     <div class="col-1">
+		      1 of 3
+		    </div>
+		    <div class="col-5">
+		      2 of 3 (wider)
+		    </div>
+		    <div class="col-6">
+		      3 of 3
+		    </div>
+		  </div>
+		</div>
+          <a href="#" class="btn btn-primary my-2">Main call to action</a>
+          <a href="#" class="btn btn-secondary my-2">Secondary action</a>
+      </div>
+    </div>
+  </section>
   
 	<!-- 하단 정보 부분 -->
 	<c:import url="/WEB-INF/views/include/bottom_info.jsp" />

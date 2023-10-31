@@ -23,6 +23,7 @@ public class TopService {
       for (int i = 0; i < course_list.size(); i++) {
            int check_cr_key = course_list.get(i).getCr_key();
            String check_cr_course = course_list.get(i).getCr_course();
+           int sb_category = course_list.get(i).getSb_category();
 
            // 중복 검사용 플래그 변수
            boolean isDuplicate = false;
@@ -41,6 +42,7 @@ public class TopService {
                CourseBean newCheckBean = new CourseBean();
                newCheckBean.setCr_key(check_cr_key);
                newCheckBean.setCr_course(check_cr_course);
+               newCheckBean.setSb_category(sb_category);
                check_list.add(newCheckBean);
            }
        }
