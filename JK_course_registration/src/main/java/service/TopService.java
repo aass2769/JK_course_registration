@@ -32,11 +32,12 @@ public class TopService {
 
                if (check_bean.getCr_key() != check_cr_key && check_bean.getCr_course().equals(check_cr_course)) {
                    isDuplicate = true;
-                   break; // 중복 발견
+                   break; // 중복 발견, 같지않으면 중복 /같으면 중복아님
                }
            }
 
            if (!isDuplicate) {
+        	   
                // 중복이 없을 때만 check_list에 추가
                CourseBean newCheckBean = new CourseBean();
                newCheckBean.setCr_key(check_cr_key);
