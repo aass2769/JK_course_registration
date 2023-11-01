@@ -19,6 +19,7 @@ public class BoardController {
 	@Autowired
 	private TopService topService;
 	
+	/*게시글 목록 페이지*/
 	@GetMapping("/detail")
 	public String detail(@RequestParam("cr_key") int cr_key, @RequestParam("cr_course") String cr_course, Model model) {
 		
@@ -29,6 +30,7 @@ public class BoardController {
 		return "board/detail";
 	}
 	
+	/*게시글 작성 페이지*/
 	@GetMapping("/create")
 	public String create( Model model) {
 		
@@ -39,6 +41,7 @@ public class BoardController {
 		return "board/create";
 	}
 	
+	/*게시글 읽기 페이지*/
 	@GetMapping("/read")
 	public String read(@RequestParam("cr_key") int cr_key, @RequestParam("cr_course") String cr_course, Model model) {
 		
@@ -50,28 +53,6 @@ public class BoardController {
 	}
 	
 	
-	@GetMapping("/IT_dev")
-	public String IT_dev() {
-		
-		return "board/board_main";
-	}
 	
-	@GetMapping("/WEB_des")
-	public String WEB_des() {
-		
-		return "board/board_main";
-	}
-	
-	@GetMapping("/game")
-	public String game() {
-		
-		return "board/board_main";
-	}
-	
-	@GetMapping("/Tax_act")
-	public String Tax_act() {
-		
-		return "board/board_main";
-	}
 
 }
