@@ -37,4 +37,9 @@ public class CourseController {
 		
 		return "course/subject_view";
 	}
+	
+	@GetMapping("/registration")
+	public String course_registration() {
+		return "course/registration";
+	}
 }
