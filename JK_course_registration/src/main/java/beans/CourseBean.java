@@ -10,8 +10,10 @@ public class CourseBean {
 	private int sb_category;
 	private String sb_subject;
 	private String sb_photo;
+	private String sb_info_photo;
 	
 	private int ct_key;
+	private int ct_category;
 	private String ct_title;
 	private String ct_description;
 	
@@ -51,11 +53,23 @@ public class CourseBean {
 	public void setSb_photo(String sb_photo) {
 		this.sb_photo = sb_photo;
 	}
+	public String getSb_info_photo() {
+		return sb_info_photo;
+	}
+	public void setSb_info_photo(String sb_info_photo) {
+		this.sb_info_photo = sb_info_photo;
+	}
 	public int getCt_key() {
 		return ct_key;
 	}
 	public void setCt_key(int ct_key) {
 		this.ct_key = ct_key;
+	}
+	public int getCt_category() {
+		return ct_category;
+	}
+	public void setCt_category(int ct_category) {
+		this.ct_category = ct_category;
 	}
 	public String getCt_title() {
 		return ct_title;

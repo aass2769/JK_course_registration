@@ -15,12 +15,13 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 <style>
 	.image-background {
-  		background-image: url('${root }image/course1.jpg');
+  		background-image: url('${root }image/course.jpg');
  	 	background-size: cover;
 	}
  	 
 	.fw-light, .lead, .text-body-secondary {
     	color: white !important;;
+    	font-weight: bold;
 	}
 </style>
 </head>
@@ -40,10 +41,6 @@
         <p class="lead text-body-secondary">여러분이 학원에 발을 디뎠을 때, 이것은 미래를 개척하는 여정의 시작입니다.</p>
         <p class="lead text-body-secondary">컴퓨터와 기술의 세계는 끊임없이 진화하고 있습니다. 이곳에서 배우고 성장함으로써</p>
         <p class="lead text-body-secondary">여러분은 이 변화를 주도하고 미래의 혁신을 만드는 일원이 될 것입니다.</p>
-        <p>
-          <a href="#" class="btn btn-primary my-2">Main call to action</a>
-          <a href="#" class="btn btn-secondary my-2">Secondary action</a>
-        </p>
       </div>
     </div>
   </section>
