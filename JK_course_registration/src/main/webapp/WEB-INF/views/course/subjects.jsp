@@ -13,6 +13,16 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+<style>
+	.image-background {
+  		background-image: url('${root }image/course1.jpg');
+ 	 	background-size: cover;
+	}
+ 	 
+	.fw-light, .lead, .text-body-secondary {
+    	color: white !important;;
+	}
+</style>
 </head>
   <body>
   
@@ -25,9 +35,11 @@
 
   <section class="py-5 text-center container ">
     <div class="row py-lg-5" style="height: 50vh;">
-      <div class="col-lg-6 col-md-8 mx-auto" style="margin: auto">
-        <h1 class="fw-light">열정과 꿈을 향한 여정</h1>
-        <p class="lead text-body-secondary">여러분이 학원에 발을 디뎠을 때, 이것은 미래를 개척하는 여정의 시작입니다. 컴퓨터와 기술의 세계는 끊임없이 진화하고 있습니다. 이곳에서 배우고 성장함으로써, 여러분은 이 변화를 주도하고 미래의 혁신을 만드는 일원이 될 것입니다.</p>
+      <div class="col-lg-10 col-md-8 mx-auto d-flex flex-column justify-content-center align-items-center image-background" style="height: 40vh;">
+       	<h1 class="fw-light">열정과 꿈을 향한 여정</h1>
+        <p class="lead text-body-secondary">여러분이 학원에 발을 디뎠을 때, 이것은 미래를 개척하는 여정의 시작입니다.</p>
+        <p class="lead text-body-secondary">컴퓨터와 기술의 세계는 끊임없이 진화하고 있습니다. 이곳에서 배우고 성장함으로써</p>
+        <p class="lead text-body-secondary">여러분은 이 변화를 주도하고 미래의 혁신을 만드는 일원이 될 것입니다.</p>
         <p>
           <a href="#" class="btn btn-primary my-2">Main call to action</a>
           <a href="#" class="btn btn-secondary my-2">Secondary action</a>
