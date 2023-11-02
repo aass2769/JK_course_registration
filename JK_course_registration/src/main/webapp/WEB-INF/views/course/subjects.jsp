@@ -36,7 +36,7 @@
 
   <section class="py-5 text-center container ">
     <div class="row py-lg-5" style="height: 50vh;">
-      <div class="col-lg-10 col-md-8 mx-auto d-flex flex-column justify-content-center align-items-center image-background" style="height: 40vh;">
+      <div class="col-lg-10 col-md-8 mx-auto d-flex flex-column justify-content-center align-items-center image-background" style="height: 40vh; margin: auto;">
        	<h1 class="fw-light">열정과 꿈을 향한 여정</h1>
         <p class="lead text-body-secondary">여러분이 학원에 발을 디뎠을 때, 이것은 미래를 개척하는 여정의 시작입니다.</p>
         <p class="lead text-body-secondary">컴퓨터와 기술의 세계는 끊임없이 진화하고 있습니다. 이곳에서 배우고 성장함으로써</p>

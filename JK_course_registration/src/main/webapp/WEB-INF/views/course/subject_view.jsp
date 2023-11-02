@@ -66,7 +66,7 @@
 	</c:forEach>
   	<section class="py-5 text-center container ">
     <div class="row py-lg-5">
-      <div class="col-lg-10 col-md-8 mx-auto" style="margin: auto">
+      <div class="col-lg-10 col-md-8 mx-auto" style="margin: auto;">
         <h1 class="fw-light subject_h1">커리큘럼</h1>
         <div class="container text-center curriculum_container">
 		  <div class="row curriculum_top_row">
