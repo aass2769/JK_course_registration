@@ -32,10 +32,6 @@
             margin-bottom: 10px;
         }
         
-       #exampleFormControlTextarea1 {
-	    resize: none;
-	  	}
-        
         .form-label{
         font-weight: bold;
         }
@@ -73,7 +69,7 @@
 		</div>
         <div class="mb-3">
         	<form:label path="brd_content" style=" font-weight: bold;">내용</form:label>
-        	<form:textarea path="brd_content" class="form-control"  rows="10"/>
+        	<form:textarea path="brd_content" class="form-control"  rows="10"  style="resize: none;"/>
 		</div>
 		</form:form>
     </div>
