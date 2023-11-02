@@ -22,7 +22,7 @@ public class CourseController {
 	public String subjects(int sb_category, Model model) {
 		
 		//한 과정의 과목들에 대한 정보를 가져오는 메서드
-		List<CourseBean> subjectsList = courseService.getSubjectsCategory(sb_category);
+		List<CourseBean> subjectsList = courseService.getSubjectsOneCategory(sb_category);
 		model.addAttribute("subjectsList", subjectsList);
 		
 		return "course/subjects";

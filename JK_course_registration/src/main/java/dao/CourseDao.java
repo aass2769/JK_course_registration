@@ -14,9 +14,9 @@ public class CourseDao {
 	@Autowired
 	private CourseMapper courseMapper;
 	
-	public List<CourseBean> getSubjectsCategory(int sb_category){
+	public List<CourseBean> getSubjectsOneCategory(int sb_category){
 		
-		List<CourseBean> subjectsList = courseMapper.getSubjectsCategory(sb_category);
+		List<CourseBean> subjectsList = courseMapper.getSubjectsOneCategory(sb_category);
 		
 		return subjectsList;
 	}

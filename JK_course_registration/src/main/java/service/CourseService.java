@@ -14,9 +14,9 @@ public class CourseService {
 	@Autowired
 	private CourseDao courseDao;
 	
-	public List<CourseBean> getSubjectsCategory(int sb_category){
+	public List<CourseBean> getSubjectsOneCategory(int sb_category){
 		
-		List<CourseBean> subjectsList = courseDao.getSubjectsCategory(sb_category);
+		List<CourseBean> subjectsList = courseDao.getSubjectsOneCategory(sb_category);
 		
 		return subjectsList;
 	}

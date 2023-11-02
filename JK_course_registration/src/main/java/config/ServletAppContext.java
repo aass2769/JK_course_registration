@@ -21,6 +21,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import interceptor.TopInterceptor;
 import mapper.CourseMapper;
+import mapper.MainMapper;
 import mapper.TopMapper;
 import mapper.UserMapper;
 import service.TopService;
@@ -123,6 +124,17 @@ public class ServletAppContext implements WebMvcConfigurer{
 		
 		return factoryBean;
 		
+	}
+	
+	//MainMapper추가
+	@Bean
+	public MapperFactoryBean<MainMapper> getMainMapper(SqlSessionFactory factory) throws Exception{
+		
+		MapperFactoryBean<MainMapper> factoryBean = new MapperFactoryBean<MainMapper>(MainMapper.class);
+		factoryBean.setSqlSessionFactory(factory);
+		
+		return factoryBean;
+			
 	}
 	
 	@Override
