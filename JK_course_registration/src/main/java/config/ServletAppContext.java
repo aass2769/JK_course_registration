@@ -20,6 +20,7 @@ import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import interceptor.TopInterceptor;
+import mapper.BoardMapper;
 import mapper.CourseMapper;
 import mapper.MainMapper;
 import mapper.TopMapper;
@@ -136,6 +137,17 @@ public class ServletAppContext implements WebMvcConfigurer{
 		return factoryBean;
 			
 	}
+	
+	//BoardMapper 추가
+	@Bean
+	public MapperFactoryBean<BoardMapper> getBoardMapper(SqlSessionFactory factory) throws Exception{
+		
+		MapperFactoryBean<BoardMapper> factoryBean = new MapperFactoryBean<BoardMapper>(BoardMapper.class);
+		factoryBean.setSqlSessionFactory(factory);
+		
+		return factoryBean;
+	}
+	
 	
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
