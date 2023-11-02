@@ -102,86 +102,16 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td class="text-center d-none d-md-table-cell" >10</td>
-						<td><a href="${root}read?cr_key=${cr_key}&cr_course=${cr_course}">오늘 점메추 받습니다..</a></td>
-						<td class="text-center d-none d-md-table-cell">혜미</td>
-						<td class="text-center d-none d-md-table-cell">2023.10.21</td>
-						<td class="text-center d-none d-md-table-cell">5</td>
-						<td class="text-center d-none d-md-table-cell">20</td>
-					</tr>
-					<tr>
-						<td class="text-center d-none d-md-table-cell">10</td>
-						<td><a href='board/read.html'>글 제목 입니다</a></td>
-						<td class="text-center d-none d-md-table-cell">홍길동</td>
-						<td class="text-center d-none d-md-table-cell">2023.10.21</td>
-						<td class="text-center d-none d-md-table-cell">5</td>
-						<td class="text-center d-none d-md-table-cell">20</td>
-					</tr>
-					<tr>
-						<td class="text-center d-none d-md-table-cell">10</td>
-						<td><a href='board_read.html'>글 제목 입니다</a></td>
-						<td class="text-center d-none d-md-table-cell">홍길동</td>
-						<td class="text-center d-none d-md-table-cell">2023.10.21</td>
-						<td class="text-center d-none d-md-table-cell">5</td>
-						<td class="text-center d-none d-md-table-cell">20</td>
-					</tr>
-					<tr>
-						<td class="text-center d-none d-md-table-cell">10</td>
-						<td><a href='board_read.html'>글 제목 입니다</a></td>
-						<td class="text-center d-none d-md-table-cell">홍길동</td>
-						<td class="text-center d-none d-md-table-cell">2023.10.21</td>
-						<td class="text-center d-none d-md-table-cell">5</td>
-						<td class="text-center d-none d-md-table-cell">20</td>
-					</tr>
-					<tr>
-						<td class="text-center d-none d-md-table-cell">10</td>
-						<td><a href='board_read.html'>글 제목 입니다</a></td>
-						<td class="text-center d-none d-md-table-cell">홍길동</td>
-						<td class="text-center d-none d-md-table-cell">2023.10.21</td>
-						<td class="text-center d-none d-md-table-cell">5</td>
-						<td class="text-center d-none d-md-table-cell">20</td>
-					</tr>
-					<tr>
-						<td class="text-center d-none d-md-table-cell">10</td>
-						<td><a href='board_read.html'>글 제목 입니다</a></td>
-						<td class="text-center d-none d-md-table-cell">홍길동</td>
-						<td class="text-center d-none d-md-table-cell">2023.10.21</td>
-						<td class="text-center d-none d-md-table-cell">5</td>
-						<td class="text-center d-none d-md-table-cell">20</td>
-					</tr>
-					<tr>
-						<td class="text-center d-none d-md-table-cell">10</td>
-						<td><a href='board_read.html'>글 제목 입니다</a></td>
-						<td class="text-center d-none d-md-table-cell">홍길동</td>
-						<td class="text-center d-none d-md-table-cell">2023.10.21</td>
-						<td class="text-center d-none d-md-table-cell">5</td>
-						<td class="text-center d-none d-md-table-cell">20</td>
-					</tr>
-					<tr>
-						<td class="text-center d-none d-md-table-cell">10</td>
-						<td><a href='board_read.html'>글 제목 입니다</a></td>
-						<td class="text-center d-none d-md-table-cell">홍길동</td>
-						<td class="text-center d-none d-md-table-cell">2023.10.21</td>
-						<td class="text-center d-none d-md-table-cell">5</td>
-						<td class="text-center d-none d-md-table-cell">20</td>
-					</tr>
-					<tr>
-						<td class="text-center d-none d-md-table-cell">10</td>
-						<td><a href='board_read.html'>글 제목 입니다</a></td>
-						<td class="text-center d-none d-md-table-cell">홍길동</td>
-						<td class="text-center d-none d-md-table-cell">2023.10.21</td>
-						<td class="text-center d-none d-md-table-cell">5</td>
-						<td class="text-center d-none d-md-table-cell">20</td>
-					</tr>
-					<tr>
-						<td class="text-center d-none d-md-table-cell">10</td>
-						<td><a href='board_read.html'>글 제목 입니다</a></td>
-						<td class="text-center d-none d-md-table-cell">홍길동</td>
-						<td class="text-center d-none d-md-table-cell">2023.10.21</td>
-						<td class="text-center d-none d-md-table-cell">5</td>
-						<td class="text-center d-none d-md-table-cell">20</td>
-					</tr>
+					<c:forEach var="brd" items="${board_list}">
+						<tr>
+							<td class="text-center d-none d-md-table-cell" >${brd.brd_key}</td>
+							<td><a href="${root}read?cr_key=${cr_key}&cr_course=${cr_course}">${brd.brd_title}</a></td>
+							<td class="text-center d-none d-md-table-cell">${brd.user_name}</td>
+							<td class="text-center d-none d-md-table-cell">${brd.brd_date}</td>
+							<td class="text-center d-none d-md-table-cell">${brd.brd_hit}</td>
+							<td class="text-center d-none d-md-table-cell">${brd.brd_likes_count}</td>
+						</tr>
+					</c:forEach>
 				</tbody>
 			</table>
 			

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -50,27 +51,31 @@
             <form class="form-inline">
             	<h2>게시판 글쓰기</h2>
             	</form>
-            	<form class="form-inline">
-				<a href="${root}create" class="btn btn-primary"  style="background-color: #670AC5; margin-left: 740px;">등록</a>
-			</form>
         </div>
+        <form:form class="form-inline" method="post" action="${root}board/create_pro" modelAttribute="createBoardBean" enctype="multipart/form-data">
+        <form:button class="btn btn-primary"  style="background-color: #670AC5; margin-left: 740px;">등록</form:button>
         <div class="divider"></div>
         <div class="form-group">
-            <label for="category">게시판 선택</label>
-            <select class="form-select form-select-lg" aria-label="Default select example">
-            	<c:forEach var="course" items="${course_list}">
-			  		<option value="${course.cr_course}">${course.cr_course}</option>
-			  </c:forEach>
-			</select>
+        	<form:label path="cr_course">게시판 선택</form:label>
+        	<form:select path="cr_course" class="form-select form-select-lg" aria-label="Default select example">
+	            <c:forEach var="course" items="${course_list}">
+				  		<option value="${course.cr_course}">${course.cr_course}</option>
+				  </c:forEach>
+			</form:select>
         </div>
         <div class="form-group">
-            <label for="title">제목</label>
-           <input class="form-control form-control-lg" type="text" placeholder="제목을 입력하세요." aria-label=".form-control-lg example">
+        	<form:label path="brd_title">제목</form:label>
+        	<form:input path="brd_title"  class="form-control form-control-lg" placeholder="제목을 입력하세요." aria-label=".form-control-lg example" />
         </div>
-        <div class="mb-3">
-		  <label for="exampleFormControlTextarea1" class="form-label">내용</label>
-		  <textarea class="form-control" id="exampleFormControlTextarea1" rows="10"></textarea>
+        <div class="form-group">
+        	<form:label path="brd_file">파일 첨부</form:label>
+        	<form:input path="brd_file" type="file"  class="form-control" />
 		</div>
+        <div class="mb-3">
+        	<form:label path="brd_content" style=" font-weight: bold;">내용</form:label>
+        	<form:textarea path="brd_content" class="form-control"  rows="10"/>
+		</div>
+		</form:form>
     </div>
 
 	<!-- 하단 정보 부분 -->

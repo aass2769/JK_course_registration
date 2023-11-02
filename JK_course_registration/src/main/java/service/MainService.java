@@ -17,10 +17,6 @@ public class MainService {
 	public List<CourseBean> getSubjectsAllCategory(){
 		
 		List<CourseBean> SubjectsAllCategory = mainDao.getSubjectsAllCategory();
-		for(CourseBean bean: SubjectsAllCategory) {
-			System.out.println(bean.getCr_course());
-			System.out.println(bean.getSb_photo());
-		}
 		
 		return SubjectsAllCategory;
 	}
