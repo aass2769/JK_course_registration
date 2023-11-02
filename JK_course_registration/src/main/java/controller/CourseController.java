@@ -39,7 +39,12 @@ public class CourseController {
 	}
 	
 	@GetMapping("/registration")
-	public String course_registration() {
+	public String registration() {
 		return "course/registration";
+	}
+	
+	@GetMapping("/registration_check")
+	public String registration_check() {
+		return "course/registration_check";
 	}
 }

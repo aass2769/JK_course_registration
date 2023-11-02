@@ -42,7 +42,7 @@
 	
 	<section class="py-5 text-center container ">
 	    <div class="row py-lg-5" style="height: 70vh;">
-		<h1 class="text-start registration_h2" style="border-bottom:2px solid #670AC5;">수강신청</h1>
+		<h1 class="text-start registration_h2" style="border-bottom:2px solid #670AC5;">수강신청조회</h1>
 		<div class="col-lg-12 col-md-8 mx-auto" style="height: 20vh; margin-top:15px;">
 			<div class="card shadow">
 				<div class="card-body">
@@ -83,7 +83,7 @@
 		              <th class="course_th" scope="col">과정명</th>
 		              <th class="course_th" scope="col">교육기간</th>
 		              <th class="course_th" scope="col">인원</th>
-		              <th class="course_th" scope="col">수강신청</th>
+		              <th class="course_th" scope="col">수강취소</th>
 		            </tr>
 		          </thead>
 		          <tbody>
@@ -94,7 +94,7 @@
 		              <td class="center-text">2/40</td>
 		              <td class="center-text">
 		              	<button type="button" class="btn btn-sm btn-secondary">커리큘럼</button>
-		              	<button type="button" class="btn btn-sm" style="background-color:#A566FF; color:white;">수강신청</button>
+		              	<button type="button" class="btn btn-sm btn-danger">수강취소</button>
 		              </td>
 		            </tr>
 		           <tr>
@@ -104,7 +104,7 @@
 		              <td class="center-text">2/40</td>
 		              <td class="center-text">
 		              	<button type="button" class="btn btn-sm btn-secondary">커리큘럼</button>
-		              	<button type="button" class="btn btn-sm" style="background-color:#A566FF; color:white;">수강신청</button>
+		              	<button type="button" class="btn btn-sm btn-danger">수강취소</button>
 		              </td>
 		            </tr>
 		            <tr>
