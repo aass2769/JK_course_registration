@@ -2,9 +2,12 @@ package controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -43,7 +46,7 @@ public class BoardController {
 	
 	/*게시글 작성 페이지*/
 	@GetMapping("/create")
-	public String create( Model model, @ModelAttribute ("createBoardBean") BoardBean createBoardBean) {
+	public String create( @Valid Model model, @ModelAttribute ("createBoardBean") BoardBean createBoardBean, BindingResult result) {
 		
 		/*select 선택에서 가져오기 위한 list*/
 		List<CourseBean> course_list = topService.courseList();

@@ -1,6 +1,8 @@
 package config;
 
 import javax.servlet.Filter;
+import javax.servlet.MultipartConfigElement;
+import javax.servlet.ServletRegistration.Dynamic;
 
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
@@ -68,6 +70,20 @@ public class SpringConfigClass extends AbstractAnnotationConfigDispatcherServlet
 		CharacterEncodingFilter encodingFilter = new CharacterEncodingFilter();
 		encodingFilter.setEncoding("UTF-8");
 		return new Filter[] {encodingFilter};
+	}
+	
+	//파일업로드의 setting
+	@Override
+	protected void customizeRegistration(Dynamic registration) {
+		// TODO Auto-generated method stub
+		super.customizeRegistration(registration);
+		
+		//첫번째: 클라이언트가 보낸 파일데이터를 저장해놓는 임시 파일의 경로 지정.->null 이면 톰캣에서 정한 임시 폴더로 셋팅됌. 
+		//두번째: 업로드하는 파일의 최대 용량.
+		//세번째: 파일데이터를 포함한 전체 요청 정보의 용량.
+		//네번째: 파일의 임계값->0이면 데이터를 다 받아서 알아서 저장을 하겠다는 뜻.
+		MultipartConfigElement config1 = new MultipartConfigElement(null, 52428800, 524288000, 0);
+		registration.setMultipartConfig(config1);
 	}
 }
 
