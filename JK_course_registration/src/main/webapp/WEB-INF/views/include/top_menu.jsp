@@ -95,9 +95,12 @@
                         <a class="nav-link" href="#" style="color: #670AC5; margin-top: 100px;">정보수정</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#" style="color: #670AC5; margin-top: 100px;">로그아웃</a>
+                        <a class="nav-link" href="${root}user/login" style="color: #670AC5; margin-top: 100px;">로그인</a>
                     </li>
-                </ul>
+				<!--<li class="nav-item"><a class="nav-link"
+					href="${root}user/login" style="color: #670AC5; margin-top: 100px;">로그아웃</a>
+				</li>-->
+			</ul>
             </div>
         </div>
     </nav>

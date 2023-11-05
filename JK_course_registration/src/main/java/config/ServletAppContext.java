@@ -174,7 +174,7 @@ public class ServletAppContext implements WebMvcConfigurer{
 	public ReloadableResourceBundleMessageSource messageSource() {
 		ReloadableResourceBundleMessageSource res = new ReloadableResourceBundleMessageSource();
 		res.setBasenames("/WEB-INF/properties/userErrors");
-		res.setBasenames("/WEB-INF/properties/boarrdErrors");
+		res.setBasenames("/WEB-INF/properties/boardErrors");
 		
 		return res;
 	}
