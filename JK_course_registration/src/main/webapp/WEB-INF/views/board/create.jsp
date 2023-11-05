@@ -62,14 +62,16 @@
         <div class="form-group">
         	<form:label path="brd_title">제목</form:label>
         	<form:input path="brd_title"  class="form-control form-control-lg" placeholder="제목을 입력하세요." aria-label=".form-control-lg example" />
+        	<form:errors path="brd_title" style="color:red"/>
         </div>
         <div class="form-group">
-        	<form:label path="brd_file">파일 첨부</form:label>
-        	<form:input path="brd_file" type="file"  class="form-control" />
+        	<form:label path="upload_File">파일 첨부</form:label>
+        	<form:input path="upload_File" type="file"  class="form-control" accept="image/*"/>
 		</div>
         <div class="mb-3">
         	<form:label path="brd_content" style=" font-weight: bold;">내용</form:label>
         	<form:textarea path="brd_content" class="form-control"  rows="10"  style="resize: none;"/>
+        	<form:errors path="brd_content" style="color:red"/>
 		</div>
 		</form:form>
     </div>

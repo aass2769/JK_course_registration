@@ -12,6 +12,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
+import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -173,10 +174,16 @@ public class ServletAppContext implements WebMvcConfigurer{
 	public ReloadableResourceBundleMessageSource messageSource() {
 		ReloadableResourceBundleMessageSource res = new ReloadableResourceBundleMessageSource();
 		res.setBasenames("/WEB-INF/properties/userErrors");
+		res.setBasenames("/WEB-INF/properties/boarrdErrors");
 		
 		return res;
 	}
 		
-	
+	//파일 업로드 위한 'MultipartResolver' 인터페이스의 구현체
+	//setting은 springconfigclass에서 함.
+	@Bean
+	public StandardServletMultipartResolver multipartResolver() {
+		return new StandardServletMultipartResolver();
+	}
 	
 }

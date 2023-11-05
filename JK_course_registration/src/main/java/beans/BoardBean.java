@@ -1,5 +1,9 @@
 package beans;
 
+import javax.validation.constraints.NotBlank;
+
+import org.springframework.web.multipart.MultipartFile;
+
 /*게시판, 게시판 좋아요, 게시판 댓글*/
 public class BoardBean {
 
@@ -9,9 +13,14 @@ public class BoardBean {
 	private int cr_key; //FK, 게시판 + 게시판 좋아요 + 게시판 댓글 여부
 	private int brd_writer;
 	private String brd_date;
+	@NotBlank
 	private String brd_title;
+	@NotBlank
 	private String brd_content;
-	private String brd_file;
+	private String brd_file; //DB에 저장되어있는 파일이름을 담을 변수.
+	private MultipartFile upload_File; //클라이언트가 보낼 파일데이터를 담을 변수.
+	//brd_file로 하면 String이기 때문에 에러가 남. Spring mvc에서는 MultipartFile이라는 객체로 만들어서
+	//주입으로 하려고 하기때문에 이 필드를 만들어줌.
 	private int brd_hit;
 	private String User_name;
 	private String cr_course;
@@ -133,6 +142,14 @@ public class BoardBean {
 
 	public void setCr_course(String cr_course) {
 		this.cr_course = cr_course;
+	}
+
+	public MultipartFile getUpload_File() {
+		return upload_File;
+	}
+
+	public void setUpload_File(MultipartFile upload_File) {
+		this.upload_File = upload_File;
 	}
 	
 }
