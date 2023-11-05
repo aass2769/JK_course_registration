@@ -44,7 +44,6 @@
       </div>
     </div>
   </section>
-	<section class="py-5 text-center container ">
 	  <div class="album py-5 bg-body-tertiary" style="height: 50vh;">
 	    <div class="container">
 		<h1 class="col text-center" style="color:#670AC5; margin-bottom:30px">
@@ -74,7 +73,6 @@
 	      </div>
 	    </div>
 	  </div>
-	  </section>
   </main>
 	<!-- 하단 정보 부분 -->
 	<c:import url="/WEB-INF/views/include/bottom_info.jsp" />

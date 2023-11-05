@@ -11,11 +11,20 @@ public class CourseBean {
 	private String sb_subject;
 	private String sb_photo;
 	private String sb_info_photo;
+	private String sb_start_date;
+	private String sb_end_date;
+	private String sb_number_people;
 	
 	private int ct_key;
 	private int ct_category;
 	private String ct_title;
 	private String ct_description;
+	
+	private int rg_key;
+	//수강신청한 유저 숫자
+	private int sb_user_count;
+	
+	private int user_key;
 	
 	public int getCr_key() {
 		return cr_key;
@@ -59,6 +68,24 @@ public class CourseBean {
 	public void setSb_info_photo(String sb_info_photo) {
 		this.sb_info_photo = sb_info_photo;
 	}
+	public String getSb_start_date() {
+		return sb_start_date;
+	}
+	public void setSb_start_date(String sb_start_date) {
+		this.sb_start_date = sb_start_date;
+	}
+	public String getSb_end_date() {
+		return sb_end_date;
+	}
+	public void setSb_end_date(String sb_end_date) {
+		this.sb_end_date = sb_end_date;
+	}
+	public String getSb_number_people() {
+		return sb_number_people;
+	}
+	public void setSb_number_people(String sb_number_people) {
+		this.sb_number_people = sb_number_people;
+	}
 	public int getCt_key() {
 		return ct_key;
 	}
@@ -82,6 +109,24 @@ public class CourseBean {
 	}
 	public void setCt_description(String ct_description) {
 		this.ct_description = ct_description;
+	}
+	public int getRg_key() {
+		return rg_key;
+	}
+	public void setRg_key(int rg_key) {
+		this.rg_key = rg_key;
+	}
+	public int getUser_key() {
+		return user_key;
+	}
+	public void setUser_key(int user_key) {
+		this.user_key = user_key;
+	}
+	public int getSb_user_count() {
+		return sb_user_count;
+	}
+	public void setSb_user_count(int sb_user_count) {
+		this.sb_user_count = sb_user_count;
 	}
 	
 	

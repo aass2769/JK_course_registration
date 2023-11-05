@@ -31,8 +31,6 @@
 	padding-bottom : 20px;
 }
 
-
-
 </style>
 </head>
   <body>
@@ -75,7 +73,7 @@
 	      </div>	
 	      <div class="col-lg-12 col-md-8 mx-auto d-flex flex-column justify-content-center align-items-center" style="height: 40vh;">
 		      <div class="table small" style="width: 100%;">
-		      	<h4 style="text-align: left;">총12건</h4>
+		      	<h4 style="text-align: left;">총 ${registrationCheckCount }건</h4>
 		        <table class="table table-striped table-sm">
 		          <thead>
 		            <tr>
@@ -87,96 +85,41 @@
 		            </tr>
 		          </thead>
 		          <tbody>
-		            <tr>
-		              <td class="center-text">IT/SW 개발</td>
-		              <td class="center-text">Java</td>
-		              <td class="center-text">2023.11.02 ~ 2023.11.03</td>
-		              <td class="center-text">2/40</td>
-		              <td class="center-text">
-		              	<button type="button" class="btn btn-sm btn-secondary">커리큘럼</button>
-		              	<button type="button" class="btn btn-sm btn-danger">수강취소</button>
-		              </td>
-		            </tr>
-		           <tr>
-		              <td class="center-text">웹 디자인/퍼블리셔</td>
-		              <td class="center-text">Javascript&jQuery</td>
-		              <td class="center-text">2023.11.02 ~ 2023.11.03</td>
-		              <td class="center-text">2/40</td>
-		              <td class="center-text">
-		              	<button type="button" class="btn btn-sm btn-secondary">커리큘럼</button>
-		              	<button type="button" class="btn btn-sm btn-danger">수강취소</button>
-		              </td>
-		            </tr>
-		            <tr>
-		              <td class="center-text">1,001</td>
-		              <td class="center-text">data</td>
-		              <td class="center-text">placeholder</td>
-		              <td class="center-text">text</td>
-		              <td class="center-text">text</td>
-		            </tr>
-		            <tr>
-		              <td class="center-text">1,001</td>
-		              <td class="center-text">data</td>
-		              <td class="center-text">placeholder</td>
-		              <td class="center-text">text</td>
-		              <td class="center-text">text</td>
-		            </tr>
-		            <tr>
-		              <td class="center-text">1,001</td>
-		              <td class="center-text">data</td>
-		              <td class="center-text">placeholder</td>
-		              <td class="center-text">text</td>
-		              <td class="center-text">text</td>
-		            </tr>
-		            <tr>
-		              <td class="center-text">1,001</td>
-		              <td class="center-text">data</td>
-		              <td class="center-text">placeholder</td>
-		              <td class="center-text">text</td>
-		              <td class="center-text">text</td>
-		            </tr>
-		            <tr>
-		              <td class="center-text">1,001</td>
-		              <td class="center-text">data</td>
-		              <td class="center-text">placeholder</td>
-		              <td class="center-text">text</td>
-		              <td class="center-text">text</td>
-		            </tr>
-		            <tr>
-		              <td class="center-text">1,001</td>
-		              <td class="center-text">data</td>
-		              <td class="center-text">placeholder</td>
-		              <td class="center-text">text</td>
-		              <td class="center-text">text</td>
-		            </tr>
-		            <tr>
-		              <td class="center-text">1,001</td>
-		              <td class="center-text">data</td>
-		              <td class="center-text">placeholder</td>
-		              <td class="center-text">text</td>
-		              <td class="center-text">text</td>
-		            </tr>
-		            <tr>
-		              <td class="center-text">1,001</td>
-		              <td class="center-text">data</td>
-		              <td class="center-text">placeholder</td>
-		              <td class="center-text">text</td>
-		              <td class="center-text">text</td>
-		            </tr>
-		            <tr>
-		              <td class="center-text">1,001</td>
-		              <td class="center-text">data</td>
-		              <td class="center-text">placeholder</td>
-		              <td class="center-text">text</td>
-		              <td class="center-text">text</td>
-		            </tr>
-		            <tr>
-		              <td class="center-text">1,001</td>
-		              <td class="center-text">data</td>
-		              <td class="center-text">placeholder</td>
-		              <td class="center-text">text</td>
-		              <td class="center-text">text</td>
-		            </tr>
+		          	<c:forEach var="registration" items="${registrationCheckList }">
+			            <tr>
+			              <td class="center-text">${registration.cr_course }</td>
+			              <td class="center-text" id="sb_subject">${registration.sb_subject }</td>
+			              <td class="center-text">${registration.sb_start_date } ~ ${registration.sb_end_date }</td>
+			              <td class="center-text">${registration.sb_user_count }/${registration.sb_number_people }</td>
+			              <td class="center-text">
+			              	<a href="${root }course/subject_view?cr_key=${registration.cr_key}"><button type="button" class="btn btn-sm btn-secondary">커리큘럼</button></a>
+			              	<button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#${registration.sb_subject }">
+							  수강취소
+							</button>
+			              </td>
+			              <!-- Modal -->
+			            </tr>
+			            <div class="modal fade" id="${registration.sb_subject }" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+							  <div class="modal-dialog modal-dialog-centered">
+							    <div class="modal-content">
+							      <div class="modal-header">
+							        <h1 class="modal-title fs-5" id="exampleModalLabel">수강취소</h1>
+							        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+							      </div>
+							      <div class="modal-body">
+							        <h4>${registration.sb_subject }</h4><h5> 과정을 수강취소 하시겠습니까?</h5>
+							      </div>
+							      <div class="modal-footer">
+							        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+							        <form action="${root }course/registrationDelete_pro " method="post">
+								        <input type="hidden" name="rg_key" value="${registration.rg_key }"/>
+								        <button type="submit" class="btn btn-primary">확인</button>
+							        </form>
+							      </div>
+							    </div>
+							  </div>
+						  </div>
+			         </c:forEach>
 		          </tbody>
 		        </table>
 		      </div>
