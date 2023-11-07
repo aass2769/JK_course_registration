@@ -58,6 +58,9 @@
 
 </head>
 <body>
+	<!-- 상단 메뉴 부분 -->
+	<c:import url="/WEB-INF/views/include/top_menu.jsp" />
+
 	<section class="login_section">
 		<div class="container outer_container accounts_container">
 			<div class="row h-100" style="margin-top: 70px;">
@@ -118,5 +121,7 @@
 		</div>
 	</section>
 
+		<!-- 하단 정보 부분 -->
+	<c:import url="/WEB-INF/views/include/bottom_info.jsp" />
 </body>
 </html>

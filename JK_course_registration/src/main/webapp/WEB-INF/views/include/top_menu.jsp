@@ -90,17 +90,26 @@
                 <a class="navbar-brand" href="#" id="logo">
                     <img src="${root }image/JK_logo.jpg" alt="Logo">
                 </a>
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#" style="color: #670AC5; margin-top: 100px;">정보수정</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="${root}user/login" style="color: #670AC5; margin-top: 100px;">로그인</a>
-                    </li>
-				<!--<li class="nav-item"><a class="nav-link"
-					href="${root}user/login" style="color: #670AC5; margin-top: 100px;">로그아웃</a>
-				</li>-->
-			</ul>
+                <div>
+	                <ul class="navbar-nav">
+	                	<li class="nav-item">${userSession.user_name }님 반갑습니다.</li>
+	                </ul>
+	                <ul class="navbar-nav">
+						<c:choose>
+							<c:when test="${userSession.userLogin == true}">
+						       <li class="nav-item"><a class="nav-link" href="${root}user/modify" style="color: #670AC5; margin-top: 100px;">정보수정</a></li>
+						       <li class="nav-item"><a class="nav-link" href="${root}user/logout" style="color: #670AC5; margin-top: 100px;">로그아웃</a></li>
+						   </c:when>
+						   <c:when  test="${userSession.userLogin == false}">
+						   		<li class="nav-item"><a class="nav-link" href="${root}user/join" style="color: #670AC5; margin-top: 100px;">회원가입</a></li>
+								<li class="nav-item"><a class="nav-link" href="${root}user/login" style="color: #670AC5; margin-top: 100px;">로그인</a></li>
+						   </c:when>
+						</c:choose>
+					<!--<li class="nav-item"><a class="nav-link"
+						href="${root}user/login" style="color: #670AC5; margin-top: 100px;">로그아웃</a>
+					</li>-->
+					</ul>
+				</div>
             </div>
         </div>
     </nav>
