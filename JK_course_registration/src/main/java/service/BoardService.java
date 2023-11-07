@@ -3,6 +3,8 @@ package service;
 import java.io.File;
 import java.util.List;
 
+import javax.annotation.Resource;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
@@ -10,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import beans.BoardBean;
+import beans.UserBean;
 import dao.BoardDao;
 
 @Service
@@ -23,6 +26,9 @@ public class BoardService {
 	@Autowired
 	private BoardDao boardDao;
 	
+	@Resource(name = "userSession")
+	private UserBean userSession;
+	
 	//게시물 목록 리스트 코드
 	public List<BoardBean> getBoardList(int cr_key){
 		
@@ -30,6 +36,17 @@ public class BoardService {
 		
 		return board_list;
 	}
+	
+	//게시물 작성 코드
+	public void addBoard(BoardBean addBoardBean) {
+		
+		//user_key를 session에서 받아와서 빈에 set함.
+		addBoardBean.setUser_key(userSession.getUser_key());
+		addBoardBean.setBrd_writer(userSession.getUser_key());
+		
+		boardDao.addBoard(addBoardBean);
+	}
+	
 	
 	//파일업로드한거 저장하는 코드
 	//(클라이언트에서 전송된 파일을 서버에 업로드하고, 새로운 파일 이름을 생성하여 반환하는 역할)

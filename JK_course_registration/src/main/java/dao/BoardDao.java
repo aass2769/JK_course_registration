@@ -19,4 +19,10 @@ public class BoardDao {
 		
 		return board_list;
 	}
+	
+	//return 타입이 없으니까 메서드를 그대로 호출해줌.
+	public void addBoard(BoardBean addBoardBean) {
+		boardMapper.addBoard(addBoardBean);
+	}
+	
 }

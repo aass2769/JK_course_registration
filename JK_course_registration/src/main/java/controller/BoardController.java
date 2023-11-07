@@ -52,10 +52,11 @@ public class BoardController {
 	
 	/*게시글 작성 페이지*/
 	@GetMapping("/create")
-	public String create(Model model, @ModelAttribute ("createBoardBean") BoardBean createBoardBean) {
+	public String create(Model model, @ModelAttribute ("addBoardBean") BoardBean addBoardBean) {
 		
 		/*select 선택에서 가져오기 위한 list*/
 		List<CourseBean> course_list = topService.courseList();
+		
 		model.addAttribute("course_list", course_list);
 		
 		return "board/create";
@@ -63,11 +64,13 @@ public class BoardController {
 	
 	/*게시글 작성하는 과정 처리하는 코드*/
 	@PostMapping("/create_pro")
-	public String create_pro(@Valid Model model, @ModelAttribute ("createBoardBean") BoardBean createBoardBean, BindingResult result) {
+	public String create_pro(@Valid Model model, @ModelAttribute ("addBoardBean") BoardBean addBoardBean, BindingResult result) {
 		
 		if(result.hasErrors()) {
 			return "board/create";
 		}
+		
+		boardService.addBoard(addBoardBean);
 		
 		return "board/create_done";
 	}

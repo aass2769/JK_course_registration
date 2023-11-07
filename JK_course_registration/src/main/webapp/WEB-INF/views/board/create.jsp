@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<c:set var="root" value="${pageContext.request.contextPath}/" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -48,14 +49,14 @@
             	<h2>게시판 글쓰기</h2>
             	</form>
         </div>
-        <form:form class="form-inline" method="post" action="${root}board/create_pro" modelAttribute="createBoardBean" enctype="multipart/form-data">
-        <form:button class="btn btn-primary"  style="background-color: #670AC5; margin-left: 740px;">등록</form:button>
+        <form:form class="form-inline" method="post" action="${root}board/create_pro" modelAttribute="addBoardBean" enctype="multipart/form-data">
+       <form:button class="btn btn-primary"  style="background-color: #670AC5; margin-left: 740px;">등록</form:button>
         <div class="divider"></div>
         <div class="form-group">
         	<form:label path="cr_course">게시판 선택</form:label>
-        	<form:select path="cr_course" class="form-select form-select-lg" aria-label="Default select example">
+        	<form:select path="cr_key" class="form-select form-select-lg" aria-label="Default select example">
 	            <c:forEach var="course" items="${course_list}">
-				  		<option value="${course.cr_key}">${course.cr_course}</option>
+				  		<form:option value="${course.cr_key}">${course.cr_course}</form:option>
 				  </c:forEach>
 			</form:select>
         </div>
