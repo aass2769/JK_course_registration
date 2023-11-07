@@ -181,10 +181,10 @@ public class ServletAppContext implements WebMvcConfigurer {
 	// Properties 파일을 Message로 등록한다.
 	@Bean
 	public ReloadableResourceBundleMessageSource messageSource() {
-		ReloadableResourceBundleMessageSource res = new ReloadableResourceBundleMessageSource();
-		res.setBasenames("/WEB-INF/properties/userErrors","/WEB-INF/properties/boardErrors");
+	    ReloadableResourceBundleMessageSource res = new ReloadableResourceBundleMessageSource();
+	    res.setBasenames("/WEB-INF/properties/userErrors", "/WEB-INF/properties/boardErrors");
 
-		return res;
+	    return res;
 	}
 
 	// 파일 업로드 위한 'MultipartResolver' 인터페이스의 구현체

@@ -39,7 +39,6 @@ public class BoardService {
 	
 	//게시물 작성 코드
 	public void addBoard(BoardBean addBoardBean) {
-		
 		//user_key를 session에서 받아와서 빈에 set함.
 		addBoardBean.setUser_key(userSession.getUser_key());
 		addBoardBean.setBrd_writer(userSession.getUser_key());

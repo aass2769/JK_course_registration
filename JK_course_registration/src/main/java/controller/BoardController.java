@@ -52,7 +52,7 @@ public class BoardController {
 	
 	/*게시글 작성 페이지*/
 	@GetMapping("/create")
-	public String create(Model model, @ModelAttribute ("addBoardBean") BoardBean addBoardBean) {
+	public String create(Model model, @ModelAttribute("addBoardBean") BoardBean addBoardBean) {
 		
 		/*select 선택에서 가져오기 위한 list*/
 		List<CourseBean> course_list = topService.courseList();
@@ -63,8 +63,9 @@ public class BoardController {
 	}
 	
 	/*게시글 작성하는 과정 처리하는 코드*/
+	/*BindingResult는 바인딩의 대상이 되는 객체 바로 뒤에 위치해야 한다.*/
 	@PostMapping("/create_pro")
-	public String create_pro(@Valid @ModelAttribute ("addBoardBean") BoardBean addBoardBean, Model model, BindingResult result) {
+	public String create_pro(@Valid @ModelAttribute("addBoardBean") BoardBean addBoardBean, BindingResult result, Model model) {
 		
 		if(result.hasErrors()) {
 			return "board/create";
