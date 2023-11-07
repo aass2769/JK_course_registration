@@ -24,9 +24,9 @@ public class BoardService {
 	private BoardDao boardDao;
 	
 	//게시물 목록 리스트 코드
-	public List<BoardBean> getBoardList(){
+	public List<BoardBean> getBoardList(int cr_key){
 		
-		List<BoardBean> board_list = boardDao.getBoardList();
+		List<BoardBean> board_list = boardDao.getBoardList(cr_key);
 		
 		return board_list;
 	}

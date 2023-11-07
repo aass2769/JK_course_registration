@@ -14,8 +14,8 @@ public class BoardDao {
 	@Autowired
 	private BoardMapper boardMapper;
 	
-	public List<BoardBean> getBoardList(){
-		List<BoardBean> board_list = boardMapper.getBoardList();
+	public List<BoardBean> getBoardList(int cr_key){
+		List<BoardBean> board_list = boardMapper.getBoardList(cr_key);
 		
 		return board_list;
 	}

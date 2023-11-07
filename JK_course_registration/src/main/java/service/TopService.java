@@ -18,6 +18,7 @@ public class TopService {
    public List<CourseBean> courseList(){
       
       List<CourseBean> course_list = topDao.courseList();
+      
       List<CourseBean> check_list = new ArrayList<CourseBean>();
       
       for (int i = 0; i < course_list.size(); i++) {

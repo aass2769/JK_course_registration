@@ -55,7 +55,7 @@
         	<form:label path="cr_course">게시판 선택</form:label>
         	<form:select path="cr_course" class="form-select form-select-lg" aria-label="Default select example">
 	            <c:forEach var="course" items="${course_list}">
-				  		<option value="${course.cr_course}">${course.cr_course}</option>
+				  		<option value="${course.cr_key}">${course.cr_course}</option>
 				  </c:forEach>
 			</form:select>
         </div>
