@@ -64,7 +64,7 @@ public class BoardController {
 	
 	/*게시글 작성하는 과정 처리하는 코드*/
 	@PostMapping("/create_pro")
-	public String create_pro(@Valid Model model, @ModelAttribute ("addBoardBean") BoardBean addBoardBean, BindingResult result) {
+	public String create_pro(@Valid @ModelAttribute ("addBoardBean") BoardBean addBoardBean, Model model, BindingResult result) {
 		
 		if(result.hasErrors()) {
 			return "board/create";
