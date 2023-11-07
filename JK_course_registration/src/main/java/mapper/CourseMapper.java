@@ -31,7 +31,8 @@ public interface CourseMapper {
 	List<CourseBean> getSubjectInfo(int cr_key);
 	
 	//수강신청 페이지의 전체 과목들에 대한 정보리스트를 가져오는 쿼리
-	@Select("SELECT a.cr_key, a.cr_course, a.sb_key, b.sb_subject, b.sb_start_date, b.sb_end_date, b.sb_number_people, c.rg_key, c.user_key ,sb_user_count "
+	@Select("SELECT a.cr_key, a.cr_course, a.sb_key, b.sb_subject, to_char(b.sb_start_date, 'YYYY-MM-DD') as sb_start_date, "
+			+ "to_char(b.sb_end_date, 'YYYY-MM-DD') as sb_end_date, b.sb_number_people, c.rg_key, c.user_key ,sb_user_count "
 			+ "FROM course_table a "
 			+ "LEFT OUTER JOIN SUBJECT_TABLE b ON a.sb_key = b.sb_key "
 			+ "LEFT OUTER JOIN REGISTRATION_TABLE c ON b.sb_key = c.sb_key "
@@ -53,7 +54,8 @@ public interface CourseMapper {
 	void setCourseRegistration(@Param("sb_key") int sb_key, @Param("user_key") int user_key);
 	
 	//수강신청조회 페이지의 신청했던 과목들에 대한 정보리스트를 가져오는 쿼리
-	@Select("SELECT a.cr_key, a.cr_course, a.sb_key, b.sb_subject, b.sb_start_date, b.sb_end_date, b.sb_number_people, c.rg_key, c.user_key ,sb_user_count "
+	@Select("SELECT a.cr_key, a.cr_course, a.sb_key, b.sb_subject, to_char(b.sb_start_date, 'YYYY-MM-DD') as sb_start_date, "
+			+ "to_char(b.sb_end_date, 'YYYY-MM-DD') as sb_end_date, b.sb_number_people, c.rg_key, c.user_key ,sb_user_count "
 			+ "FROM course_table a "
 			+ "LEFT OUTER JOIN SUBJECT_TABLE b ON a.sb_key = b.sb_key "
 			+ "LEFT OUTER JOIN REGISTRATION_TABLE c ON b.sb_key = c.sb_key "

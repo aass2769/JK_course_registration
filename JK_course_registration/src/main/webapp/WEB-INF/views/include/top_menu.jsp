@@ -92,7 +92,9 @@
                 </a>
                 <div>
 	                <ul class="navbar-nav">
-	                	<li class="nav-item">${userSession.user_name }님 반갑습니다.</li>
+	                	<c:if test="${userSession.userLogin == true}">
+	                		<li class="nav-item">${userSession.user_name }님 반갑습니다.</li>
+	                	</c:if>
 	                </ul>
 	                <ul class="navbar-nav">
 						<c:choose>
