@@ -55,7 +55,6 @@ public class UserService {
 	public void getModifyUserInfo(UserBean modifyUserBean) {
 		
 		UserBean tempModifyUserBean = userDao.getModifyUserInfo(userSession.getUser_key());
-		System.out.println("modify");
 		modifyUserBean.setUser_id(tempModifyUserBean.getUser_id());
 		modifyUserBean.setUser_name(tempModifyUserBean.getUser_name());
 	}
