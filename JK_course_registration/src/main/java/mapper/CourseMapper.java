@@ -32,7 +32,7 @@ public interface CourseMapper {
 	
 	//수강신청 페이지의 전체 과목들에 대한 정보리스트를 가져오는 쿼리
 	@Select("SELECT a.cr_key, a.cr_course, a.sb_key, b.sb_subject, to_char(b.sb_start_date, 'YYYY-MM-DD') as sb_start_date, "
-			+ "to_char(b.sb_end_date, 'YYYY-MM-DD') as sb_end_date, b.sb_number_people, c.rg_key, c.user_key ,sb_user_count "
+			+ "to_char(b.sb_end_date, 'YYYY-MM-DD') as sb_end_date, b.sb_number_people, c.rg_key, c.user_key, sb_user_count "
 			+ "FROM course_table a "
 			+ "LEFT OUTER JOIN SUBJECT_TABLE b ON a.sb_key = b.sb_key "
 			+ "LEFT OUTER JOIN REGISTRATION_TABLE c ON b.sb_key = c.sb_key "
@@ -44,6 +44,21 @@ public interface CourseMapper {
 			+ "ORDER BY a.cr_key")
 	List<CourseBean> getRegistrationList();
 	
+	//수강신청 페이지의 검색한 과목들에 대한 정보리스트를 가져오는 쿼리
+	@Select("SELECT a.cr_key, a.cr_course, a.sb_key, b.sb_category, b.sb_subject, to_char(b.sb_start_date, 'YYYY-MM-DD') as sb_start_date, "
+			+ "to_char(b.sb_end_date, 'YYYY-MM-DD') as sb_end_date, b.sb_number_people, c.rg_key, c.user_key, sb_user_count "
+			+ "FROM course_table a "
+			+ "LEFT OUTER JOIN SUBJECT_TABLE b ON a.sb_key = b.sb_key "
+			+ "LEFT OUTER JOIN REGISTRATION_TABLE c ON b.sb_key = c.sb_key "
+			+ "LEFT OUTER JOIN ( "
+			+ "SELECT sb_key, COUNT(user_key) as sb_user_count "
+			+ "FROM REGISTRATION_TABLE "
+			+ "GROUP BY sb_key "
+			+ ") sb_counts ON b.sb_key = sb_counts.sb_key "
+			+ "WHERE a.sb_key = #{sb_key} AND b.sb_category = #{sb_category} "
+			+ "ORDER BY a.cr_key")
+	List<CourseBean> getRegistrationSearchList(CourseBean registrationBean);
+	
 	//수강신청 페이지의 전체 과목들 개수를 가져오는 쿼리
 	@Select("SELECT count(sb_key) FROM subject_table")
 	int getSubjectCount();
@@ -53,9 +68,21 @@ public interface CourseMapper {
 			+ "VALUES (rg_seq.NEXTVAL, #{sb_key}, #{user_key})")
 	void setCourseRegistration(@Param("sb_key") int sb_key, @Param("user_key") int user_key);
 	
+	//수강신청 중복신청 확인하는 쿼리
+	@Select("SELECT c.user_id "
+			+ "FROM REGISTRATION_TABLE a "
+			+ "LEFT OUTER JOIN subject_table b "
+			+ "ON a.sb_key = b.sb_key "
+			+ "LEFT OUTER JOIN user_table c "
+			+ "ON a.user_key = c.user_key "
+			+ "WHERE a.sb_key = #{sb_key} AND user_id = #{user_id} "
+			+ "ORDER BY rg_key")
+	String getCheckCourseId(@Param("sb_key") int sb_key, @Param("user_id") String user_id);
+	
+	
 	//수강신청조회 페이지의 신청했던 과목들에 대한 정보리스트를 가져오는 쿼리
 	@Select("SELECT a.cr_key, a.cr_course, a.sb_key, b.sb_subject, to_char(b.sb_start_date, 'YYYY-MM-DD') as sb_start_date, "
-			+ "to_char(b.sb_end_date, 'YYYY-MM-DD') as sb_end_date, b.sb_number_people, c.rg_key, c.user_key ,sb_user_count "
+			+ "to_char(b.sb_end_date, 'YYYY-MM-DD') as sb_end_date, b.sb_number_people, c.rg_key, c.user_key, sb_user_count "
 			+ "FROM course_table a "
 			+ "LEFT OUTER JOIN SUBJECT_TABLE b ON a.sb_key = b.sb_key "
 			+ "LEFT OUTER JOIN REGISTRATION_TABLE c ON b.sb_key = c.sb_key "
@@ -73,7 +100,18 @@ public interface CourseMapper {
 			+ "WHERE user_key = #{user_key}")
 	int getRegistrationCheckCount(int user_key);
 	
+	
+	//수강 삭제하는 쿼리
 	@Delete("DELETE FROM registration_table "
 			+ "WHERE rg_key = #{rg_key}")
 	void setRegistrationDelete(int rg_key);
+	
+	@Select("SELECT a.cr_course, b.sb_category, count(*) "
+			+ "FROM course_table a "
+			+ "LEFT OUTER JOIN SUBJECT_TABLE b "
+			+ "ON a.sb_key = b.sb_key "
+			+ "GROUP BY a.cr_course, b.sb_category "
+			+ "ORDER BY sb_category")
+	List<CourseBean> getCourseList();
+	
 }

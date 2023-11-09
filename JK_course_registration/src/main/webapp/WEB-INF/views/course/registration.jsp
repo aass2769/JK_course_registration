@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="root" value="${pageContext.request.contextPath }/"/>
 <!DOCTYPE html>
@@ -32,6 +33,7 @@
 }
 
 </style>
+
 </head>
   <body>
   
@@ -46,31 +48,29 @@
 				<div class="card-body">
 					<div class="search-container">
 						<!-- 카테고리 선택(select 옵션) -->
-						<div class="row" style="padding-top: 10px;">
-						  <div class="col">
-						  	
-							    <select class="form-select" aria-label="Default select" >
-									<option selected>과정종류선택</option>
-									<option value="1">제목</option>
-									<option value="2">게시글</option>
+						<form action="${root }course/registration" method="get">
+							<div class="row" style="padding-top: 10px;">
+							  <div class="col">
+							  	<select name="sb_category" class="form-select" aria-label="Default select" >
+							  		<option value="0" selected>과정종류전체선택</option>
+									<c:forEach var="course" items="${courseList }">
+										<option value="${course.sb_category }">${course.cr_course }</option>
+									</c:forEach>
+							  	</select>
+							  </div>
+							  <div class="col">
+								<select name="sb_key" class="form-select" aria-label="Default select">
+									<option value="0" selected>과목명전체선택</option>
+							    	<c:forEach var="subject" items="${duplicateCheckRgList }" varStatus="loop">
+										<option value="${subject.sb_key }">${subject.sb_subject }</option>
+									</c:forEach>
 								</select>
-						  </div>
-						  <div class="col">
-						    <select class="form-select" aria-label="Default select" >
-						    	<c:forEach var="subject" items="${duplicateCheckRgList }" varStatus="loop">
-						    		<c:if test="${loop.index == 0 }">
-						    			<option disabled selected>과목명선택</option>
-						    		</c:if>
-									<option value="${subject }">${subject.sb_subject }</option>
-								</c:forEach>
-							</select>
-						  </div>
-						  <div class="col-1">
-						    <button type="submit" class="btn btn-primary mb-3" style="background-color:#670AC5; border: 2px solid #670AC5; width:78px; margin-right:20px;">검색</button>
-						  </div>
-						</div>
-						             
-						
+							  </div>
+							  <div class="col-1">
+							    <button type="submit" class="btn btn-primary mb-3" style="background-color:#670AC5; border: 2px solid #670AC5; width:78px; margin-right:20px;">검색</button>
+							  </div>
+							</div>
+						</form>	
 					</div>   
 				</div>
 			</div>
@@ -89,7 +89,7 @@
 		            </tr>
 		          </thead>
 		          <tbody>
-		          	<c:forEach var="registration" items="${duplicateCheckRgList }">
+		          	<c:forEach var="registration" items="${duplicateCheckRgList }" varStatus="loop">
 			            <tr>
 			              <td class="center-text">${registration.cr_course }</td>
 			              <td class="center-text" id="sb_subject">${registration.sb_subject }</td>

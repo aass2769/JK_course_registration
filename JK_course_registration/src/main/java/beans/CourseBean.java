@@ -25,6 +25,7 @@ public class CourseBean {
 	private int sb_user_count;
 	
 	private int user_key;
+	private String user_id;
 	
 	public int getCr_key() {
 		return cr_key;
@@ -127,6 +128,12 @@ public class CourseBean {
 	}
 	public void setSb_user_count(int sb_user_count) {
 		this.sb_user_count = sb_user_count;
+	}
+	public String getUser_id() {
+		return user_id;
+	}
+	public void setUser_id(String user_id) {
+		this.user_id = user_id;
 	}
 	
 	
