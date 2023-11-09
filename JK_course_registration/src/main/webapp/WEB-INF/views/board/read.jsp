@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="root" value="${pageContext.request.contextPath}/" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -99,15 +100,15 @@
 
 	<div class="container">
 		<div class="post">
-		<a href="#" class="btn btn-link text-dark">IT/SW개발 ></a>
-			<h2>오늘 점메추 받습니다..</h2>
-			<p>혜미</p>
-			<p>2023.10.21. 15:00 조회 5</p>
+		<a href="${root}board/detail?cr_key=${readBoard.cr_key}&cr_course=${readBoard.cr_course}" class="btn btn-link text-dark">${readBoard.cr_course}</a>
+			<h2>${readBoard.brd_title}</h2>
+			<p>${readBoard.user_name}</p>
+			<p>${readBoard.brd_date} 조회 ${readBoard.brd_hit}</p>
 			<hr>
-			<p>오늘 뭐 먹을지 고민되네요..ㅎㅎ맛난거 뭐 없을까요ㅜㅜ</p>
+			<p>${readBoard.brd_content}</p>
 			<div class="icons">
 				<div class="icon">
-					<i class="fas fa-thumbs-up"></i> <span>20</span>
+					<i class="fas fa-thumbs-up"></i> <span>${readBoard.brd_likes_count}</span>
 				</div>
 				<div class="icon">
 					<i class="fas fa-comment"></i> <span>3</span>
@@ -119,6 +120,16 @@
 					<i class="fas fa-thumbs-up"></i> 좋아요
 				</button>
 			</div>
+			<c:choose>
+				<c:when test="${readBoard.brd_writer == user_key}">
+					<div class="d-flex justify-content-end">
+	                        <a href="${root}board/modify?brd_key=${readBoard.brd_key}"><button class="btn btn-link text-dark mr-2">수정</button></a>
+	                        <a href="${root}board/delete?brd_key=${readBoard.brd_key}&cr_key=${readBoard.cr_key}&cr_course=${readBoard.cr_course}"><button class="btn btn-link text-dark">삭제</button></a>
+	                 </div>
+                 </c:when>
+                 <c:otherwise>
+                 </c:otherwise>
+            </c:choose>
 		</div>
 		<div class="divider"></div>
 		<div class="comments">

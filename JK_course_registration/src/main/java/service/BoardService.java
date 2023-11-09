@@ -41,9 +41,40 @@ public class BoardService {
 	public void addBoard(BoardBean addBoardBean) {
 		//user_key를 session에서 받아와서 빈에 set함.
 		addBoardBean.setUser_key(userSession.getUser_key());
+		//Brd_writer에 user_key를 넣어서, 로그인한 글쓴이와 글작성자 인덱스가 일치하게 함.
 		addBoardBean.setBrd_writer(userSession.getUser_key());
 		
 		boardDao.addBoard(addBoardBean);
+	}
+	
+	//cr_course 가져오기
+	public String selCourse(int cr_key) {
+		String cr_course = boardDao.selCourse(cr_key);
+		
+		return cr_course;
+	}
+	
+	
+	//게시물 읽기 코드
+	public BoardBean readBoard(int brd_key) {
+		BoardBean readBoard = boardDao.readBoard(brd_key);
+		
+		return readBoard;
+	}
+	
+	//게시글 조회수 증가 코드
+	public void addHit(int brd_key) {
+		boardDao.addHit(brd_key);
+	}
+	
+	//게시글 수정 코드
+	public void editBoard(BoardBean editBoardBean) {
+		boardDao.editBoard(editBoardBean);
+	}
+	
+	//게시글 삭제 코드
+	public void delBoard(int brd_key) {
+		boardDao.delBoard(brd_key);
 	}
 	
 	

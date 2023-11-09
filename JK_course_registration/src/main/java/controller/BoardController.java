@@ -58,7 +58,7 @@ public class BoardController {
 		List<CourseBean> course_list = topService.courseList();
 		
 		model.addAttribute("course_list", course_list);
-		
+
 		return "board/create";
 	}
 	
@@ -71,6 +71,11 @@ public class BoardController {
 			return "board/create";
 		}
 		
+		//cr_course 가져오기
+		String cr_course = boardService.selCourse(addBoardBean.getCr_key());
+		model.addAttribute("cr_course", cr_course);
+
+		//게시글 인서트해주는 메서드
 		boardService.addBoard(addBoardBean);
 		
 		return "board/create_done";
@@ -79,16 +84,58 @@ public class BoardController {
 	
 	/*게시글 읽기 페이지*/
 	@GetMapping("/read")
-	public String read(@RequestParam("cr_key") int cr_key, @RequestParam("cr_course") String cr_course, Model model) {
+	public String read(@RequestParam("brd_key") int brd_key, Model model) {
+	
+		//조회수 증가 메서드
+		boardService.addHit(brd_key);
 		
-		//게시판 카테고리 식별을 위한 키
-		model.addAttribute("cr_key", cr_key);
-		model.addAttribute("cr_course", cr_course);
+		//글 읽기 메서드
+		BoardBean readBoard = boardService.readBoard(brd_key);
+		model.addAttribute("readBoard", readBoard);
+		
+		int user_key = userSession.getUser_key();
+		model.addAttribute("user_key", user_key);
+		
 		
 		return "board/read";
 	}
 	
-	
-	
+	//게시물 수정 메서드
+	@GetMapping("/modify")
+	public String modify (@RequestParam("brd_key") int brd_key, @ModelAttribute("editBoardBean") BoardBean editBoardBean, Model model) {
+		
+		//글 읽기 메서드
+		BoardBean readBoard = boardService.readBoard(brd_key);
+		
+		editBoardBean.setBrd_key(readBoard.getBrd_key());
+		editBoardBean.setUser_name(readBoard.getUser_name());
+		editBoardBean.setBrd_date(readBoard.getBrd_date());
+		editBoardBean.setBrd_title(readBoard.getBrd_title());
+		editBoardBean.setBrd_content(readBoard.getBrd_content());
+		
+		//글 수정 메서드
+		
+		return "board/modify";
+	}
 
+	//게시글 수정하는 과정 메서드
+	@PostMapping("modify_pro")
+	public String modify_pro(@ModelAttribute("editBoardBean") BoardBean editBoardBean, Model model) {
+		
+			boardService.editBoard(editBoardBean);
+		
+		return "board/modify_done";
+	}
+
+	//게시글 삭제하는 메서드
+	@GetMapping("/delete")
+	public String delete(@RequestParam("brd_key") int brd_key, @RequestParam("cr_key") int cr_key, @RequestParam("cr_course") String cr_course, Model model) {
+		
+		boardService.delBoard(brd_key);
+		
+		model.addAttribute("cr_key", cr_key);
+		model.addAttribute("cr_course", cr_course);
+		
+		return "board/delete_done";
+	}
 }

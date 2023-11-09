@@ -22,7 +22,7 @@ public class BoardBean {
 	//brd_file로 하면 String이기 때문에 에러가 남. Spring mvc에서는 MultipartFile이라는 객체로 만들어서
 	//주입으로 하려고 하기때문에 이 필드를 만들어줌.
 	private int brd_hit;
-	private String User_name;
+	private String user_name;
 	private String cr_course;
 	
 	/*게시판 좋아요 여부*/
@@ -127,13 +127,13 @@ public class BoardBean {
 	public void setBrd_ct_key(int brd_ct_key) {
 		this.brd_ct_key = brd_ct_key;
 	}
-
+	
 	public String getUser_name() {
-		return User_name;
+		return user_name;
 	}
 
 	public void setUser_name(String user_name) {
-		User_name = user_name;
+		this.user_name = user_name;
 	}
 
 	public String getCr_course() {

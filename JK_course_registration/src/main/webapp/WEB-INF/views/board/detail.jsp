@@ -106,7 +106,7 @@
 					<c:forEach var="brd" items="${board_list}">
 						<tr>
 							<td class="text-center d-none d-md-table-cell" >${brd.brd_key}</td>
-							<td><a href="${root}read?cr_key=${cr_key}&cr_course=${cr_course}">${brd.brd_title}</a></td>
+							<td><a href="${root}read?cr_key=${cr_key}&cr_course=${cr_course}&brd_key=${brd.brd_key}">${brd.brd_title}</a></td>
 							<td class="text-center d-none d-md-table-cell">${brd.user_name}</td>
 							<td class="text-center d-none d-md-table-cell">${brd.brd_date}</td>
 							<td class="text-center d-none d-md-table-cell">${brd.brd_hit}</td>
