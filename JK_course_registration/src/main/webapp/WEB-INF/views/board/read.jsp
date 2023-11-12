@@ -105,6 +105,12 @@
 			<p>${readBoard.user_name}</p>
 			<p>${readBoard.brd_date} 조회 ${readBoard.brd_hit}</p>
 			<hr>
+				<c:if test="${readBoard.brd_file != null}">
+					<div class="form-group">
+					<label for="brd_file">첨부 이미지</label>
+					<img src="${root}upload/${readBoard.brd_file}" width="20%"/>
+					</div>
+				</c:if>
 			<p>${readBoard.brd_content}</p>
 			<div class="icons">
 				<div class="icon">

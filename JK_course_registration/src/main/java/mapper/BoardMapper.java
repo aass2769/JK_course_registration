@@ -33,7 +33,7 @@ public interface BoardMapper {
 	public String selCourse(int cr_key);
 	
 	/*글 읽기 쿼리*/
-	@Select("SELECT a.brd_key, a.brd_title, a.brd_content, a.brd_hit, a.brd_date,  a.brd_writer, b.user_name, c.brd_likes_count , d.cr_key, d.cr_course "
+	@Select("SELECT a.brd_key, a.brd_title, a.brd_content, a.brd_hit, a.brd_date,  a.brd_writer, a.brd_file,  b.user_name, c.brd_likes_count , d.cr_key, d.cr_course "
 			+ "FROM board_table a "
 			+ "LEFT OUTER JOIN user_table b ON a.user_key = b.user_key "
 			+ "LEFT OUTER JOIN "
