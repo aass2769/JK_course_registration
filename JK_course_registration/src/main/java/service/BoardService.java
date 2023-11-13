@@ -44,8 +44,6 @@ public class BoardService {
 		//Brd_writer에 user_key를 넣어서, 로그인한 글쓴이와 글작성자 인덱스가 일치하게 함.
 		addBoardBean.setBrd_writer(userSession.getUser_key());
 		
-		boardDao.addBoard(addBoardBean);
-		
 		//파일업로드
 		MultipartFile upload_file = addBoardBean.getUpload_File();
 		
@@ -53,8 +51,9 @@ public class BoardService {
 			//파일업로드 한거 저장하는 메서드인 saveUploadFile메서드를 호출함.
 			String file_name = saveUploadFile(upload_file);
 			addBoardBean.setBrd_file(file_name);
-			System.out.println(addBoardBean.getBrd_file() + "write");
 		}
+		
+		boardDao.addBoard(addBoardBean);
 	}
 	
 	//cr_course 가져오기
@@ -67,9 +66,8 @@ public class BoardService {
 	
 	//게시물 읽기 코드
 	public BoardBean readBoard(int brd_key) {
-		BoardBean readBoard = boardDao.readBoard(brd_key);
 		
-		System.out.println(readBoard.getBrd_file() + "read");
+		BoardBean readBoard = boardDao.readBoard(brd_key);
 		
 		return readBoard;
 	}

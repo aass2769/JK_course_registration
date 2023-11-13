@@ -107,8 +107,7 @@
 			<hr>
 				<c:if test="${readBoard.brd_file != null}">
 					<div class="form-group">
-					<label for="brd_file">첨부 이미지</label>
-					<img src="${root}upload/${readBoard.brd_file}" width="20%"/>
+					<img src="${root}upload/${readBoard.brd_file}" width="20%" height="20%"/>
 					</div>
 				</c:if>
 			<p>${readBoard.brd_content}</p>
