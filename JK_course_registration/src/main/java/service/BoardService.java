@@ -87,6 +87,10 @@ public class BoardService {
 		boardDao.delBoard(brd_key);
 	}
 	
+	//좋아요가 있을 시, 게시글 삭제 코드
+	public void delBoardLike(int brd_key) {
+		boardDao.delBoardLike(brd_key);
+	}
 	
 	//파일업로드한거 저장하는 코드
 	//(클라이언트에서 전송된 파일을 서버에 업로드하고, 새로운 파일 이름을 생성하여 반환하는 역할)
@@ -107,4 +111,56 @@ public class BoardService {
 		}
 		return file_name; //업로드 된 파일의 새로운 이름인 file_name을 반환.
 	}
+	
+	//좋아요 증가
+	public void addLike(BoardBean addLikeBoardBean) {
+		
+		addLikeBoardBean.setUser_key(userSession.getUser_key());
+		
+		boardDao.addLike(addLikeBoardBean);
+		
+	}
+	
+	//좋아요 했는지 확인하는 쿼리
+	public boolean chkBoardLike(int brd_key) {
+			
+			BoardBean chkBoardLikeBean = new BoardBean();
+			chkBoardLikeBean.setBrd_key(brd_key);
+			chkBoardLikeBean.setUser_key(userSession.getUser_key());
+		
+			BoardBean chkLikeBean = boardDao.chkBoardLike(chkBoardLikeBean);
+			
+			boolean chkLike = false;
+			//값이 있어서 가져와진다면, 좋아요를 했다는 뜻
+			if(chkLikeBean != null) {
+				
+				chkLike = true;
+				
+			}else{
+				chkLike = false;
+			}
+			
+			return chkLike;
+		}
+	
+	//좋아요 취소하는 쿼리
+	public void deleteLike(int brd_key) {
+		
+		int user_key = userSession.getUser_key();
+		
+		boardDao.deleteLike(brd_key, user_key);
+	}
+	
+	//댓글 작성
+	public void addComment(BoardBean addCommentBean) {
+		boardDao.addComment(addCommentBean);
+	}
+	
+	//댓글 조회
+		public List<BoardBean> commentList(int brd_key){
+			
+			List<BoardBean> commentList = boardDao.commentList(brd_key);
+			
+			return commentList;
+		}
 }

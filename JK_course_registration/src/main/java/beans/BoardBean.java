@@ -28,9 +28,21 @@ public class BoardBean {
 	/*게시판 좋아요 여부*/
 	private int brd_like_key;
 	private int brd_likes_count;
+	private int total_likes_count; 
 	
-	/*게시판 댓글*/
+	/*게시판 댓글*/ //brd_key와 user_key FK
 	private int brd_ct_key;
+	private String BRD_CT_CONTENT; //댓글내용
+	private int brd_ct_count; //댓글 갯수
+	private String brd_ct_date; //댓글 작성 날짜
+	
+	public int getTotal_likes_count() {
+		return total_likes_count;
+	}
+
+	public void setTotal_likes_count(int total_likes_count) {
+		this.total_likes_count = total_likes_count;
+	}
 
 	public int getBrd_key() {
 		return brd_key;
@@ -151,5 +163,31 @@ public class BoardBean {
 	public void setUpload_File(MultipartFile upload_File) {
 		this.upload_File = upload_File;
 	}
+
+	
+	public String getBRD_CT_CONTENT() {
+		return BRD_CT_CONTENT;
+	}
+
+	public void setBRD_CT_CONTENT(String bRD_CT_CONTENT) {
+		BRD_CT_CONTENT = bRD_CT_CONTENT;
+	}
+
+	public String getBrd_ct_date() {
+		return brd_ct_date;
+	}
+
+	public void setBrd_ct_date(String brd_ct_date) {
+		this.brd_ct_date = brd_ct_date;
+	}
+
+	public int getBrd_ct_count() {
+		return brd_ct_count;
+	}
+
+	public void setBrd_ct_count(int brd_ct_count) {
+		this.brd_ct_count = brd_ct_count;
+	}
+	
 	
 }

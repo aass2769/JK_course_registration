@@ -55,4 +55,41 @@ public class BoardDao {
 	public void delBoard(int brd_key) {
 		boardMapper.delBoard(brd_key);
 	}
+	
+	//좋아요가 있을 시 글 삭제
+	public void delBoardLike(int brd_key) {
+		boardMapper.delBoardLike(brd_key);
+	}
+	
+	//좋아요 증가
+	public void addLike(BoardBean addLikeBoardBean) {
+		boardMapper.addLike(addLikeBoardBean);
+	}
+	
+	//좋아요 했는지 확인
+	public BoardBean chkBoardLike(BoardBean chkBoardLikeBean) {
+		
+		BoardBean chkLikeBean = boardMapper.chkBoardLike(chkBoardLikeBean);
+		
+		return chkLikeBean;
+	}
+	
+	//좋아요 취소
+	public void deleteLike(int brd_key, int user_key) {
+		
+		boardMapper.deleteLike(brd_key, user_key);
+	}
+	
+	//댓글 작성
+	public void addComment(BoardBean addCommentBean) {
+		boardMapper.addComment(addCommentBean);
+	}
+	
+	//댓글 조회
+	public List<BoardBean> commentList(int brd_key){
+		
+		List<BoardBean> commentList = boardMapper.commentList(brd_key);
+		
+		return commentList;
+	}
 }

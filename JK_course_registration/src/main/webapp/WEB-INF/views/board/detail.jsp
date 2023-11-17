@@ -110,7 +110,7 @@
 							<td class="text-center d-none d-md-table-cell">${brd.user_name}</td>
 							<td class="text-center d-none d-md-table-cell">${brd.brd_date}</td>
 							<td class="text-center d-none d-md-table-cell">${brd.brd_hit}</td>
-							<td class="text-center d-none d-md-table-cell">${brd.brd_likes_count}</td>
+							<td class="text-center d-none d-md-table-cell">${brd.total_likes_count}</td>
 						</tr>
 					</c:forEach>
 				</tbody>

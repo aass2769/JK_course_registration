@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
@@ -11,18 +12,22 @@ import beans.BoardBean;
 
 public interface BoardMapper {
 
-	/*글 목록 불러오는 쿼리..추후 수정 필요함.*/
-	@Select("select A.BRD_KEY, A.BRD_TITLE, C.USER_NAME, A.BRD_DATE, A.BRD_HIT, B.brd_likes_count "
-			+ "FROM board_table A "
-			+ "LEFT OUTER JOIN BOARD_LIKE_TABLE B "
-			+ "ON A.BRD_KEY = B.BRD_KEY "
-			+ "LEFT OUTER JOIN USER_TABLE C "
-			+ "ON A.USER_KEY = C.USER_KEY "
-			+ "WHERE A.CR_KEY = #{cr_key}"
-			+ "ORDER BY A.BRD_KEY DESC")
+	/*글 목록.*/
+	@Select("SELECT A.BRD_KEY, A.BRD_TITLE, C.USER_NAME, A.BRD_DATE, A.BRD_HIT,  "
+					+ "SUM(B.brd_likes_count) AS total_likes_count "
+					+ "FROM board_table A "
+					+ "LEFT OUTER JOIN  "
+					+ "(SELECT BRD_KEY, COUNT(USER_KEY) AS brd_likes_count "
+					+ "FROM BOARD_LIKE_TABLE "
+					+ " GROUP BY BRD_KEY "
+					+ ") B ON A.BRD_KEY = B.BRD_KEY "
+					+ "LEFT OUTER JOIN USER_TABLE C ON A.USER_KEY = C.USER_KEY "
+					+ "WHERE A.CR_KEY = #{CR_KEY} "
+					+ "GROUP BY A.BRD_KEY, A.BRD_TITLE, C.USER_NAME, A.BRD_DATE, A.BRD_HIT "
+					+ "ORDER BY A.BRD_KEY DESC")
 		List<BoardBean> getBoardList(int cr_key);
 	
-	//글 쓰기 쿼리
+	//글 작성 쿼리
 	//db에서 null을 허용으로 설정해놨어도 mybatis에서는 허용하지 않기때문에 jdbcType=VARCHAR같이 타입을 명시적으로 작성해줌.
 	@Insert("INSERT INTO board_table (BRD_KEY, BRD_WRITER, BRD_DATE, BRD_NOTICE, BRD_TITLE, BRD_CONTENT, BRD_FILE, BRD_HIT, USER_KEY, CR_KEY) " 
 			+ "VALUES (board_seq.nextval, #{brd_writer}, sysdate, 'N', #{brd_title}, #{brd_content}, #{brd_file, jdbcType=VARCHAR}, 0, #{user_key}, #{cr_key})" )
@@ -57,4 +62,34 @@ public interface BoardMapper {
 	/*글 삭제 쿼리*/
 	@Delete("delete from board_table where brd_key = #{brd_key}")
 	public void delBoard(int brd_key);
+	
+	/*좋아요가 있을시의 좋아요 삭제 쿼리*/
+	@Delete("delete from board_like_table where brd_key = #{brd_key}")
+	public void delBoardLike(int brd_key);
+	
+	/*게시판 좋아요 버튼 누르면 좋아요 되게 하는 쿼리*/
+	@Insert("INSERT INTO BOARD_LIKE_TABLE (BRD_LIKE_KEY, BRD_LIKES_COUNT, BRD_KEY, USER_KEY) " 
+					+   "VALUES (brd_like_seq.nextval, 1, #{brd_key}, #{user_key}) ")
+	public void addLike(BoardBean addLikeBoardBean);
+	
+	/*게시판 좋아요 했는지 확인하는 쿼리*/
+	@Select("select brd_key, user_key from board_like_table where brd_key = #{brd_key} and user_key = #{user_key} ")
+	public BoardBean chkBoardLike(BoardBean chkBoardLikeBean);
+	
+	/*게시판 좋아요 취소(삭제)하는 쿼리*/
+	@Delete("delete from board_like_table where brd_key = #{brd_key} and user_key = #{user_key} ")
+	//두개 이상이면 param 씀
+	public void deleteLike(@Param("brd_key") int brd_key, @Param("user_key") int user_key);
+	
+	/*댓글 작성 쿼리*/
+	@Insert("INSERT INTO BOARD_COMMENT_TABLE(brd_ct_key, BRD_CT_CONTENT, brd_ct_count, brd_ct_date, brd_key, user_key) "
+			+ "VALUES (BRD_CT_seq.NEXTVAL, #{BRD_CT_CONTENT}, 1, sysdate, #{brd_key}, #{user_key})")
+	public void addComment(BoardBean addCommentBean);
+	
+	/*댓글 조회 쿼리*/
+	@Select("SELECT A.brd_ct_key, A.BRD_CT_CONTENT, A.brd_ct_count, A.brd_ct_date, A.brd_key, A.user_key, B.user_name "
+			+ "FROM board_comment_table A "
+			+ "INNER JOIN user_table B ON A.user_key = B.user_key "
+			+ "WHERE A.brd_key = #{brd_key}")
+	public List<BoardBean> commentList(int brd_key);
 }

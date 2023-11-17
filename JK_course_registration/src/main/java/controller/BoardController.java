@@ -84,7 +84,7 @@ public class BoardController {
 	
 	/*게시글 읽기 페이지*/
 	@GetMapping("/read")
-	public String read(@RequestParam("brd_key") int brd_key, Model model) {
+	public String read(@RequestParam("brd_key") int brd_key, @ModelAttribute("addCommentBean") BoardBean addCommentBean,  Model model) {
 	
 		//조회수 증가 메서드
 		boardService.addHit(brd_key);
@@ -93,9 +93,16 @@ public class BoardController {
 		BoardBean readBoard = boardService.readBoard(brd_key);
 		model.addAttribute("readBoard", readBoard);
 		
+		//좋아요를 로그인한 사용자가 했는지 확인하는 메서드
+		boolean chkLike = boardService.chkBoardLike(brd_key);
+		model.addAttribute("chkLike", chkLike);
+		
 		int user_key = userSession.getUser_key();
 		model.addAttribute("user_key", user_key);
 		
+		//댓글 조회 메서드
+		List<BoardBean> commentList = boardService.commentList(brd_key);
+		model.addAttribute("commentList", commentList);
 		
 		return "board/read";
 	}
@@ -131,11 +138,51 @@ public class BoardController {
 	@GetMapping("/delete")
 	public String delete(@RequestParam("brd_key") int brd_key, @RequestParam("cr_key") int cr_key, @RequestParam("cr_course") String cr_course, Model model) {
 		
+		//좋아요 있을 시, 게시글 삭제
+		boardService.delBoardLike(brd_key);
+
+		//좋아요 없을 시, 게시글 삭제
 		boardService.delBoard(brd_key);
 		
 		model.addAttribute("cr_key", cr_key);
 		model.addAttribute("cr_course", cr_course);
 		
 		return "board/delete_done";
+	}
+	
+	//좋아요 증가
+	@PostMapping("/addLike")
+	public String addLike(@ModelAttribute("addLikeBoardBean") BoardBean addLikeBoardBean) {
+		
+		boardService.addLike(addLikeBoardBean);
+		
+		return "board/like_done";
+	}
+	
+	//좋아요 취소
+	@PostMapping("/deleteLike")
+	public String deleteLike(int brd_key, Model model) {
+		
+		boardService.deleteLike(brd_key);
+		//jsp로 보내기 위해 model에 담는다.
+		model.addAttribute("brd_key", brd_key);
+		
+		return "board/like_delete_done";
+	}
+	
+	//댓글 작성
+	@PostMapping("/addComment")
+	public String addComment(@ModelAttribute("addCommentBean") BoardBean addCommentBean, 
+			@RequestParam("brd_key") int brd_key, @RequestParam("user_key") int user_key, @RequestParam("cr_key") int cr_key,
+			@RequestParam("cr_course") String cr_course, Model model) {
+		
+		boardService.addComment(addCommentBean);
+		
+		model.addAttribute("brd_key", brd_key);
+		model.addAttribute("user_key", user_key);
+		model.addAttribute("cr_key", cr_key);
+		model.addAttribute("cr_course", cr_course);
+		
+		return "board/add_ct_done";
 	}
 }

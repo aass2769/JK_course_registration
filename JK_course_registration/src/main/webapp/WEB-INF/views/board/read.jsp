@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="form"  uri="http://www.springframework.org/tags/form"%>
 <c:set var="root" value="${pageContext.request.contextPath}/" />
 <!DOCTYPE html>
 <html>
@@ -113,23 +114,41 @@
 			<p>${readBoard.brd_content}</p>
 			<div class="icons">
 				<div class="icon">
-					<i class="fas fa-thumbs-up"></i> <span>${readBoard.brd_likes_count}</span>
+					<i class="fa-solid fa-heart"></i> <span>${readBoard.brd_likes_count}</span>
 				</div>
 				<div class="icon">
 					<i class="fas fa-comment"></i> <span>3</span>
 				</div>
 			</div>
 			<div class="text-center">
-				<button class="btn btn-light"
-					style="background-color: #670AC5; color: #ffffff;">
-					<i class="fas fa-thumbs-up"></i> 좋아요
-				</button>
+			<!-- 좋아요 안 했을 시,  비워진 좋아요 하트 = 좋아요 버튼 -->
+			<c:choose>
+				<c:when test="${chkLike == false}">
+					<form action="${root}board/addLike"  method="post">
+						<input type="hidden" value="${readBoard.brd_key}" name="brd_key">
+							<button class="btn btn-light"
+								style="background-color: #670AC5; color: #ffffff;">
+								<i class="fa-regular fa-heart"></i> 좋아요
+							</button>
+						</form>
+				</c:when>
+				<%--좋아요 했을 시,  채워진 좋아요 하트 = 좋아요 취소 버튼 --%>
+				<c:otherwise>
+					<form action="${root}board/deleteLike"  method="post">
+							<input type="hidden" value="${readBoard.brd_key}" name="brd_key">
+								<button class="btn btn-light"
+									style="background-color: #670AC5; color: #ffffff;">
+									<i class="fa-solid fa-heart" style="color : red;"></i> 좋아요
+								</button>
+						</form>
+				</c:otherwise>
+				</c:choose>
 			</div>
 			<c:choose>
 				<c:when test="${readBoard.brd_writer == user_key}">
 					<div class="d-flex justify-content-end">
 	                        <a href="${root}board/modify?brd_key=${readBoard.brd_key}"><button class="btn btn-link text-dark mr-2">수정</button></a>
-	                        <a href="${root}board/delete?brd_key=${readBoard.brd_key}&cr_key=${readBoard.cr_key}&cr_course=${readBoard.cr_course}"><button class="btn btn-link text-dark">삭제</button></a>
+	                        <a href="${root}board/delete?brd_key=${readBoard.brd_key}&cr_key=${readBoard.cr_key}&cr_course=${readBoard.cr_course}&brd_like_key=${readBoard.brd_like_key}"><button class="btn btn-link text-dark">삭제</button></a>
 	                 </div>
                  </c:when>
                  <c:otherwise>
@@ -146,48 +165,34 @@
 				</div>
 			</div>
 			<!-- 댓글 내용 -->
-			<div class="comment">
-				<p>우민</p>
-				<p>돈까스 어때요?ㅎㅎ전 치돈이 좋거든요</p>
-				<p>2023.10.21. 15:01</p>
-			</div>
-			<div class="divider divider-1" style="border-top-color: #ede8f1;"></div>
-			<div class="comment">
-				<p>올챙</p>
-				<p>날씨가 추워져서 국밥도 괜찮지 않나요?ㅋㅋ</p>
-				<p>2023.10.21. 15:03</p>
-			</div>
-			<div class="divider divider-1" style="border-top-color: #ede8f1;"></div>
-			<div class="comment">
-				<p>깨꾹</p>
-				<p>전 떡볶이 강추합니당!! 떡볶이가 짱이죠</p>
-				<p>2023.10.21. 15:06</p>
-			</div>
-			<div class="divider divider-1" style="border-top-color: #ede8f1;"></div>
-			<div class="comment">
-				<p>혜미</p>
-				<p>ㅎㅎ다른 분들 모두 감사합니다. 생각해보고 골라서 먹을게요!</p>
-				<div class="d-flex justify-content-between align-items-center">
-					<p>2023.10.21. 15:06</p>
+			<c:forEach var="comment" items="${commentList}">
+				<div class="comment">
+					<p>${comment.user_name}</p>
+					<p>${comment.BRD_CT_CONTENT}</p>
+					<p>${comment.brd_ct_date}</p>
+				</div>
+				<div class="divider divider-1" style="border-top-color: #ede8f1;"></div>
+			</c:forEach>
+			<%-- <<div class="d-flex justify-content-between align-items-center">
 					<div class="d-flex justify-content-end">
                         <button class="btn btn-link text-dark mr-2">수정</button>
                         <button class="btn btn-link text-dark">삭제</button>
                     </div>
-                </div>
+                </div> --%>
+				
 			</div>
 			<div class="divider"></div>
 			<div class="comment-form">
-				<form style="position: relative;">
+			<%--댓글 --%>
+				<form:form action="${root}board/addComment?brd_key=${readBoard.brd_key}&user_key=${user_key}&cr_key=${readBoard.cr_key}&cr_course=${readBoard.cr_course}" method="post" modelAttribute="addCommentBean" style="position: relative;">
 					<div class="form-group">
-						<textarea class="form-control" id="commentContent" rows="4"
-							placeholder="댓글을 입력하세요."></textarea>
+					<form:textarea path="BRD_CT_CONTENT" class="form-control" id="commentContent" rows="4" placeholder="댓글을 입력하세요."/>
 						<!-- 댓글 등록 버튼을 댓글 입력 상자 우측 하단에 삽입 -->
-						<button type="submit" class="btn btn-primary"
-							style="position: absolute; bottom: 0; right: 0; background-color: #670AC5;">
+						<form:button class="btn btn-primary"	style="position: absolute; bottom: 0; right: 0; background-color: #670AC5;">
 							<i class="fas fa-paper-plane" style="font-size: 20px;"></i>
-						</button>
+						</form:button>
 					</div>
-				</form>
+				</form:form>
 			</div>
 		</div>
 		<div class="d-flex justify-content-between mt-2">
