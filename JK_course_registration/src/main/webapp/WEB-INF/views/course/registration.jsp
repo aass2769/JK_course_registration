@@ -14,6 +14,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+
 <style>
 .course_th {
 	height: 40px; /* 원하는 높이로 설정하세요. */
@@ -34,6 +35,31 @@
 
 </style>
 
+<script>
+
+function subjectChange() {
+    var sb_category = $("#sb_category").val();
+    $.ajax({
+        url: "${root}course/subjectList/" + sb_category,
+        type: "get",
+        dataType: "json",
+        success: function (data) {
+            // 기존에 추가된 option 제거
+            $('#sb_key').empty();
+            // 과목명 전체선택 option
+            $('#sb_key').append('<option value="0">과목명전체선택</option>');
+            // 받아온 데이터를 기반으로 option을 동적으로 추가
+            $(data).each(function () {
+                $('#sb_key').append('<option value="' + this.sb_key + '">' + this.sb_subject + '</option>');
+            });
+        },
+        error: function (error) {
+            console.error('Error:', error);
+        }
+    });
+}
+</script>
+
 </head>
   <body>
   
@@ -51,7 +77,7 @@
 						<form action="${root }course/registration" method="get">
 							<div class="row" style="padding-top: 10px;">
 							  <div class="col">
-							  	<select name="sb_category" class="form-select" aria-label="Default select" >
+							  	<select id="sb_category" name="sb_category" class="form-select" aria-label="Default select" onchange="subjectChange()">
 							  		<option value="0" selected>과정종류전체선택</option>
 									<c:forEach var="course" items="${courseList }">
 										<option value="${course.sb_category }">${course.cr_course }</option>
@@ -59,11 +85,8 @@
 							  	</select>
 							  </div>
 							  <div class="col">
-								<select name="sb_key" class="form-select" aria-label="Default select">
+								<select id="sb_key" name="sb_key" class="form-select" aria-label="Default select">
 									<option value="0" selected>과목명전체선택</option>
-							    	<c:forEach var="subject" items="${duplicateCheckRgList }" varStatus="loop">
-										<option value="${subject.sb_key }">${subject.sb_subject }</option>
-									</c:forEach>
 								</select>
 							  </div>
 							  <div class="col-1">

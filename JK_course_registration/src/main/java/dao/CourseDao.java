@@ -14,6 +14,7 @@ public class CourseDao {
 	@Autowired
 	private CourseMapper courseMapper;
 	
+	//한 과정의 과목의 정보를 가져오는 쿼리. ex)IT/SW 개발의 JAVA,C언어 등 과목들에 대한 정보
 	public List<CourseBean> getSubjectsOneCategory(int sb_category){
 		
 		List<CourseBean> subjectsList = courseMapper.getSubjectsOneCategory(sb_category);
@@ -21,6 +22,14 @@ public class CourseDao {
 		return subjectsList;
 	}
 	
+	public List<CourseBean> getSubjectCategory(){
+		
+		List<CourseBean> subjectsList = courseMapper.getSubjectCategory();
+		
+		return subjectsList;
+	}
+	
+	//한 과목에 대한 커리큘럼 정보를 가져오는 메서드
 	public List<CourseBean> getSubjectInfo(int cr_key){
 		
 		List<CourseBean> subjectInfoList = courseMapper.getSubjectInfo(cr_key);
@@ -42,14 +51,6 @@ public class CourseDao {
 		List<CourseBean> registrationList = courseMapper.getRegistrationSearchList(registrationBean);
 		
 		return registrationList;
-	}
-	
-	//수강신청 페이지의 전체 과목들 개수를 가져오는 메서드
-	public int getSubjectCount() {
-		
-		int subjectCount = courseMapper.getSubjectCount();
-		
-		return subjectCount;
 	}
 	
 	//수강신청 하는 메서드
@@ -74,24 +75,33 @@ public class CourseDao {
 		return registrationCheckList;
 	}
 	
-	//수강신청조회 페이지의 신청한 과목들 개수를 가져오는 메서드
-	public int getRegistrationCheckCount(int user_key) {
+	//수강신청조회 페이지의 검색한 과목들에 대한 정보리스트를 가져오는 메서드
+	public List<CourseBean> getRegistrationCheckSearchList(CourseBean registrationBean){
 		
-		int registrationCheckCount = courseMapper.getRegistrationCheckCount(user_key);
+		List<CourseBean> registrationCheckList = courseMapper.getRegistrationCheckSearchList(registrationBean);
 		
-		return registrationCheckCount;
+		return registrationCheckList;
 	}
 	
-	//수강신청조회 페이지의 신청한 과목들 개수를 가져오는 쿼리
+	//수강 삭제하는 메서드
 	public void setRegistrationDelete(int rg_key) {
 		
 		courseMapper.setRegistrationDelete(rg_key);
 	}
 	
+	//검색 select태그에 사용할 sb_category와 course이름을 가져오는 메서드
 	public List<CourseBean> getCourseList(){
 		
 		List<CourseBean> courseList = courseMapper.getCourseList();
 		
 		return courseList;
+	}
+	
+	//검색 select태그에 사용할 sb_key, sb_subject를 가져오는 메서드
+	public List<CourseBean> getSubjectList(int sb_category){
+		
+		List<CourseBean> subjectList = courseMapper.getSubjectList(sb_category);
+		
+		return subjectList;
 	}
 }

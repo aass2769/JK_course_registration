@@ -24,6 +24,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import beans.UserBean;
 import interceptor.TopInterceptor;
+import interceptor.UserInterceptor;
 import mapper.BoardMapper;
 import mapper.CourseMapper;
 import mapper.MainMapper;
@@ -167,6 +168,10 @@ public class ServletAppContext implements WebMvcConfigurer {
 
 		InterceptorRegistration reg1 = registry.addInterceptor(topInterceptor);
 		reg1.addPathPatterns("/**");
+		
+		UserInterceptor userInterceptor = new UserInterceptor(userSession);
+		InterceptorRegistration reg2 = registry.addInterceptor(userInterceptor);
+		reg2.addPathPatterns("/course/registration", "/course/registration_check");
 	}
 
 	// @PropertySource로 등록한 properties파일과 메시지로 등록한 properties파일이 충돌해서 오류가 나기 떄문에

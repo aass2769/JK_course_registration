@@ -44,11 +44,11 @@ public class CourseController {
 	@GetMapping("/registration")
 	public String registration(@ModelAttribute("registrationBean") CourseBean registrationBean, Model model) {
 		
-		System.out.println(registrationBean.getSb_category());
-		System.out.println(registrationBean.getSb_key());
-		
 		//검색 select태그에 사용할 sb_category와 course이름을 가져오는 메서드
 		List<CourseBean> courseList = courseService.getCourseList();
+		model.addAttribute("courseList", courseList);
+		
+
 		
 		if(registrationBean.getSb_category() == 0 && registrationBean.getSb_key() == 0) {
 			
@@ -56,23 +56,21 @@ public class CourseController {
 			List<CourseBean> duplicateCheckRgList = courseService.getRegistrationList();
 			model.addAttribute("duplicateCheckRgList", duplicateCheckRgList);
 			
+			//수강신청 과목 개수
+			int subjectCount = duplicateCheckRgList.size();
+			model.addAttribute("subjectCount", subjectCount);
+			
 		} else {
 			
 			//수강신청 페이지의 검색한 과목들에 대한 정보리스트를 가져오는 메서드
 			List<CourseBean> duplicateCheckRgList = courseService.getRegistrationSearchList(registrationBean);
-			System.out.println(duplicateCheckRgList.size());
 			model.addAttribute("duplicateCheckRgList", duplicateCheckRgList);
+			
+			//게시글 개수
+			int subjectCount = duplicateCheckRgList.size();
+			model.addAttribute("subjectCount", subjectCount);
 		}
-		
-		
-		
-		//수강신청 페이지의 전체 과목들 개수를 가져오는 메서드
-		int subjectCount = courseService.getSubjectCount();
-		
-		
-		model.addAttribute("subjectCount", subjectCount);
-		model.addAttribute("courseList", courseList);
-		
+
 		return "course/registration";
 	}
 	
@@ -94,13 +92,31 @@ public class CourseController {
 	
 	
 	@GetMapping("/registration_check")
-	public String registration_check(Model model) {
+	public String registration_check(@ModelAttribute("registrationBean") CourseBean registrationBean, Model model) {
 		
-		//수강신청조회 페이지의 신청했던 과목들에 대한 정보리스트를 가져오는 메서드
-		List<CourseBean> registrationCheckList = courseService.getRegistrationCheckList();
-		int registrationCheckCount = courseService.getRegistrationCheckCount();
-		model.addAttribute("registrationCheckList", registrationCheckList);
-		model.addAttribute("registrationCheckCount", registrationCheckCount);
+		//검색 select태그에 사용할 sb_category와 course이름을 가져오는 메서드
+		List<CourseBean> courseList = courseService.getCourseList();
+		model.addAttribute("courseList", courseList);
+		
+		if(registrationBean.getSb_category() == 0 && registrationBean.getSb_key() == 0) {
+			//수강신청조회 페이지의 신청했던 과목들에 대한 정보리스트를 가져오는 메서드
+			List<CourseBean> registrationCheckList = courseService.getRegistrationCheckList();
+			model.addAttribute("registrationCheckList", registrationCheckList);
+			
+			//수강신청한 과목 개수
+			int subjectCount = registrationCheckList.size();
+			model.addAttribute("subjectCount", subjectCount);
+		} else {
+			//수강신청 페이지의 검색한 과목들에 대한 정보리스트를 가져오는 메서드
+			List<CourseBean> registrationCheckList = courseService.getRegistrationCheckSearchList(registrationBean);
+			model.addAttribute("registrationCheckList", registrationCheckList);
+			
+			//게시글 개수
+			int subjectCount = registrationCheckList.size();
+			model.addAttribute("subjectCount", subjectCount);
+		}
+		
+		
 		
 		return "course/registration_check";
 	}
@@ -108,6 +124,7 @@ public class CourseController {
 	@PostMapping("/registrationDelete_pro")
 	public String registrationDelete_pro(int rg_key) {
 		
+		//수강 삭제하는 메서드
 		courseService.setRegistrationDelete(rg_key);
 		
 		return "course/registration_delete";

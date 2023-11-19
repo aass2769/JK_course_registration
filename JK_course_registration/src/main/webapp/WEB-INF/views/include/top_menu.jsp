@@ -87,7 +87,7 @@
                         <a class="nav-link" href="${root }course/registration_check" style="color: #670AC5; margin-top: 100px;">수강조회</a>
                     </li>
                 </ul>
-                <a class="navbar-brand" href="#" id="logo">
+                <a class="navbar-brand" href="${root }main" id="logo">
                     <img src="${root }image/JK_logo.jpg" alt="Logo">
                 </a>
                 <div>

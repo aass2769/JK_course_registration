@@ -22,6 +22,7 @@ public class CourseService {
 	@Resource(name = "userSession")
 	private UserBean userSession;
 	
+	//한 과정의 과목의 정보를 가져오는 쿼리. ex)IT/SW 개발의 JAVA,C언어 등 과목들에 대한 정보
 	public List<CourseBean> getSubjectsOneCategory(int sb_category){
 		
 		List<CourseBean> subjectsList = courseDao.getSubjectsOneCategory(sb_category);
@@ -29,6 +30,14 @@ public class CourseService {
 		return subjectsList;
 	}
 	
+	public List<CourseBean> getSubjectCategory(){
+		
+		List<CourseBean> subjectsList = courseDao.getSubjectCategory();
+		
+		return subjectsList;
+	}
+	
+	//한 과목에 대한 커리큘럼 정보를 가져오는 메서드
 	public List<CourseBean> getSubjectInfo(int cr_key){
 		
 		List<CourseBean> subjectInfoList = courseDao.getSubjectInfo(cr_key);
@@ -113,14 +122,6 @@ public class CourseService {
 		return duplicateCheckRgList;
 	}
 	
-	//수강신청 페이지의 전체 과목들 개수를 가져오는 메서드
-	public int getSubjectCount() {
-		
-		int subjectCount = courseDao.getSubjectCount();
-		
-		return subjectCount;
-	}
-	
 	//수강신청과 조회 페이지에서 과정종류선택 
 	
 	
@@ -160,26 +161,33 @@ public class CourseService {
 		return registrationCheckList;
 	}
 	
-	
-	//수강신청조회 페이지의 신청한 과목들 개수를 가져오는 메서드
-	public int getRegistrationCheckCount() {
+	//수강신청조회 페이지의 검색한 과목들에 대한 정보리스트를 가져오는 메서드
+	public List<CourseBean> getRegistrationCheckSearchList(CourseBean registrationBean){
 		
-		int user_key = userSession.getUser_key();
-		int registrationCheckCount = courseDao.getRegistrationCheckCount(user_key);
+		List<CourseBean> registrationCheckList = courseDao.getRegistrationCheckSearchList(registrationBean);
 		
-		return registrationCheckCount;
+		return registrationCheckList;
 	}
 	
-	//수강신청조회 페이지의 신청한 과목들 개수를 가져오는 쿼리
+	//수강 삭제하는 메서드
 	public void setRegistrationDelete(int rg_key) {
 		courseDao.setRegistrationDelete(rg_key);
 	}
 	
+	//검색 select태그에 사용할 sb_category와 course이름을 가져오는 메서드
 	public List<CourseBean> getCourseList(){
 		
 		List<CourseBean> courseList = courseDao.getCourseList();
 		
 		return courseList;
+	}
+	
+	//검색 select태그에 사용할 sb_key, sb_subject를 가져오는 메서드
+	public List<CourseBean> getSubjectList(int sb_category){
+		
+		List<CourseBean> subjectList = courseDao.getSubjectList(sb_category);
+		
+		return subjectList;
 	}
 	
 }

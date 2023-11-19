@@ -57,7 +57,7 @@
 				</div>
 				<div class="sb_button_div">
 					<a href="${root }course/subjects?sb_category=${subject.sb_category}" class="btn btn-secondary my-2">${subject.cr_course } 과정보기</a>
-					<a href="#" class="btn btn-primary my-2" style="background-color : #670AC5; border : 1px solid #670AC5;">수강신청</a>
+					<a href="${root }course/registration" class="btn btn-primary my-2" style="background-color : #670AC5; border : 1px solid #670AC5;">수강신청</a>
 		        </div>
 		      </div>
 		      </div>

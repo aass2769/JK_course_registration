@@ -16,17 +16,21 @@
 
 <style>
 
-td a {
-		color: #1D202E;
-		 text-decoration: none;
+	td a {
+			color: #1D202E;
+			 text-decoration: none;
 	}
 
-.table thead tr {
-   border-top: 3px solid #1D202E;
-   border-bottom: 3px solid #1D202E; /* thead의 선 색상 변경 */
-   color: #1D202E; /* thead의 글자 색상 변경 */
-    }
-
+	.table thead tr {
+	   border-top: 3px solid #1D202E;
+	   border-bottom: 3px solid #1D202E; /* thead의 선 색상 변경 */
+	   color: #1D202E; /* thead의 글자 색상 변경 */
+	}
+	
+	.a_subject {
+	  text-decoration: none;
+	}
+    
 </style> 
   
 </head>
@@ -66,145 +70,52 @@ td a {
 		</div>
 	</div>
 
-	<!-- 수강신청 카드 캐러셀 -->
-	<div id="course-carousel" class="carousel slide"
-		data-bs-ride="carousel">
-		<div class="carousel-inner">
-			<!-- 첫 번째 슬라이드 -->
-			<div class="carousel-item active" data-bs-interval="3000">
-				<div class="container px-4 py-5" id="custom-cards">
-					<h2 class="pb-2 border-bottom">IT/SW 개발</h2>
-					<div
-						class="row row-cols-1 row-cols-lg-4 align-items-stretch g-4 py-5">
-						<!-- 카드 1 -->
-						<div class="col">
-							<div
-								class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg"
-								style="background-image: url('${root}image/course1_1.jpg'); background-size: cover;">
-								<div
-									class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
-									<h3 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">Short
-										title, long jacket</h3>
-									<ul class="d-flex list-unstyled mt-auto">
-										<!-- 내용 1 -->
-									</ul>
-								</div>
-							</div>
-						</div>
-						<!-- 카드 2 -->
-						<div class="col">
-							<div
-								class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg"
-								style="background-image: url('${root}image/course1_2.jpg'); background-size: cover;">
-								<div
-									class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
-									<h3 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">Short
-										title, long jacket</h3>
-									<ul class="d-flex list-unstyled mt-auto">
-										<!-- 내용 1 -->
-									</ul>
-								</div>
-							</div>
-						</div>
-						<!-- 카드 3 -->
-						<div class="col">
-							<div
-								class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg"
-								style="background-image: url('${root}image/course1_3.jpg');">
-								<div
-									class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
-									<h3 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">Short
-										title, long jacket</h3>
-									<ul class="d-flex list-unstyled mt-auto">
-										<!-- 내용 1 -->
-									</ul>
-								</div>
-							</div>
-						</div>
-						<!-- 카드 4 -->
-						<div class="col">
-							<div
-								class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg"
-								style="background-image: url('${root}image/course1_4.jpg');">
-								<div
-									class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
-									<h3 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">Short
-										title, long jacket</h3>
-									<ul class="d-flex list-unstyled mt-auto">
-										<!-- 내용 1 -->
-									</ul>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
+<!-- 수강신청 카드 캐러셀 -->
+<div id="course-carousel" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
 
-			<!-- 두 번째 슬라이드 (이하 동일한 구조로 추가) -->
-			<div class="carousel-item" data-bs-interval="3000">
-				<div class="container px-4 py-5" id="custom-cards">
-					<h2 class="pb-2 border-bottom">웹 디자인/퍼블리셔</h2>
-					<div
-						class="row row-cols-1 row-cols-lg-4 align-items-stretch g-4 py-5">
-						<!-- 카드 5 -->
-						<div class="col">
-							<!-- 내용 5 -->
-						</div>
-						<!-- 카드 6 -->
-						<div class="col">
-							<!-- 내용 6 -->
-						</div>
-						<!-- 카드 7 -->
-						<div class="col">
-							<!-- 내용 7 -->
-						</div>
-						<!-- 카드 8 -->
-						<div class="col">
-							<!-- 내용 8 -->
-						</div>
-					</div>
-				</div>
-			</div>
+        <c:forEach var="course" items="${courseList}" varStatus="courseStatus">
+            <c:set var="activeClass" value="${courseStatus.index == 0 ? 'active' : ''}"/>
 
-			<div class="carousel-item" data-bs-interval="3000">
-				<div class="container px-4 py-5" id="custom-cards">
-					<h2 class="pb-2 border-bottom">게임/영상/마야</h2>
-					<div
-						class="row row-cols-1 row-cols-lg-4 align-items-stretch g-4 py-5">
-						<!-- 카드 9 -->
-						<div class="col">
-							<!-- 내용 9 -->
-						</div>
-						<!-- 카드 10 -->
-						<div class="col">
-							<!-- 내용 10 -->
-						</div>
-						<!-- 카드 11 -->
-						<div class="col">
-							<!-- 내용 11 -->
-						</div>
-						<!-- 카드 12 -->
-						<div class="col">
-							<!-- 내용 12 -->
-						</div>
-					</div>
-				</div>
-			</div>
+            <div class="carousel-item ${activeClass}" data-bs-interval="3000">
+                <div class="container px-4 py-5" id="custom-cards">
+                    <h2 class="pb-2 border-bottom">${course.cr_course}</h2>
+                    <div class="row row-cols-1 row-cols-lg-4 align-items-stretch g-4 py-5">
+                        <c:forEach var="subject" items="${subjectsList}" varStatus="subjectStatus">
+                            <c:if test="${subjectStatus.index >= courseStatus.index * 4 && subjectStatus.index < (courseStatus.index + 1) * 4}">
+                                <div class="col">
+                                	<a href="${root }course/subject_view?cr_key=${subject.cr_key}" class="a_subject">
+                                    <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg"
+                                         style="background-image: url('${root}image/${subject.sb_photo}.jpg'); background-size: cover;">
+                                        <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
+                                            <h3 class="pt-5 mt-5 mb-4 display-10 lh-1 fw-bold">${subject.sb_subject}</h3>
+                                            <ul class="d-flex list-unstyled mt-auto">
+                                                <!-- 내용 -->
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    </a>
+                                </div>
+                            </c:if>
+                        </c:forEach>
+                    </div>
+                </div>
+            </div>
+        </c:forEach>
 
-		</div>
+    </div>
 
-		<!-- 캐러셀 이전/다음 버튼 -->
-		<button class="carousel-control-prev" type="button"
-			data-bs-target="#course-carousel" data-bs-slide="prev">
-			<span class="carousel-control-prev-icon" aria-hidden="true"></span> <span
-				class="visually-hidden">Previous</span>
-		</button>
-		<button class="carousel-control-next" type="button"
-			data-bs-target="#course-carousel" data-bs-slide="next">
-			<span class="carousel-control-next-icon" aria-hidden="true"></span> <span
-				class="visually-hidden">Next</span>
-		</button>
-	</div>
+    <!-- 캐러셀 이전/다음 버튼 -->
+    <button class="carousel-control-prev" type="button" data-bs-target="#course-carousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#course-carousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+
 
 
 

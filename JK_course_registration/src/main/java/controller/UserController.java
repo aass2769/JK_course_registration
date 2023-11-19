@@ -109,6 +109,11 @@ public class UserController {
 		return "user/logout_success";
 	}
 	
+	@GetMapping("/not_login")
+	public String not_login() {
+		return "user/not_login";
+	}
+	
 	//@InitBinder 어노테이션은 컨트롤러 내에서 데이터 바인딩 및 유효성 검사를 커스터마이징할 떄 사용됨.
 	//WebDataBinder 객체를 인자로 받아서 데이터 바인딩 및 검증을 구성함.
 	@InitBinder

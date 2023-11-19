@@ -32,6 +32,31 @@
 }
 
 </style>
+
+<script>
+
+function subjectChange() {
+    var sb_category = $("#sb_category").val();
+    $.ajax({
+        url: "${root}course/subjectList/" + sb_category,
+        type: "get",
+        dataType: "json",
+        success: function (data) {
+            // 기존에 추가된 option 제거
+            $('#sb_key').empty();
+            // 과목명 전체선택 option
+            $('#sb_key').append('<option value="0">과목명전체선택</option>');
+            // 받아온 데이터를 기반으로 option을 동적으로 추가
+            $(data).each(function () {
+                $('#sb_key').append('<option value="' + this.sb_key + '">' + this.sb_subject + '</option>');
+            });
+        },
+        error: function (error) {
+            console.error('Error:', error);
+        }
+    });
+}
+</script>
 </head>
   <body>
   
@@ -46,34 +71,33 @@
 				<div class="card-body">
 					<div class="search-container">
 						<!-- 카테고리 선택(select 옵션) -->
-						<div class="row" style="padding-top: 10px;">
-						  <div class="col">
-						    <select class="form-select" aria-label="Default select" >
-								<option selected>과정종류선택</option>
-								<option value="1">제목</option>
-								<option value="2">게시글</option>
-							</select>
-						  </div>
-						  <div class="col">
-						    <select class="form-select" aria-label="Default select" >
-								<option selected>과목명선택</option>
-								<option value="1">제목</option>
-								<option value="2">게시글</option>
-							</select>
-						  </div>
-						  <div class="col-1">
-						    <button type="submit" class="btn btn-primary mb-3" style="background-color:#670AC5; border: 2px solid #670AC5; width:78px; margin-right:20px;">검색</button>
-						  </div>
-						</div>
-						             
-						
+						<form action="${root }course/registration_check" method="get">
+							<div class="row" style="padding-top: 10px;">
+							  <div class="col">
+							  	<select id="sb_category" name="sb_category" class="form-select" aria-label="Default select" onchange="subjectChange()">
+							  		<option value="0" selected>과정종류전체선택</option>
+									<c:forEach var="course" items="${courseList }">
+										<option value="${course.sb_category }">${course.cr_course }</option>
+									</c:forEach>
+							  	</select>
+							  </div>
+							  <div class="col">
+								<select id="sb_key" name="sb_key" class="form-select" aria-label="Default select">
+									<option value="0" selected>과목명전체선택</option>
+								</select>
+							  </div>
+							  <div class="col-1">
+							    <button type="submit" class="btn btn-primary mb-3" style="background-color:#670AC5; border: 2px solid #670AC5; width:78px; margin-right:20px;">검색</button>
+							  </div>
+							</div>
+						</form>	
 					</div>   
 				</div>
 			</div>
 	      </div>	
 	      <div class="col-lg-12 col-md-8 mx-auto d-flex flex-column justify-content-center align-items-center" style="height: 40vh;">
 		      <div class="table small" style="width: 100%;">
-		      	<h4 style="text-align: left;">총 ${registrationCheckCount }건</h4>
+		      	<h4 style="text-align: left;">총 ${subjectCount }건</h4>
 		        <table class="table table-striped table-sm">
 		          <thead>
 		            <tr>
