@@ -75,7 +75,8 @@ public class CourseController {
 	}
 	
 	@PostMapping("/registration_pro")
-	public String registration_pro(@ModelAttribute("registrationBean") CourseBean registrationBean, @RequestParam int sb_key) {
+	public String registration_pro(@ModelAttribute("registrationBean") CourseBean registrationBean, @RequestParam int sb_key,
+									@RequestParam(value="over", defaultValue ="true") boolean over) {
 		
 		//수강신청을 했던 항목인지 체크하는 메서드
 		boolean checkCourse = courseService.getCheckCourseId(sb_key);
@@ -83,9 +84,12 @@ public class CourseController {
 			
 			return "course/registration_fail";
 		}
+		
+		if(over == false) {
+			return "course/registration_over";
+		}
 		//수강신청 하는 메서드
 		courseService.setCourseRegistration(sb_key);
-		
 		
 		return "course/registration_success";
 	}

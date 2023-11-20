@@ -64,9 +64,9 @@ function subjectChange() {
 	<c:import url="/WEB-INF/views/include/top_menu.jsp" />
 	
 	<section class="py-5 text-center container ">
-	    <div class="row py-lg-5" style="height: 70vh;">
+	    <div class="row py-lg-5">
 		<h1 class="text-start registration_h2" style="border-bottom:2px solid #670AC5;">수강신청조회</h1>
-		<div class="col-lg-12 col-md-8 mx-auto" style="height: 20vh; margin-top:15px;">
+		<div class="col-lg-12 col-md-8 mx-auto" style="margin-top:15px;">
 			<div class="card shadow">
 				<div class="card-body">
 					<div class="search-container">
@@ -95,7 +95,7 @@ function subjectChange() {
 				</div>
 			</div>
 	      </div>	
-	      <div class="col-lg-12 col-md-8 mx-auto d-flex flex-column justify-content-center align-items-center" style="height: 40vh;">
+	      <div class="col-lg-12 col-md-8 mx-auto d-flex flex-column justify-content-center align-items-center" style="margin-top:50px;">
 		      <div class="table small" style="width: 100%;">
 		      	<h4 style="text-align: left;">총 ${subjectCount }건</h4>
 		        <table class="table table-striped table-sm">

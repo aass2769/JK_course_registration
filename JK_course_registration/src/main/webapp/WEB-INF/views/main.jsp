@@ -70,9 +70,9 @@
 		</div>
 	</div>
 
-<!-- 수강신청 카드 캐러셀 -->
-<div id="course-carousel" class="carousel slide" data-bs-ride="carousel">
-    <div class="carousel-inner">
+	<!-- 수강신청 카드 캐러셀 -->
+	<div id="course-carousel" class="carousel slide" data-bs-ride="carousel">
+	    <div class="carousel-inner">
 
         <c:forEach var="course" items="${courseList}" varStatus="courseStatus">
             <c:set var="activeClass" value="${courseStatus.index == 0 ? 'active' : ''}"/>
@@ -102,19 +102,18 @@
                 </div>
             </div>
         </c:forEach>
+    	</div>
 
-    </div>
-
-    <!-- 캐러셀 이전/다음 버튼 -->
-    <button class="carousel-control-prev" type="button" data-bs-target="#course-carousel" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#course-carousel" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-    </button>
-</div>
+	    <!-- 캐러셀 이전/다음 버튼 -->
+	    <button class="carousel-control-prev" type="button" data-bs-target="#course-carousel" data-bs-slide="prev">
+	        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+	        <span class="visually-hidden">Previous</span>
+	    </button>
+	    <button class="carousel-control-next" type="button" data-bs-target="#course-carousel" data-bs-slide="next">
+	        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+	        <span class="visually-hidden">Next</span>
+	    </button>
+	</div>
 
 
 
