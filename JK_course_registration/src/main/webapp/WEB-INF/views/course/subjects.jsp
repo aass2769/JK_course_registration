@@ -35,8 +35,8 @@
 <main>
 
   <section class="py-5 text-center container ">
-    <div class="row py-lg-5" style="height: 50vh;">
-      <div class="col-lg-10 col-md-8 mx-auto d-flex flex-column justify-content-center align-items-center image-background" style="height: 40vh;">
+    <div class="row py-lg-5" style="height: 600;">
+      <div class="col-lg-10 col-md-8 mx-auto d-flex flex-column justify-content-center align-items-center image-background" style="height: 500px;">
        	<h1 class="fw-light">열정과 꿈을 향한 여정</h1>
         <p class="lead text-body-secondary">여러분이 학원에 발을 디뎠을 때, 이것은 미래를 개척하는 여정의 시작입니다.</p>
         <p class="lead text-body-secondary">컴퓨터와 기술의 세계는 끊임없이 진화하고 있습니다. 이곳에서 배우고 성장함으로써</p>
@@ -44,7 +44,7 @@
       </div>
     </div>
   </section>
-	  <div class="album py-5 bg-body-tertiary" style="height: 50vh;">
+	  <div class="album py-5 bg-body-tertiary" style="height: 600px;">
 	    <div class="container">
 		<h1 class="col text-center" style="color:#670AC5; margin-bottom:30px">
 			<c:forEach var="courseName" items="${subjectsList}" varStatus="loop">
