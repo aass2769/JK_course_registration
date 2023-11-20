@@ -80,6 +80,14 @@ public class BoardDao {
 		boardMapper.deleteLike(brd_key, user_key);
 	}
 	
+	//댓글 총 갯수
+	public int totalComment(int brd_key) {
+		
+		int totalComment = boardMapper.totalComment(brd_key);
+		
+		return totalComment;
+	}
+	
 	//댓글 작성
 	public void addComment(BoardBean addCommentBean) {
 		boardMapper.addComment(addCommentBean);
@@ -91,5 +99,11 @@ public class BoardDao {
 		List<BoardBean> commentList = boardMapper.commentList(brd_key);
 		
 		return commentList;
+	}
+	
+	//댓글 수정
+	public void modifyComment(BoardBean modifyCommentBean) {
+		
+		boardMapper.modifyComment(modifyCommentBean);
 	}
 }

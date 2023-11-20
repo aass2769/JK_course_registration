@@ -104,6 +104,10 @@ public class BoardController {
 		List<BoardBean> commentList = boardService.commentList(brd_key);
 		model.addAttribute("commentList", commentList);
 		
+		//댓글 총 갯수
+		int totalComment = boardService.totalComment(brd_key);
+		model.addAttribute("totalComment", totalComment);
+		
 		return "board/read";
 	}
 	
@@ -184,5 +188,13 @@ public class BoardController {
 		model.addAttribute("cr_course", cr_course);
 		
 		return "board/add_ct_done";
+	}
+	
+	
+	//댓글 삭제
+	@GetMapping("/deleteComment")
+	public String deleteComment() {
+		
+		return "board/del_ct_done";
 	}
 }

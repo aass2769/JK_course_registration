@@ -17,6 +17,83 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 
+<script>
+function changeToInput(loopId, commentId, buttonId, brdId) {
+    // <p> 태그 요소 가져오기
+    var paragraph = document.getElementById(commentId);
+    
+    var  brd = document.getElementById(brdId);
+    var brd_ct_key = brd.value;
+    
+    // 새로운 <input> 태그 생성
+    var inputElement = document.createElement("input");
+
+    // 기존 <p> 태그의 속성 복사
+    inputElement.setAttribute("id", paragraph.id);
+    inputElement.setAttribute("value", paragraph.textContent);
+
+    // <p> 태그를 <input> 태그로 교체
+    paragraph.parentNode.replaceChild(inputElement, paragraph);
+
+    // 수정 버튼을 숨김
+    document.getElementById(buttonId).style.display = "none";
+
+    // 제출 버튼 생성
+    var submitButton = document.createElement("button");
+    submitButton.textContent = "제출";
+    submitButton.onclick = function() {
+    	var brd_ct_content = inputElement.value;
+        // 여기에서 폼 제출을 처리하는 함수를 호출하거나 필요한 작업을 수행
+        submitForm(brd_ct_key, brd_ct_content);
+        // 폼 제출 후 다시 <p> 태그로 변경
+        inputElement.parentNode.replaceChild(paragraph, inputElement);
+        // 수정 버튼 다시 표시
+        document.getElementById(buttonId).style.display = "inline-block";
+        // 취소 버튼 제거
+        cancelButton.parentNode.removeChild(cancelButton);
+        // 제출 버튼 제거
+        submitButton.parentNode.removeChild(submitButton);
+    };
+
+    // 제출 버튼을 컨테이너에 추가
+    document.getElementById(loopId).appendChild(submitButton);
+
+    // 취소 버튼 생성
+    var cancelButton = document.createElement("button");
+    cancelButton.textContent = "취소";
+    cancelButton.onclick = function() {
+        // 취소 버튼을 누르면 다시 <p> 태그로 변경
+        inputElement.parentNode.replaceChild(paragraph, inputElement);
+        // 수정 버튼 다시 표시
+        document.getElementById(buttonId).style.display = "inline-block";
+        // 취소 버튼 제거
+        cancelButton.parentNode.removeChild(cancelButton);
+        // 제출 버튼 제거
+        submitButton.parentNode.removeChild(submitButton);
+    };
+
+    // 취소 버튼을 컨테이너에 추가
+    document.getElementById(loopId).appendChild(cancelButton);
+}
+
+// 나중에 폼 제출을 처리하는 함수
+function submitForm(brd_ct_key, brd_ct_content) {
+    // 여기서 폼을 실제로 제출하거나 원하는 동작을 수행
+    
+    /* 서버에 비동기적으로 요청을 보내는 ajax통신 */
+    $.ajax({
+       url : "${root}board/modifyComment/" + brd_ct_key + "/" + brd_ct_content ,
+       type : "get",
+       /* 서버에서 반환되는 데이터 타입을 text로 지정함 */
+       dataType : "text",
+       /* 서버에서 성공적으로 응답을 받았을 시 실행됨 */
+       success : function(result){
+    	   location.reload();
+		}
+    })
+
+}
+</script>
 <style>
 
 .post {
@@ -158,28 +235,32 @@
 		<div class="divider"></div>
 		<div class="comments">
 			<div class="comment-header">
-				<h3>댓글</h3>
+				<h3>댓글 ${totalComment}</h3>
 				<div class="sort-buttons">
 					<button class="sort-button active" id="sort-oldest">등록순</button>
 					<button class="sort-button" id="sort-newest">최신순</button>
 				</div>
 			</div>
-			<!-- 댓글 내용 -->
-			<c:forEach var="comment" items="${commentList}">
-				<div class="comment">
-					<p>${comment.user_name}</p>
-					<p>${comment.BRD_CT_CONTENT}</p>
-					<p>${comment.brd_ct_date}</p>
+			<%-- 댓글  --%>
+			<c:forEach var="comment" items="${commentList}" varStatus="loop">
+				<input type="hidden" value="${comment.brd_ct_key}" id="brd_ct_key${loop.index}">
+				<div id="comment${loop.index }" class="comment">
+						<p>${comment.user_name}</p>
+						<p id="myParagraph${loop.index }">${comment.BRD_CT_CONTENT}</p>
+						<div class="d-flex justify-content-between">
+							<p>${comment.brd_ct_date}</p>
+							<c:if test="${user_key == comment.user_key}">
+								<div class="d-flex justify-content-between align-items-center">
+										<div class="d-flex justify-content-end">
+					                        <button id="myButton${loop.index}" type="button"  onclick="changeToInput('comment${loop.index }', 'myParagraph${loop.index }', 'myButton${loop.index}', 'brd_ct_key${loop.index}')"  class ="btn btn-link text-dark mr-2">수정</button>
+					                        <a href="${root}board/deleteComment"><button class="btn btn-link text-dark">삭제</button></a>
+			                    		</div>
+		                	</div> 
+							</c:if>
+							</div>
 				</div>
 				<div class="divider divider-1" style="border-top-color: #ede8f1;"></div>
 			</c:forEach>
-			<%-- <<div class="d-flex justify-content-between align-items-center">
-					<div class="d-flex justify-content-end">
-                        <button class="btn btn-link text-dark mr-2">수정</button>
-                        <button class="btn btn-link text-dark">삭제</button>
-                    </div>
-                </div> --%>
-				
 			</div>
 			<div class="divider"></div>
 			<div class="comment-form">
@@ -194,8 +275,7 @@
 					</div>
 				</form:form>
 			</div>
-		</div>
-		<div class="d-flex justify-content-between mt-2">
+			<div class="d-flex justify-content-between mt-2">
 			<div class="row">
 			<form class="form-inline">
 				<!-- 글쓰기 버튼 -->
@@ -211,7 +291,9 @@
 				<button class="btn btn-secondary" style="background-color: #1D202E;">TOP</button>
 			</div>
 		</div>
-	</div>
+		</div>
+		
+
 
 	<!-- 하단 정보 부분 -->
 	<c:import url="/WEB-INF/views/include/bottom_info.jsp" />

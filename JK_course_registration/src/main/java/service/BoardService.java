@@ -151,16 +151,30 @@ public class BoardService {
 		boardDao.deleteLike(brd_key, user_key);
 	}
 	
+	//댓글 총 갯수
+	public int totalComment(int brd_key) {
+		
+		int totalComment = boardDao.totalComment(brd_key);
+		
+		return totalComment;
+	}
+
 	//댓글 작성
 	public void addComment(BoardBean addCommentBean) {
 		boardDao.addComment(addCommentBean);
 	}
 	
 	//댓글 조회
-		public List<BoardBean> commentList(int brd_key){
-			
-			List<BoardBean> commentList = boardDao.commentList(brd_key);
-			
-			return commentList;
-		}
+	public List<BoardBean> commentList(int brd_key){
+		
+		List<BoardBean> commentList = boardDao.commentList(brd_key);
+		
+		return commentList;
+	}
+	
+	//댓글 수정
+	public void modifyComment(BoardBean modifyCommentBean) {
+		
+		boardDao.modifyComment(modifyCommentBean);
+	}
 }

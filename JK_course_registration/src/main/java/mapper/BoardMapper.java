@@ -81,6 +81,10 @@ public interface BoardMapper {
 	//두개 이상이면 param 씀
 	public void deleteLike(@Param("brd_key") int brd_key, @Param("user_key") int user_key);
 	
+	/*댓글 총 갯수 쿼리*/
+	@Select("select count(*) from board_comment_table  where brd_key = #{brd_key} ")
+	public int totalComment(int brd_key);
+	
 	/*댓글 작성 쿼리*/
 	@Insert("INSERT INTO BOARD_COMMENT_TABLE(brd_ct_key, BRD_CT_CONTENT, brd_ct_count, brd_ct_date, brd_key, user_key) "
 			+ "VALUES (BRD_CT_seq.NEXTVAL, #{BRD_CT_CONTENT}, 1, sysdate, #{brd_key}, #{user_key})")
@@ -92,4 +96,8 @@ public interface BoardMapper {
 			+ "INNER JOIN user_table B ON A.user_key = B.user_key "
 			+ "WHERE A.brd_key = #{brd_key}")
 	public List<BoardBean> commentList(int brd_key);
+	
+	/*댓글 수정 쿼리*/
+	@Update("update board_comment_table set BRD_CT_CONTENT = #{BRD_CT_CONTENT} where brd_ct_key = #{brd_ct_key} ")
+	public void modifyComment(BoardBean modifyCommentBean);
 }
