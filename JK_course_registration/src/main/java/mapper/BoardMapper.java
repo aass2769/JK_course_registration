@@ -90,14 +90,88 @@ public interface BoardMapper {
 			+ "VALUES (BRD_CT_seq.NEXTVAL, #{BRD_CT_CONTENT}, 1, sysdate, #{brd_key}, #{user_key})")
 	public void addComment(BoardBean addCommentBean);
 	
-	/*댓글 조회 쿼리*/
+	/*댓글 조회+등록순 쿼리*/
 	@Select("SELECT A.brd_ct_key, A.BRD_CT_CONTENT, A.brd_ct_count, A.brd_ct_date, A.brd_key, A.user_key, B.user_name "
 			+ "FROM board_comment_table A "
 			+ "INNER JOIN user_table B ON A.user_key = B.user_key "
-			+ "WHERE A.brd_key = #{brd_key}")
-	public List<BoardBean> commentList(int brd_key);
+			+ "WHERE A.brd_key = #{brd_key} order by a.brd_ct_key asc ")
+	public List<BoardBean> ascComment(int brd_key);
+	
+	/*댓글 최신순 쿼리*/
+	@Select("SELECT A.brd_ct_key, A.BRD_CT_CONTENT, A.brd_ct_count, A.brd_ct_date, A.brd_key, A.user_key, B.user_name "
+			+ "FROM board_comment_table A "
+			+ "INNER JOIN user_table B ON A.user_key = B.user_key "
+			+ "WHERE A.brd_key = #{brd_key} order by a.brd_ct_key desc ")
+	public List<BoardBean> descComment(int brd_key);
 	
 	/*댓글 수정 쿼리*/
 	@Update("update board_comment_table set BRD_CT_CONTENT = #{BRD_CT_CONTENT} where brd_ct_key = #{brd_ct_key} ")
 	public void modifyComment(BoardBean modifyCommentBean);
+	
+	/*댓글 삭제 쿼리*/
+	@Delete("delete from board_comment_table where brd_ct_key = #{brd_ct_key} ")
+	public void deleteComment(int brd_ct_key);
+	
+	/*작성자 이름으로 검색 시 쿼리*/
+	@Select("SELECT A.BRD_KEY, A.BRD_TITLE, C.USER_NAME, A.BRD_DATE, A.BRD_HIT, "
+				+ "SUM(B.brd_likes_count) AS total_likes_count "
+				+ "FROM board_table A "
+				+ "LEFT OUTER JOIN "
+				+ "( SELECT BRD_KEY, COUNT(USER_KEY) AS brd_likes_count "
+				+ "    FROM BOARD_LIKE_TABLE "
+				+ "    GROUP BY BRD_KEY "
+				+ ") B ON A.BRD_KEY = B.BRD_KEY "
+				+ "LEFT OUTER JOIN USER_TABLE C ON A.USER_KEY = C.USER_KEY "
+				+ "WHERE A.CR_KEY = #{cr_key} AND C.USER_NAME  LIKE '%' || #{user_name} || '%'  "
+				+ "GROUP BY A.BRD_KEY, A.BRD_TITLE, C.USER_NAME, A.BRD_DATE, A.BRD_HIT "
+				+ "ORDER BY A.BRD_KEY DESC ")
+	public List<BoardBean> nameSearch(@Param("cr_key") int cr_key, @Param("user_name") String user_name);
+	
+	/*제목으로 검색 시 쿼리*/
+	@Select("SELECT A.BRD_KEY, A.BRD_TITLE, C.USER_NAME, A.BRD_DATE, A.BRD_HIT, "
+				+ "SUM(B.brd_likes_count) AS total_likes_count "
+				+ "FROM board_table A "
+				+ "LEFT OUTER JOIN "
+				+ "( SELECT BRD_KEY, COUNT(USER_KEY) AS brd_likes_count "
+				+ "    FROM BOARD_LIKE_TABLE "
+				+ "    GROUP BY BRD_KEY "
+				+ ") B ON A.BRD_KEY = B.BRD_KEY "
+				+ "LEFT OUTER JOIN USER_TABLE C ON A.USER_KEY = C.USER_KEY "
+				+ "WHERE A.CR_KEY = #{cr_key} AND A.BRD_TITLE  LIKE '%' || #{brd_title} || '%'  "
+				+ "GROUP BY A.BRD_KEY, A.BRD_TITLE, C.USER_NAME, A.BRD_DATE, A.BRD_HIT "
+				+ "ORDER BY A.BRD_KEY DESC ")
+	public List<BoardBean> titleSearch(@Param("cr_key") int cr_key, @Param("brd_title") String brd_title);
+	
+	/*게시글로 검색 시 쿼리*/
+	@Select("SELECT A.BRD_KEY, A.BRD_TITLE, C.USER_NAME, A.BRD_DATE, A.BRD_HIT, "
+				+ "SUM(B.brd_likes_count) AS total_likes_count "
+				+ "FROM board_table A "
+				+ "LEFT OUTER JOIN "
+				+ "( SELECT BRD_KEY, COUNT(USER_KEY) AS brd_likes_count "
+				+ "    FROM BOARD_LIKE_TABLE "
+				+ "    GROUP BY BRD_KEY "
+				+ ") B ON A.BRD_KEY = B.BRD_KEY "
+				+ "LEFT OUTER JOIN USER_TABLE C ON A.USER_KEY = C.USER_KEY "
+				+ "WHERE A.CR_KEY = #{cr_key} AND A.BRD_CONTENT  LIKE '%' || #{brd_content} || '%'  "
+				+ "GROUP BY A.BRD_KEY, A.BRD_TITLE, C.USER_NAME, A.BRD_DATE, A.BRD_HIT "
+				+ "ORDER BY A.BRD_KEY DESC ")
+	public List<BoardBean> contentSearch(@Param("cr_key") int cr_key, @Param("brd_content") String brd_content);
+	
+	/*전체로 검색 시 쿼리*/
+	@Select("SELECT A.BRD_KEY, A.BRD_TITLE, C.USER_NAME, A.BRD_DATE, A.BRD_HIT, "
+				+ "SUM(B.brd_likes_count) AS total_likes_count "
+				+ "FROM board_table A "
+				+ "LEFT OUTER JOIN "
+				+ "( SELECT BRD_KEY, COUNT(USER_KEY) AS brd_likes_count "
+				+ "    FROM BOARD_LIKE_TABLE "
+				+ "    GROUP BY BRD_KEY "
+				+ ") B ON A.BRD_KEY = B.BRD_KEY "
+				+ "LEFT OUTER JOIN USER_TABLE C ON A.USER_KEY = C.USER_KEY "
+				+ "WHERE A.CR_KEY = #{cr_key} AND (A.BRD_CONTENT LIKE '%' || #{brd_content} || '%'  OR "
+				+ "A.BRD_TITLE LIKE '%' || #{brd_title} || '%'  OR "
+				+ "C.USER_NAME  LIKE '%' || #{user_name} || '%'  ) "
+				+ "GROUP BY A.BRD_KEY, A.BRD_TITLE, C.USER_NAME, A.BRD_DATE, A.BRD_HIT "
+				+ "ORDER BY A.BRD_KEY DESC ")
+	public List<BoardBean> totalSearch(@Param("cr_key") int cr_key, @Param("brd_content") String brd_content, 
+																 @Param("user_name") String user_name, @Param("brd_title") String brd_title);
 }

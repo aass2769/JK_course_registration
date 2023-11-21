@@ -2,6 +2,7 @@ package dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -93,17 +94,65 @@ public class BoardDao {
 		boardMapper.addComment(addCommentBean);
 	}
 	
-	//댓글 조회
-	public List<BoardBean> commentList(int brd_key){
+	//댓글 등록순 조회
+	public List<BoardBean> ascComment(int brd_key){
 		
-		List<BoardBean> commentList = boardMapper.commentList(brd_key);
-		
+		List<BoardBean> commentList = boardMapper.ascComment(brd_key);
+	
 		return commentList;
 	}
+	
+	//댓글 최신순 조회
+	public List<BoardBean> descComment(int brd_key){
+		
+		List<BoardBean> commentList = boardMapper.descComment(brd_key);
+	
+		return commentList;
+		}
 	
 	//댓글 수정
 	public void modifyComment(BoardBean modifyCommentBean) {
 		
 		boardMapper.modifyComment(modifyCommentBean);
+	}
+	
+	//댓글 삭제
+	public void deleteComment(int brd_ct_key) {
+		
+		boardMapper.deleteComment(brd_ct_key);
+	}
+	
+	//작성자 이름으로 검색
+	public List<BoardBean> nameSearch(int cr_key, String user_name){
+		
+		List<BoardBean> board_list = boardMapper.nameSearch(cr_key, user_name);
+		
+		return board_list;
+	}
+	
+	//제목으로 검색
+	public List<BoardBean> titleSearch(@Param("cr_key") int cr_key, @Param("brd_title") String brd_title){
+		
+		List<BoardBean> board_list = boardMapper.titleSearch(cr_key, brd_title);
+		
+		return board_list;
+	}
+	
+	//게시글로 검색
+	public List<BoardBean> contentSearch(@Param("cr_key") int cr_key, @Param("brd_content") String brd_content){
+		
+		List<BoardBean> board_list = boardMapper.contentSearch(cr_key, brd_content);
+		
+		return board_list;
+	}
+	
+	//전체로 검색
+	public List<BoardBean> totalSearch(@Param("cr_key") int cr_key, @Param("brd_content") String brd_content, 
+			 													@Param("user_name") String user_name, @Param("brd_title") String brd_title){
+		
+		List<BoardBean> board_list = boardMapper.totalSearch(cr_key, brd_content, user_name, brd_title);
+		
+		return board_list;
+		
 	}
 }

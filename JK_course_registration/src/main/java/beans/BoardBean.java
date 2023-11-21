@@ -6,7 +6,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 /*게시판, 게시판 좋아요, 게시판 댓글*/
 public class BoardBean {
-
+	
 	/*게시판*/
 	private int brd_key;
 	private int user_key; //FK, 게시판 + 게시판 좋아요 + 게시판 댓글 여부
@@ -24,6 +24,9 @@ public class BoardBean {
 	private int brd_hit;
 	private String user_name;
 	private String cr_course;
+	private String brd_search_content; //검색 내용
+	private String brd_search_category; //검색 종류
+	private String brd_all_button; //전체 게시글 버튼
 	
 	/*게시판 좋아요 여부*/
 	private int brd_like_key;
@@ -36,6 +39,34 @@ public class BoardBean {
 	private int brd_ct_count; //댓글 갯수
 	private String brd_ct_date; //댓글 작성 날짜
 	
+	public BoardBean(){
+		this.brd_all_button = "전체글보기";
+	}
+	
+	public String getBrd_all_button() {
+		return brd_all_button;
+	}
+
+	public void setBrd_all_button(String brd_all_button) {
+		this.brd_all_button = brd_all_button;
+	}
+
+	public String getBrd_search_category() {
+		return brd_search_category;
+	}
+
+	public void setBrd_search_category(String brd_search_category) {
+		this.brd_search_category = brd_search_category;
+	}
+
+	public String getBrd_search_content() {
+		return brd_search_content;
+	}
+
+	public void setBrd_search_content(String brd_search_content) {
+		this.brd_search_content = brd_search_content;
+	}
+
 	public int getTotal_likes_count() {
 		return total_likes_count;
 	}

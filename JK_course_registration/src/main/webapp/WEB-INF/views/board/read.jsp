@@ -232,16 +232,21 @@ function submitForm(brd_ct_key, brd_ct_content) {
                  </c:otherwise>
             </c:choose>
 		</div>
+		<%--댓글 등록/최신순 버튼 --%>
 		<div class="divider"></div>
 		<div class="comments">
 			<div class="comment-header">
 				<h3>댓글 ${totalComment}</h3>
 				<div class="sort-buttons">
-					<button class="sort-button active" id="sort-oldest">등록순</button>
-					<button class="sort-button" id="sort-newest">최신순</button>
+					<a href="${root}board/read?brd_key=${readBoard.brd_key}&cr_key=${readBoard.cr_key}&cr_course=${readBoard.cr_course}&user_key=${user_key}">
+						<button class="sort-button active" id="sort-oldest">등록순</button>
+					</a>
+					<a href="${root}board/read?brd_key=${readBoard.brd_key}&cr_key=${readBoard.cr_key}&cr_course=${readBoard.cr_course}&user_key=${user_key}&sort=최신순">
+						<button class="sort-button" id="sort-newest">최신순</button>
+					</a>
 				</div>
 			</div>
-			<%-- 댓글  --%>
+			<%-- 댓글  수정과 삭제--%>
 			<c:forEach var="comment" items="${commentList}" varStatus="loop">
 				<input type="hidden" value="${comment.brd_ct_key}" id="brd_ct_key${loop.index}">
 				<div id="comment${loop.index }" class="comment">
@@ -253,7 +258,7 @@ function submitForm(brd_ct_key, brd_ct_content) {
 								<div class="d-flex justify-content-between align-items-center">
 										<div class="d-flex justify-content-end">
 					                        <button id="myButton${loop.index}" type="button"  onclick="changeToInput('comment${loop.index }', 'myParagraph${loop.index }', 'myButton${loop.index}', 'brd_ct_key${loop.index}')"  class ="btn btn-link text-dark mr-2">수정</button>
-					                        <a href="${root}board/deleteComment"><button class="btn btn-link text-dark">삭제</button></a>
+					                        <a href="${root}board/deleteComment?cr_key=${readBoard.cr_key}&cr_course=${readBoard.cr_course}&brd_ct_key=${comment.brd_ct_key}&brd_key=${readBoard.brd_key}&user_key=${user_key}"><button class="btn btn-link text-dark">삭제</button></a>
 			                    		</div>
 		                	</div> 
 							</c:if>
@@ -264,7 +269,7 @@ function submitForm(brd_ct_key, brd_ct_content) {
 			</div>
 			<div class="divider"></div>
 			<div class="comment-form">
-			<%--댓글 --%>
+			<%--댓글 입력 --%>
 				<form:form action="${root}board/addComment?brd_key=${readBoard.brd_key}&user_key=${user_key}&cr_key=${readBoard.cr_key}&cr_course=${readBoard.cr_course}" method="post" modelAttribute="addCommentBean" style="position: relative;">
 					<div class="form-group">
 					<form:textarea path="BRD_CT_CONTENT" class="form-control" id="commentContent" rows="4" placeholder="댓글을 입력하세요."/>
@@ -279,16 +284,12 @@ function submitForm(brd_ct_key, brd_ct_content) {
 			<div class="row">
 			<form class="form-inline">
 				<!-- 글쓰기 버튼 -->
-				<a href="${root}create"class="btn btn-secondary" style="background-color: #1D202E; margin-right: -5px;">글쓰기</a>
-				<!-- 답글 버튼 -->
-				<button class="btn btn-secondary" style="background-color: #1D202E;">답글</button>
+				<a href="${root}board/create"class="btn btn-secondary" style="background-color: #1D202E; margin-right: -5px;">글쓰기</a>
 				</form>
 			</div>
 			<div class="d-flex justify-content-end">
 				<!-- 목록 버튼 -->
-				<a href="${root}detail?cr_key=${cr_key}&cr_course=${cr_course}"class="btn btn-secondary mr-2" style="background-color: #1D202E;">목록</a>
-				<!-- Top 버튼 -->
-				<button class="btn btn-secondary" style="background-color: #1D202E;">TOP</button>
+				<a href="${root}board/detail?cr_key=${readBoard.cr_key}&cr_course=${readBoard.cr_course}"class="btn btn-secondary mr-2" style="background-color: #1D202E;">목록</a>
 			</div>
 		</div>
 		</div>

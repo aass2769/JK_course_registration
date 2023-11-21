@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<c:set var="root" value="${pageContext.request.contextPath}/" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,7 +33,6 @@
 	
 	.form-select {
     width: 150px; /* 원하는 너비 값으로 설정하세요 */
-    margin-left: 860px;
 	}
 
 	.search-form {
@@ -75,22 +75,26 @@
 		<div class="card-body">
 		<h4 class="card-title" >${cr_course}</h4>
                 <div class="search-container">
-                    <!-- 카테고리 선택(select 옵션) -->
-                    <select class="form-select" aria-label="Default select">
-					  <option selected>글작성자</option>
-					  <option value="1">제목</option>
-					  <option value="2">게시글</option>
-					</select>
-                    <!-- 검색 폼과 버튼 -->
-                    <div class="search-form">
-                        <form class="form-inline">
-                            <input type="text" class="form-control search-input" placeholder="검색어를 입력하세요">
-                        </form>
-                        <form class="form-inline">
-                            <button type="submit" class="btn btn-primary search-button">검색</button>
-                        </form>
-                    </div>
-                </div>   
+                	<a href="${root}board/allList?cr_key=${cr_key}&cr_course=${cr_course}"><button class="btn btn-light"	style="background-color: #670AC5; color: #ffffff;">전체 글 보기</button></a>
+                <%--검색 --%>
+                	<form:form class="form-inline" action="${root}board/detail" method="get" modelAttribute="searchBean">
+                	<div class="search-form">
+                		<input type="hidden" name="cr_key" value="${cr_key}"/>
+                		<input type="hidden" name="cr_course" value="${cr_course}"> 
+	                    <!-- 카테고리 선택(select 옵션) -->
+	                    <form:select class="form-select" aria-label="Default select" path="brd_search_category" style="width: 150px;  ">
+						  <option selected value="전체">전체</option>
+						  <option value="제목">제목</option>
+						  <option value="게시글">게시글</option>
+						  <option value="글작성자">글작성자</option>
+						</form:select>
+	                    <!-- 검색 폼과 버튼 -->
+	                    
+	                    	<form:input  class="form-control search-input" placeholder="검색어를 입력하세요" path="brd_search_content" style="width: 180px;"/>
+	                    	<form:button class="btn btn-primary search-button">검색</form:button>
+	                    </div>
+                    </form:form>
+                </div> 
 			<table class="table table-hover" id='board_list'>
 				<thead style="color: #1D202E;">
 					<tr>
@@ -106,7 +110,7 @@
 					<c:forEach var="brd" items="${board_list}">
 						<tr>
 							<td class="text-center d-none d-md-table-cell" >${brd.brd_key}</td>
-							<td><a href="${root}read?cr_key=${cr_key}&cr_course=${cr_course}&brd_key=${brd.brd_key}">${brd.brd_title}</a></td>
+							<td><a href="${root}board/read?cr_key=${cr_key}&cr_course=${cr_course}&brd_key=${brd.brd_key}">${brd.brd_title}</a></td>
 							<td class="text-center d-none d-md-table-cell">${brd.user_name}</td>
 							<td class="text-center d-none d-md-table-cell">${brd.brd_date}</td>
 							<td class="text-center d-none d-md-table-cell">${brd.brd_hit}</td>
@@ -169,7 +173,7 @@
 			</div>
     
 			<div class="text-right">
-				<a href="${root}create" class="btn btn-primary"  style="background-color: #670AC5; margin-left: 1170px;">글쓰기</a>
+				<a href="${root}board/create" class="btn btn-primary"  style="background-color: #670AC5; margin-left: 1170px;">글쓰기</a>
 			</div>
 		</div>
 	</div>

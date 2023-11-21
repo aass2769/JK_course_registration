@@ -37,15 +37,75 @@ public class BoardController {
 	
 	/*게시글 목록 페이지*/
 	@GetMapping("/detail")
-	public String detail(@RequestParam("cr_key") int cr_key, @RequestParam("cr_course") String cr_course, Model model) {
+	public String detail(@RequestParam("cr_key") int cr_key, @RequestParam("cr_course") String cr_course,
+									@ModelAttribute("searchBean") BoardBean searchBean, Model model) {
 		
 		//게시판 카테고리 식별을 위한 키
 		model.addAttribute("cr_key", cr_key);
 		model.addAttribute("cr_course", cr_course);
 		
-		/*게시글 목록 불러오기*/
+		if(searchBean.getBrd_search_category() == null) {
+		/*게시글 전체 목록 불러오기*/
 		List<BoardBean> board_list = boardService.getBoardList(cr_key);
 		model.addAttribute("board_list", board_list);
+		}
+		
+		else if(searchBean.getBrd_search_category().equals("글작성자")) {
+			String user_name = searchBean.getBrd_search_content();
+			
+			/*게시글 이름 검색*/
+			List<BoardBean> board_list_name = boardService.nameSearch(cr_key, user_name);
+			model.addAttribute("board_list", board_list_name);
+		}
+		
+		else if(searchBean.getBrd_search_category().equals("제목")) {
+			String brd_title = searchBean.getBrd_search_content();
+			
+			/*게시글 제목 검색*/
+			List<BoardBean> board_list_title = boardService.titleSearch(cr_key, brd_title);
+			model.addAttribute("board_list", board_list_title);
+			
+		}
+
+		else if(searchBean.getBrd_search_category().equals("게시글")) {
+			String brd_content = searchBean.getBrd_search_content();
+			
+			/*게시글 제목 검색*/
+			List<BoardBean> board_list_content = boardService.contentSearch(cr_key, brd_content);
+			model.addAttribute("board_list", board_list_content);
+			
+		}
+		
+		else if(searchBean.getBrd_search_category().equals("전체")) {
+			String brd_content = searchBean.getBrd_search_content();
+			String user_name = searchBean.getBrd_search_content();
+			String brd_title = searchBean.getBrd_search_content();
+			
+			/*게시글 제목 검색*/
+			List<BoardBean> board_list_total = boardService.totalSearch(cr_key, brd_content, user_name, brd_title);
+			model.addAttribute("board_list", board_list_total);
+			
+		}
+		
+		return "board/detail";
+	}
+	
+	/*전체글 보기 버튼 관련*/
+	@GetMapping("/allList")
+	public String allList(@RequestParam("cr_key") int cr_key, @RequestParam("cr_course") String cr_course,
+									@ModelAttribute("searchBean") BoardBean searchBean, Model model) {
+		
+		//게시판 카테고리 식별을 위한 키
+		model.addAttribute("cr_key", cr_key);
+		model.addAttribute("cr_course", cr_course);
+		
+		BoardBean forAllListbtn = new BoardBean();
+		
+		if(forAllListbtn.getBrd_all_button().equals("전체글보기")) {
+			/*전체 게시글 목록 불러오기*/
+			List<BoardBean> board_list = boardService.getBoardList(cr_key);
+			model.addAttribute("board_list", board_list);
+		}
 		
 		return "board/detail";
 	}
@@ -84,7 +144,8 @@ public class BoardController {
 	
 	/*게시글 읽기 페이지*/
 	@GetMapping("/read")
-	public String read(@RequestParam("brd_key") int brd_key, @ModelAttribute("addCommentBean") BoardBean addCommentBean,  Model model) {
+	public String read(@RequestParam("brd_key") int brd_key, @ModelAttribute("addCommentBean") BoardBean addCommentBean,
+									@RequestParam(value="sort", defaultValue = "등록순") String sort, Model model) {
 	
 		//조회수 증가 메서드
 		boardService.addHit(brd_key);
@@ -100,9 +161,14 @@ public class BoardController {
 		int user_key = userSession.getUser_key();
 		model.addAttribute("user_key", user_key);
 		
-		//댓글 조회 메서드
-		List<BoardBean> commentList = boardService.commentList(brd_key);
-		model.addAttribute("commentList", commentList);
+		//댓글 조회 - 등록, 최신메서드
+		if(sort.equals("등록순")) {
+			List<BoardBean> commentList = boardService.ascComment(brd_key);
+			model.addAttribute("commentList", commentList);
+		} else if(sort.equals("최신순")) {
+			List<BoardBean> commentList = boardService.descComment(brd_key);
+			model.addAttribute("commentList", commentList);
+		}
 		
 		//댓글 총 갯수
 		int totalComment = boardService.totalComment(brd_key);
@@ -193,8 +259,19 @@ public class BoardController {
 	
 	//댓글 삭제
 	@GetMapping("/deleteComment")
-	public String deleteComment() {
+	public String deleteComment(@RequestParam("cr_key") int cr_key, @RequestParam("cr_course") String cr_course, 
+													@RequestParam("brd_ct_key") int brd_ct_key, @RequestParam("brd_key") int brd_key,
+													@RequestParam("user_key") int user_key, Model model) {
+		
+		boardService.deleteComment(brd_ct_key);
+		
+		model.addAttribute("cr_key", cr_key);
+		model.addAttribute("cr_course", cr_course);
+		model.addAttribute("brd_key", brd_key);
+		model.addAttribute("user_key", user_key);
 		
 		return "board/del_ct_done";
 	}
+	
+	
 }
