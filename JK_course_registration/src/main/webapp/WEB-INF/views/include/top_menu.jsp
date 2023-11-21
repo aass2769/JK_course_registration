@@ -10,12 +10,11 @@
             background-color: #ffffff;
             border-bottom: 5px solid #670AC5;
             margin-bottom: 30px;
-            padding-left: 200px;
         }
 
         .navbar-brand img {
             max-height: 200px;
-            margin-left: 50px;
+            
         }
 
         .navbar-toggler {
@@ -51,13 +50,13 @@
 </head>
 
     <nav class="navbar navbar-expand-lg navbar-light">
-        <div class="container">
+        <div class="container px-4">
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav mr-auto">
+                <ul class="navbar-nav flex-fill">
                     <li class="nav-item dropdown">
                         <a class="nav-link" href="#" id="navbarDropdownMenuLink" role="button"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: #670AC5; margin-top: 100px;">
@@ -88,29 +87,31 @@
                     </li>
                 </ul>
                 <a class="navbar-brand" href="${root }main" id="logo">
-                    <img src="${root }image/JK_logo.jpg" alt="Logo">
+                    <img src="${root }image/jklogo.jpg" alt="Logo">
                 </a>
-                <div>
-	                <ul class="navbar-nav">
-	                	<c:if test="${userSession.userLogin == true}">
-	                		<li class="nav-item" style="font-weight: bold; margin-top: 100px;">${userSession.user_name }님 반갑습니다</li>
-	                	</c:if>
-	                </ul>
-	                <ul class="navbar-nav">
-						<c:choose>
-							<c:when test="${userSession.userLogin == true}">
-						       <li class="nav-item"><a class="nav-link" href="${root}user/modify" style="color: #670AC5;">정보수정</a></li>
-						       <li class="nav-item"><a class="nav-link" href="${root}user/logout" style="color: #670AC5;">로그아웃</a></li>
-						   </c:when>
-						   <c:when  test="${userSession.userLogin == false}">
-						   		<li class="nav-item"><a class="nav-link" href="${root}user/join" style="color: #670AC5; margin-top: 100px;">회원가입</a></li>
-								<li class="nav-item"><a class="nav-link" href="${root}user/login" style="color: #670AC5; margin-top: 100px;">로그인</a></li>
-						   </c:when>
-						</c:choose>
-					<!--<li class="nav-item"><a class="nav-link"
-						href="${root}user/login" style="color: #670AC5; margin-top: 100px;">로그아웃</a>
-					</li>-->
-					</ul>
+                <div class="flex-fill d-flex justify-content-end">
+                	<div class="d-flex flex-column">
+		                <ul class="navbar-nav">
+		                	<c:if test="${userSession.userLogin == true}">
+		                		<li class="nav-item" style="font-weight: bold; margin-top: 100px;">${userSession.user_name }님 반갑습니다</li>
+		                	</c:if>
+		                </ul>
+		                <ul class="navbar-nav">
+							<c:choose>
+								<c:when test="${userSession.userLogin == true}">
+							       <li class="nav-item"><a class="nav-link" href="${root}user/modify" style="color: #670AC5;">정보수정</a></li>
+							       <li class="nav-item"><a class="nav-link" href="${root}user/logout" style="color: #670AC5;">로그아웃</a></li>
+							   </c:when>
+							   <c:when  test="${userSession.userLogin == false}">
+							   		<li class="nav-item"><a class="nav-link" href="${root}user/join" style="color: #670AC5; margin-top: 100px;">회원가입</a></li>
+									<li class="nav-item"><a class="nav-link" href="${root}user/login" style="color: #670AC5; margin-top: 100px;">로그인</a></li>
+							   </c:when>
+							</c:choose>
+						<!--<li class="nav-item"><a class="nav-link"
+							href="${root}user/login" style="color: #670AC5; margin-top: 100px;">로그아웃</a>
+						</li>-->
+						</ul>
+					</div>
 				</div>
             </div>
         </div>
