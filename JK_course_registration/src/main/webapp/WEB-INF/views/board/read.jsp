@@ -194,7 +194,7 @@ function submitForm(brd_ct_key, brd_ct_content) {
 					<i class="fa-solid fa-heart"></i> <span>${readBoard.brd_likes_count}</span>
 				</div>
 				<div class="icon">
-					<i class="fas fa-comment"></i> <span>3</span>
+					<i class="fas fa-comment"></i> <span>${totalComment}</span>
 				</div>
 			</div>
 			<div class="text-center">

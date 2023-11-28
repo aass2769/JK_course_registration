@@ -115,16 +115,14 @@
 	    </button>
 	</div>
 
-
-
-
 	 <!-- 게시판 미리보기 부분 -->
 	<div class="container" style="margin-top: 100px">
 		<div class="row">
+		<c:forEach var="s_list"  items="${sub_list}" varStatus="idx">
 			<div class="col-lg-6" style="margin-top: 20px">
 				<div class="card shadow">
 					<div class="card-body">
-						<h4 class="card-title">자유게시판</h4>
+						<h4 class="card-title">${courseList[idx.index].cr_course}</h4>
 						<table class="table table-hover" id='board_list'>
                             <thead style="color: #1D202E;">
                                 <tr>
@@ -133,174 +131,24 @@
                                     <th class="text-center d-none d-md-table-cell">작성자</th>
                                 </tr>
                             </thead>
+                            <c:forEach var="list" items="${s_list}" >
                             <tbody>
-                                <tr>
-                                    <td class="text-center d-none d-md-table-cell" >10</td>
-                                    <td><a href="#">오늘 점메추 받습니다..</a></td>
-                                    <td class="text-center d-none d-md-table-cell">혜미</td>
-                                </tr>
-                                <tr>
-                                    <td class="text-center d-none d-md-table-cell">10</td>
-                                    <td><a href='board/read.html'>글 제목 입니다</a></td>
-                                    <td class="text-center d-none d-md-table-cell">홍길동</td>
-                                </tr>
-                                <tr>
-                                    <td class="text-center d-none d-md-table-cell">10</td>
-                                    <td><a href='board_read.html'>글 제목 입니다</a></td>
-                                    <td class="text-center d-none d-md-table-cell">홍길동</td>
-                                </tr>
-                                <tr>
-                                    <td class="text-center d-none d-md-table-cell">10</td>
-                                    <td><a href='board_read.html'>글 제목 입니다</a></td>
-                                    <td class="text-center d-none d-md-table-cell">홍길동</td>
-                                </tr>
-                                <tr>
-                                    <td class="text-center d-none d-md-table-cell">10</td>
-                                    <td><a href='board_read.html'>글 제목 입니다</a></td>
-                                    <td class="text-center d-none d-md-table-cell">홍길동</td>
-                                </tr>
+	                                <tr>
+	                                    <td class="text-center d-none d-md-table-cell" >${list.brd_key}</td>
+	                                    <td><a href="${root }board/read?brd_key=${list.brd_key}">${list.brd_title}</a></td>
+	                                    <td class="text-center d-none d-md-table-cell">${list.user_name}</td>
+	                                </tr>
+                                </c:forEach>
                             </tbody>
 						</table> 
 						<a href="board_main.html" class="btn btn-primary" style="background-color: #1D202E; margin-left: 528px;">더보기</a>
+										</div>
+								</div>
+							</div>
+						</c:forEach>
 					</div>
 				</div>
-			</div>
 			
-			<div class="col-lg-6" style="margin-top: 20px">
-				<div class="card shadow">
-					<div class="card-body">
-						<h4 class="card-title">자유게시판</h4>
-						<table class="table table-hover" id='board_list'>
-                            <thead style="color: #1D202E;">
-                                <tr>
-                                    <th class="text-center d-none d-md-table-cell">글번호</th>
-                                    <th class="w-50">제목</th>
-                                    <th class="text-center d-none d-md-table-cell">작성자</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td class="text-center d-none d-md-table-cell" >10</td>
-                                    <td><a href="#">오늘 점메추 받습니다..</a></td>
-                                    <td class="text-center d-none d-md-table-cell">혜미</td>
-                                </tr>
-                                <tr>
-                                    <td class="text-center d-none d-md-table-cell">10</td>
-                                    <td><a href='board/read.html'>글 제목 입니다</a></td>
-                                    <td class="text-center d-none d-md-table-cell">홍길동</td>
-                                </tr>
-                                <tr>
-                                    <td class="text-center d-none d-md-table-cell">10</td>
-                                    <td><a href='board_read.html'>글 제목 입니다</a></td>
-                                    <td class="text-center d-none d-md-table-cell">홍길동</td>
-                                </tr>
-                                <tr>
-                                    <td class="text-center d-none d-md-table-cell">10</td>
-                                    <td><a href='board_read.html'>글 제목 입니다</a></td>
-                                    <td class="text-center d-none d-md-table-cell">홍길동</td>
-                                </tr>
-                                <tr>
-                                    <td class="text-center d-none d-md-table-cell">10</td>
-                                    <td><a href='board_read.html'>글 제목 입니다</a></td>
-                                    <td class="text-center d-none d-md-table-cell">홍길동</td>
-                                </tr>
-                            </tbody>
-						</table> 
-						<a href="board_main.html" class="btn btn-primary" style="background-color: #1D202E; margin-left: 528px;">더보기</a>
-					</div>
-				</div>
-			</div>
-			<div class="col-lg-6" style="margin-top: 20px">
-				<div class="card shadow">
-					<div class="card-body">
-						<h4 class="card-title">자유게시판</h4>
-						<table class="table table-hover" id='board_list'>
-                            <thead style="color: #1D202E;">
-                                <tr>
-                                    <th class="text-center d-none d-md-table-cell">글번호</th>
-                                    <th class="w-50">제목</th>
-                                    <th class="text-center d-none d-md-table-cell">작성자</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td class="text-center d-none d-md-table-cell" >10</td>
-                                    <td><a href="#">오늘 점메추 받습니다..</a></td>
-                                    <td class="text-center d-none d-md-table-cell">혜미</td>
-                                </tr>
-                                <tr>
-                                    <td class="text-center d-none d-md-table-cell">10</td>
-                                    <td><a href='board/read.html'>글 제목 입니다</a></td>
-                                    <td class="text-center d-none d-md-table-cell">홍길동</td>
-                                </tr>
-                                <tr>
-                                    <td class="text-center d-none d-md-table-cell">10</td>
-                                    <td><a href='board_read.html'>글 제목 입니다</a></td>
-                                    <td class="text-center d-none d-md-table-cell">홍길동</td>
-                                </tr>
-                                <tr>
-                                    <td class="text-center d-none d-md-table-cell">10</td>
-                                    <td><a href='board_read.html'>글 제목 입니다</a></td>
-                                    <td class="text-center d-none d-md-table-cell">홍길동</td>
-                                </tr>
-                                <tr>
-                                    <td class="text-center d-none d-md-table-cell">10</td>
-                                    <td><a href='board_read.html'>글 제목 입니다</a></td>
-                                    <td class="text-center d-none d-md-table-cell">홍길동</td>
-                                </tr>
-                            </tbody>
-						</table> 
-						<a href="board_main.html" class="btn btn-primary" style="background-color: #1D202E; margin-left: 528px;">더보기</a>
-					</div>
-				</div>
-			</div>
-            <div class="col-lg-6" style="margin-top: 20px">
-				<div class="card shadow">
-					<div class="card-body">
-						<h4 class="card-title">자유게시판</h4>
-						<table class="table table-hover" id='board_list'>
-                            <thead style="color: #1D202E;">
-                                <tr>
-                                    <th class="text-center d-none d-md-table-cell">글번호</th>
-                                    <th class="w-50">제목</th>
-                                    <th class="text-center d-none d-md-table-cell">작성자</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td class="text-center d-none d-md-table-cell" >10</td>
-                                    <td><a href="#">오늘 점메추 받습니다..</a></td>
-                                    <td class="text-center d-none d-md-table-cell">혜미</td>
-                                </tr>
-                                <tr>
-                                    <td class="text-center d-none d-md-table-cell">10</td>
-                                    <td><a href='board/read.html'>글 제목 입니다</a></td>
-                                    <td class="text-center d-none d-md-table-cell">홍길동</td>
-                                </tr>
-                                <tr>
-                                    <td class="text-center d-none d-md-table-cell">10</td>
-                                    <td><a href='board_read.html'>글 제목 입니다</a></td>
-                                    <td class="text-center d-none d-md-table-cell">홍길동</td>
-                                </tr>
-                                <tr>
-                                    <td class="text-center d-none d-md-table-cell">10</td>
-                                    <td><a href='board_read.html'>글 제목 입니다</a></td>
-                                    <td class="text-center d-none d-md-table-cell">홍길동</td>
-                                </tr>
-                                <tr>
-                                    <td class="text-center d-none d-md-table-cell">10</td>
-                                    <td><a href='board_read.html'>글 제목 입니다</a></td>
-                                    <td class="text-center d-none d-md-table-cell">홍길동</td>
-                                </tr>
-                            </tbody>
-						</table> 
-						<a href="board_main.html" class="btn btn-primary" style="background-color: #1D202E; margin-left: 528px;">더보기</a>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-
 	<!-- 하단 정보 부분 -->
 	<c:import url="/WEB-INF/views/include/bottom_info.jsp" />
 </body>

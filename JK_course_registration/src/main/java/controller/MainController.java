@@ -1,5 +1,6 @@
 package controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,7 +8,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import beans.BoardBean;
 import beans.CourseBean;
+import service.BoardService;
 import service.CourseService;
 import service.MainService;
 
@@ -27,7 +30,18 @@ public class MainController {
 		model.addAttribute("allCategoryList", allCategoryList);
 		
 		List<CourseBean> courseList = courseService.getCourseList();
+		
 		model.addAttribute("courseList", courseList);
+		
+		/*게시판 자체 총 갯수 3개 가져오는 리스트*/
+		ArrayList<List<BoardBean>> sub_list = new ArrayList<>();
+		for(int i=1; i<10; i=i+4) { //게시판의 cr_key가 각각 1, 5, 9
+			List<BoardBean> sub_list_in = mainService.getMainList(i);
+			System.out.println("i : " + i);
+			sub_list.add(sub_list_in);
+			System.out.println("몇개찍힐까");
+		}
+		model.addAttribute("sub_list", sub_list);
 		
 		List<CourseBean> subjectsList = courseService.getSubjectCategory();
 		model.addAttribute("subjectsList", subjectsList);
