@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.session.RowBounds;
 
 import beans.BoardBean;
 
@@ -25,7 +26,11 @@ public interface BoardMapper {
 					+ "WHERE A.CR_KEY = #{CR_KEY} "
 					+ "GROUP BY A.BRD_KEY, A.BRD_TITLE, C.USER_NAME, A.BRD_DATE, A.BRD_HIT "
 					+ "ORDER BY A.BRD_KEY DESC")
-		List<BoardBean> getBoardList(int cr_key);
+		List<BoardBean> getBoardList(int cr_key, RowBounds rowBounds);
+	
+	//게시판 마다의 글 갯수
+	@Select("select count(*) from board_table where cr_key = #{cr_key}")
+	int getContentCnt(int cr_key);
 	
 	//글 작성 쿼리
 	//db에서 null을 허용으로 설정해놨어도 mybatis에서는 허용하지 않기때문에 jdbcType=VARCHAR같이 타입을 명시적으로 작성해줌.
@@ -125,7 +130,7 @@ public interface BoardMapper {
 				+ "WHERE A.CR_KEY = #{cr_key} AND C.USER_NAME  LIKE '%' || #{user_name} || '%'  "
 				+ "GROUP BY A.BRD_KEY, A.BRD_TITLE, C.USER_NAME, A.BRD_DATE, A.BRD_HIT "
 				+ "ORDER BY A.BRD_KEY DESC ")
-	public List<BoardBean> nameSearch(@Param("cr_key") int cr_key, @Param("user_name") String user_name);
+	public List<BoardBean> nameSearch(@Param("cr_key") int cr_key, @Param("user_name") String user_name, RowBounds rowBounds);
 	
 	/*제목으로 검색 시 쿼리*/
 	@Select("SELECT A.BRD_KEY, A.BRD_TITLE, C.USER_NAME, A.BRD_DATE, A.BRD_HIT, "
@@ -140,7 +145,7 @@ public interface BoardMapper {
 				+ "WHERE A.CR_KEY = #{cr_key} AND A.BRD_TITLE  LIKE '%' || #{brd_title} || '%'  "
 				+ "GROUP BY A.BRD_KEY, A.BRD_TITLE, C.USER_NAME, A.BRD_DATE, A.BRD_HIT "
 				+ "ORDER BY A.BRD_KEY DESC ")
-	public List<BoardBean> titleSearch(@Param("cr_key") int cr_key, @Param("brd_title") String brd_title);
+	public List<BoardBean> titleSearch(@Param("cr_key") int cr_key, @Param("brd_title") String brd_title, RowBounds rowBounds);
 	
 	/*게시글로 검색 시 쿼리*/
 	@Select("SELECT A.BRD_KEY, A.BRD_TITLE, C.USER_NAME, A.BRD_DATE, A.BRD_HIT, "
@@ -155,7 +160,7 @@ public interface BoardMapper {
 				+ "WHERE A.CR_KEY = #{cr_key} AND A.BRD_CONTENT  LIKE '%' || #{brd_content} || '%'  "
 				+ "GROUP BY A.BRD_KEY, A.BRD_TITLE, C.USER_NAME, A.BRD_DATE, A.BRD_HIT "
 				+ "ORDER BY A.BRD_KEY DESC ")
-	public List<BoardBean> contentSearch(@Param("cr_key") int cr_key, @Param("brd_content") String brd_content);
+	public List<BoardBean> contentSearch(@Param("cr_key") int cr_key, @Param("brd_content") String brd_content, RowBounds rowBounds);
 	
 	/*전체로 검색 시 쿼리*/
 	@Select("SELECT A.BRD_KEY, A.BRD_TITLE, C.USER_NAME, A.BRD_DATE, A.BRD_HIT, "
@@ -173,5 +178,5 @@ public interface BoardMapper {
 				+ "GROUP BY A.BRD_KEY, A.BRD_TITLE, C.USER_NAME, A.BRD_DATE, A.BRD_HIT "
 				+ "ORDER BY A.BRD_KEY DESC ")
 	public List<BoardBean> totalSearch(@Param("cr_key") int cr_key, @Param("brd_content") String brd_content, 
-																 @Param("user_name") String user_name, @Param("brd_title") String brd_title);
+																 @Param("user_name") String user_name, @Param("brd_title") String brd_title, RowBounds rowBounds);
 }

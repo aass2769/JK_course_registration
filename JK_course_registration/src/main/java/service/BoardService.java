@@ -6,6 +6,7 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import beans.BoardBean;
+import beans.BoardPageBean;
 import beans.UserBean;
 import dao.BoardDao;
 
@@ -24,6 +26,12 @@ public class BoardService {
 	@Value("${path.upload}") //@value를 이용하여 프로퍼티 파일의 path.upload를
 	private String path_upload; //path_upload라는 문자열 변수에 주입.
 	
+	@Value("${page.listcnt}")
+	private int page_listcnt;
+	
+	@Value("${page.paginationcnt}")
+	private int page_paginationcnt;
+	
 	@Autowired
 	private BoardDao boardDao;
 	
@@ -31,12 +39,27 @@ public class BoardService {
 	private UserBean userSession;
 	
 	//게시물 목록 리스트 코드
-	public List<BoardBean> getBoardList(int cr_key){
+	public List<BoardBean> getBoardList(int cr_key, int page){
 		
-		List<BoardBean> board_list = boardDao.getBoardList(cr_key);
+		//page_listcnt = 10
+		int start = (page - 1) * page_listcnt;
+		RowBounds rowBounds = new RowBounds(start, page_listcnt);
+		//몇번째부터, 총 몇개
+		
+		List<BoardBean> board_list = boardDao.getBoardList(cr_key, rowBounds);
 		
 		return board_list;
 	}
+	
+	//게시판마다의 글 갯수
+		public BoardPageBean  getContentCnt(int cr_key, int currentPage) {
+			
+			int content_cnt = boardDao.getContentCnt(cr_key);
+			
+			BoardPageBean boardPageBean =  new BoardPageBean(content_cnt, currentPage, page_listcnt, page_paginationcnt);
+			
+			return boardPageBean;
+		}
 	
 	//게시물 작성 코드
 	public void addBoard(BoardBean addBoardBean) {
@@ -194,34 +217,54 @@ public class BoardService {
 		}
 	
 	//작성자 이름으로 검색
-	public List<BoardBean> nameSearch(int cr_key, String user_name){
+	public List<BoardBean> nameSearch(int cr_key, String user_name, int page){
 		
-		List<BoardBean> board_list = boardDao.nameSearch(cr_key, user_name);
+		//page_listcnt = 10
+		int start = (page - 1) * page_listcnt;
+		RowBounds rowBounds = new RowBounds(start, page_listcnt);
+		//몇번째부터, 총 몇개
+		
+		List<BoardBean> board_list = boardDao.nameSearch(cr_key, user_name, rowBounds);
 		
 		return board_list;
 	}
 	
 	//제목으로 검색
-	public List<BoardBean> titleSearch(@Param("cr_key") int cr_key, @Param("brd_title") String brd_title){
+	public List<BoardBean> titleSearch(@Param("cr_key") int cr_key, @Param("brd_title") String brd_title, int page){
 		
-		List<BoardBean> board_list = boardDao.titleSearch(cr_key, brd_title);
+		//page_listcnt = 10
+		int start = (page - 1) * page_listcnt;
+		RowBounds rowBounds = new RowBounds(start, page_listcnt);
+		//몇번째부터, 총 몇개
+				
+		List<BoardBean> board_list = boardDao.titleSearch(cr_key, brd_title, rowBounds);
 		
 		return board_list;
 	}
 	
 	//게시글로 검색
-	public List<BoardBean> contentSearch(@Param("cr_key") int cr_key, @Param("brd_content") String brd_content){
+	public List<BoardBean> contentSearch(@Param("cr_key") int cr_key, @Param("brd_content") String brd_content, int page){
 		
-		List<BoardBean> board_list = boardDao.contentSearch(cr_key, brd_content);
+		//page_listcnt = 10
+		int start = (page - 1) * page_listcnt;
+		RowBounds rowBounds = new RowBounds(start, page_listcnt);
+		//몇번째부터, 총 몇개
+		
+		List<BoardBean> board_list = boardDao.contentSearch(cr_key, brd_content, rowBounds);
 		
 		return board_list;
 	}
 	
 	//전체로 검색
 	public List<BoardBean> totalSearch(@Param("cr_key") int cr_key, @Param("brd_content") String brd_content, 
-			 													@Param("user_name") String user_name, @Param("brd_title") String brd_title){
+			 													@Param("user_name") String user_name, @Param("brd_title") String brd_title, int page){
 		
-		List<BoardBean> board_list = boardDao.totalSearch(cr_key, brd_content, user_name, brd_title);
+		//page_listcnt = 10
+			int start = (page - 1) * page_listcnt;
+			RowBounds rowBounds = new RowBounds(start, page_listcnt);
+			//몇번째부터, 총 몇개
+		
+		List<BoardBean> board_list = boardDao.totalSearch(cr_key, brd_content, user_name, brd_title, rowBounds);
 		
 		return board_list;
 		

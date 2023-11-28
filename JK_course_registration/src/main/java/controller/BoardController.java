@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import beans.BoardBean;
+import beans.BoardPageBean;
 import beans.CourseBean;
 import beans.UserBean;
 import service.BoardService;
@@ -38,7 +39,8 @@ public class BoardController {
 	/*게시글 목록 페이지*/
 	@GetMapping("/detail")
 	public String detail(@RequestParam("cr_key") int cr_key, @RequestParam("cr_course") String cr_course,
-									@ModelAttribute("searchBean") BoardBean searchBean, Model model) {
+									@ModelAttribute("searchBean") BoardBean searchBean, Model model,
+									@RequestParam(value = "page", defaultValue = "1")  int page) {
 		
 		//게시판 카테고리 식별을 위한 키
 		model.addAttribute("cr_key", cr_key);
@@ -46,7 +48,7 @@ public class BoardController {
 		
 		if(searchBean.getBrd_search_category() == null) {
 		/*게시글 전체 목록 불러오기*/
-		List<BoardBean> board_list = boardService.getBoardList(cr_key);
+		List<BoardBean> board_list = boardService.getBoardList(cr_key, page);
 		model.addAttribute("board_list", board_list);
 		}
 		
@@ -54,7 +56,7 @@ public class BoardController {
 			String user_name = searchBean.getBrd_search_content();
 			
 			/*게시글 이름 검색*/
-			List<BoardBean> board_list_name = boardService.nameSearch(cr_key, user_name);
+			List<BoardBean> board_list_name = boardService.nameSearch(cr_key, user_name, page);
 			model.addAttribute("board_list", board_list_name);
 		}
 		
@@ -62,7 +64,7 @@ public class BoardController {
 			String brd_title = searchBean.getBrd_search_content();
 			
 			/*게시글 제목 검색*/
-			List<BoardBean> board_list_title = boardService.titleSearch(cr_key, brd_title);
+			List<BoardBean> board_list_title = boardService.titleSearch(cr_key, brd_title, page);
 			model.addAttribute("board_list", board_list_title);
 			
 		}
@@ -70,8 +72,8 @@ public class BoardController {
 		else if(searchBean.getBrd_search_category().equals("게시글")) {
 			String brd_content = searchBean.getBrd_search_content();
 			
-			/*게시글 제목 검색*/
-			List<BoardBean> board_list_content = boardService.contentSearch(cr_key, brd_content);
+			/*게시글의 내용 검색*/
+			List<BoardBean> board_list_content = boardService.contentSearch(cr_key, brd_content, page);
 			model.addAttribute("board_list", board_list_content);
 			
 		}
@@ -82,10 +84,13 @@ public class BoardController {
 			String brd_title = searchBean.getBrd_search_content();
 			
 			/*게시글 제목 검색*/
-			List<BoardBean> board_list_total = boardService.totalSearch(cr_key, brd_content, user_name, brd_title);
+			List<BoardBean> board_list_total = boardService.totalSearch(cr_key, brd_content, user_name, brd_title, page);
 			model.addAttribute("board_list", board_list_total);
 			
 		}
+		
+		BoardPageBean boardPageBean = boardService.getContentCnt(cr_key, page);
+		model.addAttribute("boardPageBean", boardPageBean);
 		
 		return "board/detail";
 	}
@@ -93,7 +98,8 @@ public class BoardController {
 	/*전체글 보기 버튼 관련*/
 	@GetMapping("/allList")
 	public String allList(@RequestParam("cr_key") int cr_key, @RequestParam("cr_course") String cr_course,
-									@ModelAttribute("searchBean") BoardBean searchBean, Model model) {
+									@ModelAttribute("searchBean") BoardBean searchBean,
+									@RequestParam(value = "page", defaultValue = "1")  int page, Model model) {
 		
 		//게시판 카테고리 식별을 위한 키
 		model.addAttribute("cr_key", cr_key);
@@ -103,7 +109,7 @@ public class BoardController {
 		
 		if(forAllListbtn.getBrd_all_button().equals("전체글보기")) {
 			/*전체 게시글 목록 불러오기*/
-			List<BoardBean> board_list = boardService.getBoardList(cr_key);
+			List<BoardBean> board_list = boardService.getBoardList(cr_key, page);
 			model.addAttribute("board_list", board_list);
 		}
 		

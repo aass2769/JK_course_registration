@@ -3,6 +3,7 @@ package dao;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -16,15 +17,23 @@ public class BoardDao {
 	private BoardMapper boardMapper;
 	
 	//글 목록
-	public List<BoardBean> getBoardList(int cr_key){
-		List<BoardBean> board_list = boardMapper.getBoardList(cr_key);
+	public List<BoardBean> getBoardList(int cr_key, RowBounds rowBounds){
+		List<BoardBean> board_list = boardMapper.getBoardList(cr_key, rowBounds);
 		
 		return board_list;
+	}
+	
+	//게시판마다의 글 갯수
+	public int getContentCnt(int cr_key) {
+		
+		return boardMapper.getContentCnt(cr_key);
+		
 	}
 	
 	//글 작성
 	//return 타입이 없으니까 메서드를 그대로 호출해줌.
 	public void addBoard(BoardBean addBoardBean) {
+			
 		boardMapper.addBoard(addBoardBean);
 	}
 	
@@ -123,34 +132,34 @@ public class BoardDao {
 	}
 	
 	//작성자 이름으로 검색
-	public List<BoardBean> nameSearch(int cr_key, String user_name){
+	public List<BoardBean> nameSearch(int cr_key, String user_name, RowBounds rowBounds){
 		
-		List<BoardBean> board_list = boardMapper.nameSearch(cr_key, user_name);
+		List<BoardBean> board_list = boardMapper.nameSearch(cr_key, user_name, rowBounds);
 		
 		return board_list;
 	}
 	
 	//제목으로 검색
-	public List<BoardBean> titleSearch(@Param("cr_key") int cr_key, @Param("brd_title") String brd_title){
+	public List<BoardBean> titleSearch(@Param("cr_key") int cr_key, @Param("brd_title") String brd_title, RowBounds rowBounds){
 		
-		List<BoardBean> board_list = boardMapper.titleSearch(cr_key, brd_title);
+		List<BoardBean> board_list = boardMapper.titleSearch(cr_key, brd_title, rowBounds);
 		
 		return board_list;
 	}
 	
 	//게시글로 검색
-	public List<BoardBean> contentSearch(@Param("cr_key") int cr_key, @Param("brd_content") String brd_content){
+	public List<BoardBean> contentSearch(@Param("cr_key") int cr_key, @Param("brd_content") String brd_content, RowBounds rowBounds){
 		
-		List<BoardBean> board_list = boardMapper.contentSearch(cr_key, brd_content);
+		List<BoardBean> board_list = boardMapper.contentSearch(cr_key, brd_content, rowBounds);
 		
 		return board_list;
 	}
 	
 	//전체로 검색
 	public List<BoardBean> totalSearch(@Param("cr_key") int cr_key, @Param("brd_content") String brd_content, 
-			 													@Param("user_name") String user_name, @Param("brd_title") String brd_title){
+			 													@Param("user_name") String user_name, @Param("brd_title") String brd_title, RowBounds rowBounds){
 		
-		List<BoardBean> board_list = boardMapper.totalSearch(cr_key, brd_content, user_name, brd_title);
+		List<BoardBean> board_list = boardMapper.totalSearch(cr_key, brd_content, user_name, brd_title, rowBounds);
 		
 		return board_list;
 		

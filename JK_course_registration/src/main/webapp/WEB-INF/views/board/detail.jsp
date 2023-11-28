@@ -122,53 +122,36 @@
 			
 			<div class="d-none d-md-block">
 				<ul class="pagination justify-content-center">
-					<li class="page-item">
-						<a href="#" class="page-link">이전</a>
+					<c:choose>
+						<c:when test="${boardPageBean.prevPage <= 0}">
+							<li class="page-item disabled">
+								<a href="${root}board/detail?cr_key=${cr_key}&cr_course=${cr_course}&page=${boardPageBean.prevPage}" class="page-link">이전</a>
+							</li>
+						</c:when>
+						<c:otherwise>
+							<li class="page-item">
+								<a href="${root}board/detail?cr_key=${cr_key}&cr_course=${cr_course}&page=${boardPageBean.prevPage}" class="page-link">이전</a>
+							</li>
+						</c:otherwise>
+					</c:choose>
+					<c:forEach var = "idx" begin="${boardPageBean.min}" end="${boardPageBean.max}">
+						<li class="page-item">
+						<a href="${root}board/detail?cr_key=${cr_key}&cr_course=${cr_course}&page=${idx}" class="page-link">${idx}</a>
 					</li>
-					<li class="page-item">
-						<a href="#" class="page-link">1</a>
-					</li>
-					<li class="page-item">
-						<a href="#" class="page-link">2</a>
-					</li>
-					<li class="page-item">
-						<a href="#" class="page-link">3</a>
-					</li>
-					<li class="page-item">
-						<a href="#" class="page-link">4</a>
-					</li>
-					<li class="page-item">
-						<a href="#" class="page-link">5</a>
-					</li>
-					<li class="page-item">
-						<a href="#" class="page-link">6</a>
-					</li>
-					<li class="page-item">
-						<a href="#" class="page-link">7</a>
-					</li>
-					<li class="page-item">
-						<a href="#" class="page-link">8</a>
-					</li>
-					<li class="page-item">
-						<a href="#" class="page-link">9</a>
-					</li>
-					<li class="page-item">
-						<a href="#" class="page-link">10</a>
-					</li>
-					<li class="page-item">
-						<a href="#" class="page-link">다음</a>
-					</li>
-				</ul>
-			</div>
-			
-			<div class="d-block d-md-none">
-				<ul class="pagination justify-content-center">
-					<li class="page-item">
-						<a href="#" class="page-link">이전</a>
-					</li>
-					<li class="page-item">
-						<a href="#" class="page-link">다음</a>
-					</li>
+					</c:forEach>
+					
+					<c:choose>
+						<c:when test="${boardPageBean.max >= boardPageBean.pageCnt }">
+							<li class="page-item disabled">
+								<a href="#" class="page-link">다음</a>
+							</li>
+						</c:when>
+						<c:otherwise>
+							<li class="page-item">
+								<a href="${root}board/detail?cr_key=${cr_key}&cr_course=${cr_course}&page=${boardPageBean.nextPage}" class="page-link">다음</a>
+							</li>
+						</c:otherwise>
+					</c:choose>
 				</ul>
 			</div>
     
