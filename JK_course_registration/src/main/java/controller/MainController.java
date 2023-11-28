@@ -37,9 +37,7 @@ public class MainController {
 		ArrayList<List<BoardBean>> sub_list = new ArrayList<>();
 		for(int i=1; i<10; i=i+4) { //게시판의 cr_key가 각각 1, 5, 9
 			List<BoardBean> sub_list_in = mainService.getMainList(i);
-			System.out.println("i : " + i);
 			sub_list.add(sub_list_in);
-			System.out.println("몇개찍힐까");
 		}
 		model.addAttribute("sub_list", sub_list);
 		

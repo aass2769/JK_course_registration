@@ -119,7 +119,7 @@
 	<div class="container" style="margin-top: 100px">
 		<div class="row">
 		<c:forEach var="s_list"  items="${sub_list}" varStatus="idx">
-			<div class="col-lg-6" style="margin-top: 20px">
+			<div class="col-lg-4" style="margin-top: 20px">
 				<div class="card shadow">
 					<div class="card-body">
 						<h4 class="card-title">${courseList[idx.index].cr_course}</h4>
@@ -141,7 +141,7 @@
                                 </c:forEach>
                             </tbody>
 						</table> 
-						<a href="board_main.html" class="btn btn-primary" style="background-color: #1D202E; margin-left: 528px;">더보기</a>
+						<a href="board_main.html" class="btn btn-primary" style="background-color: #1D202E; ">더보기</a>
 										</div>
 								</div>
 							</div>
