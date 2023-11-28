@@ -134,12 +134,41 @@
 							</li>
 						</c:otherwise>
 					</c:choose>
-					<c:forEach var = "idx" begin="${boardPageBean.min}" end="${boardPageBean.max}">
-						<li class="page-item">
-						<a href="${root}board/detail?cr_key=${cr_key}&cr_course=${cr_course}&page=${idx}" class="page-link">${idx}</a>
-					</li>
-					</c:forEach>
-					
+					<c:if test="${total == '전체' }">
+						<c:forEach var = "idx" begin="${boardPageBean.min}" end="${boardPageBean.max}">
+								<li class="page-item">
+									<a href="${root}board/detail?cr_key=${cr_key}&cr_course=${cr_course}&page=${idx}&brd_search_category=글작성자&brd_search_content=${user_name}" class="page-link">${idx}</a>
+								</li>
+						</c:forEach>
+					</c:if>
+					<c:if test="${user_name != null && brd_title == null && brd_content == null}">
+						<c:forEach var = "idx" begin="${boardPageBean.min}" end="${boardPageBean.max}">
+								<li class="page-item">
+									<a href="${root}board/detail?cr_key=${cr_key}&cr_course=${cr_course}&page=${idx}&brd_search_category=글작성자&brd_search_content=${user_name}" class="page-link">${idx}</a>
+								</li>
+						</c:forEach>
+					</c:if>
+					<c:if test="${brd_title != null && user_name == null && brd_content == null}">
+						<c:forEach var = "idx" begin="${boardPageBean.min}" end="${boardPageBean.max}">
+								<li class="page-item">
+									<a href="${root}board/detail?cr_key=${cr_key}&cr_course=${cr_course}&page=${idx}&brd_search_category=제목&brd_search_content=${brd_title}" class="page-link">${idx}</a>
+								</li>
+						</c:forEach>
+					</c:if>
+					<c:if test="${brd_content != null && brd_title == null && user_name == null}">
+						<c:forEach var = "idx" begin="${boardPageBean.min}" end="${boardPageBean.max}">
+								<li class="page-item">
+									<a href="${root}board/detail?cr_key=${cr_key}&cr_course=${cr_course}&page=${idx}&brd_search_category=제목&brd_search_content=${brd_content}" class="page-link">${idx}</a>
+								</li>
+						</c:forEach>
+					</c:if>
+					<c:if test="${user_name != null && brd_title != null && brd_content != null}">
+						<c:forEach var = "idx" begin="${boardPageBean.min}" end="${boardPageBean.max}">
+								<li class="page-item">
+									<a href="${root}board/detail?cr_key=${cr_key}&cr_course=${cr_course}&page=${idx}&brd_search_category=전체&brd_search_content=${brd_content}" class="page-link">${idx}</a>
+								</li>
+						</c:forEach>
+					</c:if>
 					<c:choose>
 						<c:when test="${boardPageBean.max >= boardPageBean.pageCnt }">
 							<li class="page-item disabled">

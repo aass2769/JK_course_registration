@@ -24,16 +24,44 @@ public class BoardDao {
 	}
 	
 	//게시판마다의 글 갯수
-	public int getContentCnt(int cr_key) {
+	public int getTotalContentCnt(int cr_key) {
 		
-		return boardMapper.getContentCnt(cr_key);
+		return boardMapper.getTotalContentCnt(cr_key);
+		
+	}
+	
+	//게시판마다의 글 갯수
+	public int getUserContentCnt(int cr_key, String user_name) {
+		
+		return boardMapper.getUserContentCnt(cr_key, user_name);
+		
+	}
+	
+	//게시판마다의 글 갯수
+	public int getTitleContentCnt(int cr_key, String brd_title) {
+		
+		return boardMapper.getTitleContentCnt(cr_key, brd_title);
+		
+	}
+	
+	//게시판마다의 글 갯수
+	public int getContentCnt(int cr_key, String brd_content) {
+		
+		return boardMapper.getContentCnt(cr_key, brd_content);
+		
+	}
+	
+	//게시판마다의 글 갯수
+	public int getTotalSearchContentCnt(int cr_key, String user_name, String brd_content, String brd_title) {
+		
+		return boardMapper.getTotalSearchContentCnt(cr_key, user_name, brd_content, brd_title);
 		
 	}
 	
 	//글 작성
 	//return 타입이 없으니까 메서드를 그대로 호출해줌.
 	public void addBoard(BoardBean addBoardBean) {
-			
+		
 		boardMapper.addBoard(addBoardBean);
 	}
 	
