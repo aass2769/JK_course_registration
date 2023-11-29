@@ -40,7 +40,7 @@ public class BoardController {
 	@GetMapping("/detail")
 	public String detail(@RequestParam("cr_key") int cr_key, @RequestParam("cr_course") String cr_course,
 									@ModelAttribute("searchBean") BoardBean searchBean, Model model,
-									@RequestParam(value = "page", required = false, defaultValue = "1")  int page) {
+									@RequestParam(value = "page", required = false, defaultValue = "1") int page) {
 		
 		//게시판 카테고리 식별을 위한 키
 		model.addAttribute("cr_key", cr_key);
@@ -52,6 +52,7 @@ public class BoardController {
 		model.addAttribute("board_list", board_list);
 		
 		BoardPageBean boardPageBean = boardService.getTotalContentCnt(cr_key, page);
+		
 		model.addAttribute("boardPageBean", boardPageBean);
 		model.addAttribute("total", "전체");
 		}
@@ -64,6 +65,9 @@ public class BoardController {
 			model.addAttribute("board_list", board_list_name);
 			
 			BoardPageBean boardPageBean = boardService.getUserContentCnt(cr_key, page, user_name);
+			if(boardPageBean.getPageCnt() == 0) {
+				return "board/fail_search";
+			}
 			model.addAttribute("boardPageBean", boardPageBean);
 			model.addAttribute("user_name", user_name);
 		}
@@ -76,6 +80,9 @@ public class BoardController {
 			model.addAttribute("board_list", board_list_title);
 			
 			BoardPageBean boardPageBean = boardService.getTitleContentCnt(cr_key, page, brd_title);
+			if(boardPageBean.getPageCnt() == 0) {
+				return "board/fail_search";
+			}
 			model.addAttribute("boardPageBean", boardPageBean);
 			model.addAttribute("brd_title", brd_title);
 			
@@ -89,6 +96,9 @@ public class BoardController {
 			model.addAttribute("board_list", board_list_content);
 			
 			BoardPageBean boardPageBean = boardService.getContentCnt(cr_key, page, brd_content);
+			if(boardPageBean.getPageCnt() == 0) {
+				return "board/fail_search";
+			}
 			model.addAttribute("boardPageBean", boardPageBean);
 			model.addAttribute("brd_content", brd_content);
 			
@@ -104,32 +114,14 @@ public class BoardController {
 			model.addAttribute("board_list", board_list_total);
 			
 			BoardPageBean boardPageBean = boardService.getTotalSearchContentCnt(cr_key, page, user_name, brd_content, brd_title);
+			if(boardPageBean.getPageCnt() == 0) {
+				return "board/fail_search";
+			}
 			model.addAttribute("boardPageBean", boardPageBean);
 			model.addAttribute("user_name", user_name);
 			model.addAttribute("brd_content", brd_content);
 			model.addAttribute("brd_title", brd_title);
 			
-		}
-		
-		return "board/detail";
-	}
-	
-	/*전체글 보기 버튼 관련*/
-	@GetMapping("/allList")
-	public String allList(@RequestParam("cr_key") int cr_key, @RequestParam("cr_course") String cr_course,
-									@ModelAttribute("searchBean") BoardBean searchBean,
-									@RequestParam(value = "page", defaultValue = "1")  int page, Model model) {
-		
-		//게시판 카테고리 식별을 위한 키
-		model.addAttribute("cr_key", cr_key);
-		model.addAttribute("cr_course", cr_course);
-		
-		BoardBean forAllListbtn = new BoardBean();
-		
-		if(forAllListbtn.getBrd_all_button().equals("전체글보기")) {
-			/*전체 게시글 목록 불러오기*/
-			List<BoardBean> board_list = boardService.getBoardList(cr_key, page);
-			model.addAttribute("board_list", board_list);
 		}
 		
 		return "board/detail";

@@ -16,6 +16,7 @@ public class BoardPageBean {
 	private int currentPage;
 	
 	//contenCnt : 전체 글 갯수, currentPage : 현재 페이지 번호, contentPageCnt : 페이지당 글의 갯수, paginationCnt : 페이지네이션 버튼의 갯수
+	public BoardPageBean() {}
 	public BoardPageBean(int contentCnt, int currentPage, int contentPageCnt, int paginationCnt) {
 		
 		// 현재 페이지 번호
@@ -24,19 +25,20 @@ public class BoardPageBean {
 		//전체 페이지 갯수
 		pageCnt = contentCnt / contentPageCnt;
 		
-		if(contentCnt % contentPageCnt > 0) { //0으로 떨어지고 난 후, 다른 수가 나오면 그 수의 페이지는 안나오니까
+		if(contentCnt % contentPageCnt > 0) { 
 			pageCnt++;
 		}
 		
-		min = ((currentPage -1) / paginationCnt) * paginationCnt + 1;
-		max = min + paginationCnt - 1;
 		
-		if(max > pageCnt) {
+		min = ((currentPage -1) / paginationCnt) * paginationCnt + 1;
+		max = min + paginationCnt - 1;	
+		
+		if(max > pageCnt) { 
 			max = pageCnt;
 		}
 		
-		prevPage = min - 1;
-		nextPage = max + 1;
+		prevPage = min - 1;	
+		nextPage = max + 1;	
 		if(nextPage > pageCnt) {
 			nextPage = pageCnt;
 		}
@@ -61,6 +63,9 @@ public class BoardPageBean {
 	}
 	public int getCurrentPage() {
 		return currentPage;
+	}
+	public void setPageCnt(int pageCnt) {
+		this.pageCnt = pageCnt;
 	}
 	
 	
