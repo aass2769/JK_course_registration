@@ -52,14 +52,60 @@ public class BoardService {
 	}
 	
 	//게시판마다의 글 갯수
-		public BoardPageBean  getContentCnt(int cr_key, int currentPage) {
-			
-			int content_cnt = boardDao.getContentCnt(cr_key);
-			
-			BoardPageBean boardPageBean =  new BoardPageBean(content_cnt, currentPage, page_listcnt, page_paginationcnt);
-			
-			return boardPageBean;
-		}
+	public BoardPageBean getTotalContentCnt(int cr_key, int currentPage) {
+		
+		//전체 글 갯수
+		int content_cnt = boardDao.getTotalContentCnt(cr_key);
+		
+		BoardPageBean boardPageBean =  new BoardPageBean(content_cnt, currentPage, page_listcnt, page_paginationcnt);
+		
+		return boardPageBean;
+	}
+		
+	//게시판마다의 글 갯수
+	public BoardPageBean getUserContentCnt(int cr_key, int currentPage, String user_name) {
+		
+		//전체 글 갯수
+		int content_cnt = boardDao.getUserContentCnt(cr_key, user_name);
+		
+		BoardPageBean boardPageBean =  new BoardPageBean(content_cnt, currentPage, page_listcnt, page_paginationcnt);
+		
+		return boardPageBean;
+	}
+	
+	//게시판마다의 글 갯수
+	public BoardPageBean getTitleContentCnt(int cr_key, int currentPage, String brd_title) {
+		
+		//전체 글 갯수
+		int content_cnt = boardDao.getTitleContentCnt(cr_key, brd_title);
+		
+		BoardPageBean boardPageBean =  new BoardPageBean(content_cnt, currentPage, page_listcnt, page_paginationcnt);
+		
+		return boardPageBean;
+	}
+	
+	//게시판마다의 글 갯수
+	public BoardPageBean getContentCnt(int cr_key, int currentPage, String brd_content) {
+		
+		//전체 글 갯수
+		int content_cnt = boardDao.getContentCnt(cr_key, brd_content);
+		
+		BoardPageBean boardPageBean =  new BoardPageBean(content_cnt, currentPage, page_listcnt, page_paginationcnt);
+		
+		return boardPageBean;
+	}
+	
+	//게시판마다의 글 갯수
+	public BoardPageBean getTotalSearchContentCnt(int cr_key, int currentPage, String user_name, String brd_content, String brd_title) {
+		
+		//전체 글 갯수
+		int content_cnt = boardDao.getTotalSearchContentCnt(cr_key, user_name, brd_content, brd_title);
+		
+		BoardPageBean boardPageBean =  new BoardPageBean(content_cnt, currentPage, page_listcnt, page_paginationcnt);
+		
+		return boardPageBean;
+	}
+	
 	
 	//게시물 작성 코드
 	public void addBoard(BoardBean addBoardBean) {
