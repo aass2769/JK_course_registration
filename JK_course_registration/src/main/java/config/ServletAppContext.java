@@ -171,7 +171,7 @@ public class ServletAppContext implements WebMvcConfigurer {
 		
 		UserInterceptor userInterceptor = new UserInterceptor(userSession);
 		InterceptorRegistration reg2 = registry.addInterceptor(userInterceptor);
-		reg2.addPathPatterns("/course/registration", "/course/registration_check");
+		reg2.addPathPatterns("/course/registration", "/course/registration_check", "/board/detail");
 	}
 
 	// @PropertySource로 등록한 properties파일과 메시지로 등록한 properties파일이 충돌해서 오류가 나기 떄문에
