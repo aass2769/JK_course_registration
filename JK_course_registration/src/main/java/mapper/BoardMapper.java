@@ -28,38 +28,38 @@ public interface BoardMapper {
 					+ "ORDER BY A.BRD_KEY DESC")
 		List<BoardBean> getBoardList(int cr_key, RowBounds rowBounds);
 	
-	//게시판 마다의 글 갯수
+	//전체 페이지네이션
 	@Select("select count(*) from board_table where cr_key = #{cr_key}")
-	int getTotalContentCnt(int cr_key);
+	String getTotalContentCnt(int cr_key);
 	
-	//게시판 마다의 글 갯수
+	//글작성자로 검색하여 페이지네이션
 	@Select("SELECT SUM(count(*)) AS content_cnt "
 			+ "FROM board_table A "
 			+ "LEFT OUTER JOIN USER_TABLE B ON A.USER_KEY = B.USER_KEY "
 			+ "WHERE A.CR_KEY = #{cr_key} AND B.USER_NAME LIKE '%' || #{user_name} || '%' "
 			+ "GROUP BY A.BRD_KEY "
 			+ "ORDER BY A.BRD_KEY DESC")
-	int getUserContentCnt(@Param("cr_key")int cr_key, @Param("user_name")String user_name);
+	String getUserContentCnt(@Param("cr_key")int cr_key, @Param("user_name")String user_name);
 	
-	//게시판 마다의 글 갯수
+	//제목으로 검색하여 페이지네이션
 	@Select("SELECT SUM(count(*)) AS content_cnt "
 			+ "FROM board_table A "
 			+ "LEFT OUTER JOIN USER_TABLE B ON A.USER_KEY = B.USER_KEY "
 			+ "WHERE A.CR_KEY = #{cr_key} AND A.brd_title LIKE '%' || #{brd_title} || '%' "
 			+ "GROUP BY A.BRD_KEY "
 			+ "ORDER BY A.BRD_KEY DESC")
-	int getTitleContentCnt(@Param("cr_key")int cr_key, @Param("brd_title")String brd_title);
+	String getTitleContentCnt(@Param("cr_key")int cr_key, @Param("brd_title")String brd_title);
 	
-	//게시판 마다의 글 갯수
+	//게시글로 검색하여 페이지네이션
 	@Select("SELECT SUM(count(*)) AS content_cnt "
 			+ "FROM board_table A "
 			+ "LEFT OUTER JOIN USER_TABLE B ON A.USER_KEY = B.USER_KEY "
 			+ "WHERE A.CR_KEY = #{cr_key} AND A.brd_content LIKE '%' || #{brd_content} || '%' "
 			+ "GROUP BY A.BRD_KEY "
 			+ "ORDER BY A.BRD_KEY DESC")
-	int getContentCnt(@Param("cr_key")int cr_key, @Param("brd_content")String brd_content);
+	String getContentCnt(@Param("cr_key")int cr_key, @Param("brd_content")String brd_content);
 	
-	//게시판 마다의 글 갯수
+	//글작성자, 제목, 내용 전체로 검색하여 페이지네이션
 	@Select("SELECT SUM(count(*)) AS content_cnt "
 			+ "FROM board_table A "
 			+ "LEFT OUTER JOIN USER_TABLE B ON A.USER_KEY = B.USER_KEY "
@@ -68,7 +68,7 @@ public interface BoardMapper {
 			+ "A.brd_title LIKE '%' || #{brd_title} || '%' ) "
 			+ "GROUP BY A.BRD_KEY "
 			+ "ORDER BY A.BRD_KEY DESC")
-	int getTotalSearchContentCnt(@Param("cr_key") int cr_key, @Param("user_name") String user_name, @Param("brd_content") String brd_content, @Param("brd_title") String brd_title);
+	String getTotalSearchContentCnt(@Param("cr_key") int cr_key, @Param("user_name") String user_name, @Param("brd_content") String brd_content, @Param("brd_title") String brd_title);
 	
 	//글 작성 쿼리
 	//db에서 null을 허용으로 설정해놨어도 mybatis에서는 허용하지 않기때문에 jdbcType=VARCHAR같이 타입을 명시적으로 작성해줌.

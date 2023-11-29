@@ -60,7 +60,7 @@
         border-bottom: 3px solid #1D202E; /* thead의 선 색상 변경 */
         color: #1D202E; /* thead의 글자 색상 변경 */
     }
-   
+    
 </style>
 
 </head>
@@ -75,7 +75,7 @@
 		<div class="card-body">
 		<h4 class="card-title" >${cr_course}</h4>
                 <div class="search-container">
-                	<a href="${root}board/allList?cr_key=${cr_key}&cr_course=${cr_course}"><button class="btn btn-light"	style="background-color: #670AC5; color: #ffffff;">전체 글 보기</button></a>
+                	<a href="${root}board/detail?cr_key=${cr_key}&cr_course=${cr_course}"><button class="btn btn-light"	style="background-color: #670AC5; color: #ffffff;">전체 글 보기</button></a>
                 <%--검색 --%>
                 	<form:form class="form-inline" action="${root}board/detail" method="get" modelAttribute="searchBean">
                 	<div class="search-form">
@@ -135,10 +135,10 @@
 						</c:otherwise>
 					</c:choose>
 					<c:if test="${total == '전체' }">
-						<c:forEach var = "idx" begin="${boardPageBean.min}" end="${boardPageBean.max}">
-								<li class="page-item">
-									<a href="${root}board/detail?cr_key=${cr_key}&cr_course=${cr_course}&page=${idx}&brd_search_category=글작성자&brd_search_content=${user_name}" class="page-link">${idx}</a>
-								</li>
+						<c:forEach var="idx" begin="${boardPageBean.min}" end="${boardPageBean.max}">
+							<li class="page-item">
+								<a href="${root}board/detail?cr_key=${cr_key}&cr_course=${cr_course}&page=${idx}&brd_search_category=글작성자&brd_search_content=${user_name}" class="page-link">${idx}</a>
+							</li>
 						</c:forEach>
 					</c:if>
 					<c:if test="${user_name != null && brd_title == null && brd_content == null}">
@@ -183,7 +183,6 @@
 					</c:choose>
 				</ul>
 			</div>
-    
 			<div class="text-right">
 				<a href="${root}board/create" class="btn btn-primary"  style="background-color: #670AC5; margin-left: 1170px;">글쓰기</a>
 			</div>

@@ -26,9 +26,11 @@ public class BoardService {
 	@Value("${path.upload}") //@value를 이용하여 프로퍼티 파일의 path.upload를
 	private String path_upload; //path_upload라는 문자열 변수에 주입.
 	
+	//페이지에 보여줄 게시글의 수
 	@Value("${page.listcnt}")
 	private int page_listcnt;
 	
+	//페이지네이션 버튼의 수
 	@Value("${page.paginationcnt}")
 	private int page_paginationcnt;
 	
@@ -41,8 +43,9 @@ public class BoardService {
 	//게시물 목록 리스트 코드
 	public List<BoardBean> getBoardList(int cr_key, int page){
 		
-		//page_listcnt = 10
+		//page_listcnt
 		int start = (page - 1) * page_listcnt;
+		//1페이지 0~9개 2페이지 10~19개
 		RowBounds rowBounds = new RowBounds(start, page_listcnt);
 		//몇번째부터, 총 몇개
 		
@@ -51,59 +54,84 @@ public class BoardService {
 		return board_list;
 	}
 	
-	//게시판마다의 글 갯수
+	//전체 페이지네이션
 	public BoardPageBean getTotalContentCnt(int cr_key, int currentPage) {
 		
 		//전체 글 갯수
-		int content_cnt = boardDao.getTotalContentCnt(cr_key);
-		
-		BoardPageBean boardPageBean =  new BoardPageBean(content_cnt, currentPage, page_listcnt, page_paginationcnt);
-		
-		return boardPageBean;
+		String cnt = boardDao.getTotalContentCnt(cr_key);
+		if(cnt != null) {
+			int content_cnt = Integer.parseInt(cnt);
+			BoardPageBean boardPageBean =  new BoardPageBean(content_cnt, currentPage, page_listcnt, page_paginationcnt);
+			return boardPageBean;
+		}else {
+			BoardPageBean boardPageBean =  new BoardPageBean();
+			boardPageBean.setPageCnt(0);
+			return boardPageBean;
+		}
 	}
 		
-	//게시판마다의 글 갯수
+	//글작성자로 검색하여 페이지네이션
 	public BoardPageBean getUserContentCnt(int cr_key, int currentPage, String user_name) {
 		
 		//전체 글 갯수
-		int content_cnt = boardDao.getUserContentCnt(cr_key, user_name);
-		
-		BoardPageBean boardPageBean =  new BoardPageBean(content_cnt, currentPage, page_listcnt, page_paginationcnt);
-		
-		return boardPageBean;
+		String cnt = boardDao.getUserContentCnt(cr_key, user_name);
+		if(cnt != null) {
+			int content_cnt = Integer.parseInt(cnt);
+			BoardPageBean boardPageBean =  new BoardPageBean(content_cnt, currentPage, page_listcnt, page_paginationcnt);
+			return boardPageBean;
+		} else {
+			BoardPageBean boardPageBean =  new BoardPageBean();
+			boardPageBean.setPageCnt(0);
+			return boardPageBean;
+		}
 	}
 	
-	//게시판마다의 글 갯수
+	//제목으로 검색하여 페이지네이션
 	public BoardPageBean getTitleContentCnt(int cr_key, int currentPage, String brd_title) {
 		
 		//전체 글 갯수
-		int content_cnt = boardDao.getTitleContentCnt(cr_key, brd_title);
-		
-		BoardPageBean boardPageBean =  new BoardPageBean(content_cnt, currentPage, page_listcnt, page_paginationcnt);
-		
-		return boardPageBean;
+		String cnt = boardDao.getTitleContentCnt(cr_key, brd_title);
+		if(cnt != null) {
+			int content_cnt = Integer.parseInt(cnt);
+			BoardPageBean boardPageBean =  new BoardPageBean(content_cnt, currentPage, page_listcnt, page_paginationcnt);
+			return boardPageBean;
+		} else {
+			BoardPageBean boardPageBean =  new BoardPageBean();
+			boardPageBean.setPageCnt(0);
+			return boardPageBean;
+		}
 	}
 	
-	//게시판마다의 글 갯수
+	//게시글로 검색하여 페이지네이션
 	public BoardPageBean getContentCnt(int cr_key, int currentPage, String brd_content) {
 		
 		//전체 글 갯수
-		int content_cnt = boardDao.getContentCnt(cr_key, brd_content);
-		
-		BoardPageBean boardPageBean =  new BoardPageBean(content_cnt, currentPage, page_listcnt, page_paginationcnt);
-		
-		return boardPageBean;
+		String cnt = boardDao.getContentCnt(cr_key, brd_content);
+		if(cnt != null) {
+			int content_cnt = Integer.parseInt(cnt);
+			BoardPageBean boardPageBean =  new BoardPageBean(content_cnt, currentPage, page_listcnt, page_paginationcnt);
+			return boardPageBean;
+		} else {
+			BoardPageBean boardPageBean =  new BoardPageBean();
+			boardPageBean.setPageCnt(0);
+			return boardPageBean;
+		}
 	}
 	
-	//게시판마다의 글 갯수
+	//글작성자, 제목, 내용 전체로 검색하여 페이지네이션
 	public BoardPageBean getTotalSearchContentCnt(int cr_key, int currentPage, String user_name, String brd_content, String brd_title) {
 		
 		//전체 글 갯수
-		int content_cnt = boardDao.getTotalSearchContentCnt(cr_key, user_name, brd_content, brd_title);
-		
-		BoardPageBean boardPageBean =  new BoardPageBean(content_cnt, currentPage, page_listcnt, page_paginationcnt);
-		
-		return boardPageBean;
+		String cnt = boardDao.getTotalSearchContentCnt(cr_key, user_name, brd_content, brd_title);
+		if(cnt != null) {
+			int content_cnt = Integer.parseInt(cnt);
+			BoardPageBean boardPageBean =  new BoardPageBean(content_cnt, currentPage, page_listcnt, page_paginationcnt);
+			return boardPageBean;
+		} else {
+			BoardPageBean boardPageBean =  new BoardPageBean();
+			boardPageBean.setPageCnt(0);
+			return boardPageBean;
+		}
 	}
 	
 	

@@ -23,36 +23,36 @@ public class BoardDao {
 		return board_list;
 	}
 	
-	//게시판마다의 글 갯수
-	public int getTotalContentCnt(int cr_key) {
+	//전체 페이지네이션
+	public String getTotalContentCnt(int cr_key) {
 		
 		return boardMapper.getTotalContentCnt(cr_key);
 		
 	}
 	
-	//게시판마다의 글 갯수
-	public int getUserContentCnt(int cr_key, String user_name) {
+	//글작성자로 검색하여 페이지네이션
+	public String getUserContentCnt(int cr_key, String user_name) {
 		
 		return boardMapper.getUserContentCnt(cr_key, user_name);
 		
 	}
 	
-	//게시판마다의 글 갯수
-	public int getTitleContentCnt(int cr_key, String brd_title) {
+	//제목으로 검색하여 페이지네이션
+	public String getTitleContentCnt(int cr_key, String brd_title) {
 		
 		return boardMapper.getTitleContentCnt(cr_key, brd_title);
 		
 	}
 	
-	//게시판마다의 글 갯수
-	public int getContentCnt(int cr_key, String brd_content) {
+	//게시글로 검색하여 페이지네이션
+	public String getContentCnt(int cr_key, String brd_content) {
 		
 		return boardMapper.getContentCnt(cr_key, brd_content);
 		
 	}
 	
-	//게시판마다의 글 갯수
-	public int getTotalSearchContentCnt(int cr_key, String user_name, String brd_content, String brd_title) {
+	//글작성자, 제목, 내용 전체로 검색하여 페이지네이션
+	public String getTotalSearchContentCnt(int cr_key, String user_name, String brd_content, String brd_title) {
 		
 		return boardMapper.getTotalSearchContentCnt(cr_key, user_name, brd_content, brd_title);
 		
