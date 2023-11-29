@@ -34,8 +34,9 @@ public class BoardDao {
 	//return 타입이 없으니까 메서드를 그대로 호출해줌.
 	public void addBoard(BoardBean addBoardBean) {
 			
-		boardMapper.addBoard(addBoardBean);
+			boardMapper.addBoard(addBoardBean);
 	}
+	
 	
 	//cr_course 가져오기
 	public String selCourse(int cr_key) {
