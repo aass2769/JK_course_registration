@@ -14,7 +14,7 @@ import beans.BoardBean;
 public interface BoardMapper {
 
 	/*글 목록.*/
-	@Select("SELECT A.BRD_KEY, A.BRD_TITLE, C.USER_NAME, A.BRD_DATE, A.BRD_HIT,  "0
+	@Select("SELECT A.BRD_KEY, A.BRD_TITLE, C.USER_NAME, A.BRD_DATE, A.BRD_HIT,  "
 					+ "SUM(B.brd_likes_count) AS total_likes_count "
 					+ "FROM board_table A "
 					+ "LEFT OUTER JOIN  "
