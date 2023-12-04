@@ -2,6 +2,9 @@
 JK아카데미의 게시판, 수강신청 및 조회 등의 기능이 담긴 사이트.
 ## 📚프로젝트 소개
 과정별로 분류된 게시판을 통해 같은 과정을 수강하는 동기들과 소통하고, 각 과정별에 따른 과목에 대해 수강신청 및 조회할 수 있는 사이트입니다.
+## 👪멤버 소개
+- 정우민 - 진행 총괄 및 화면 담당(메인, 로그인 및 가입, 수강 신청 및 조회), 로그인 및 회원가입과 수강신청 및 조회 기능 구현<br>
+- 김혜미 - 화면 담당(메인, 게시판), 게시판 기능 구현
 ## 🗓프로젝트 타임라인
 #### ➡️프로젝트 정의 및 계획(23.11.07 ~ 23.11.09)
 - 구현 할 프로젝트 계획 및 조사<br>
@@ -23,10 +26,10 @@ JK아카데미의 게시판, 수강신청 및 조회 등의 기능이 담긴 사
 - 프로젝트 관련 서류 정리<br>
 - 깃 허브 정리
 ## ⚙개발 환경
-- <img src="https://img.shields.io/badge/windows 11-48B0F1?style=flat&logo=windows11&logoColor=white"/>
+- <img src="https://img.shields.io/badge/windows 10-48B0F1?style=flat&logo=windows11&logoColor=white"/>, <img src="https://img.shields.io/badge/windows 11-48B0F1?style=flat&logo=windows11&logoColor=white"/>
 - <img src="https://img.shields.io/badge/chrome-4285F4?style=flat&logo=googlechrome&logoColor=white"/>
-- <img src="https://img.shields.io/badge/JAVA 8-007396?style=flat&logo=Java&logoColor=white"/>
-- <img src="https://img.shields.io/badge/JDK 1.8.0-34567C?style=flat&logoColor=white"/>
+- <img src="https://img.shields.io/badge/JAVA 11-007396?style=flat&logo=Java&logoColor=white"/>
+- <img src="https://img.shields.io/badge/JDK 11-34567C?style=flat&logoColor=white"/>
 - Server : <img src="https://img.shields.io/badge/apache tomcat 9.0-F09D13?style=flat&logo=apachetomcat&logoColor=white"/>
 - IDE : <img src="https://img.shields.io/badge/eclipse-2C2255?style=flat&logo=eclipseide&logoColor=white"/>
 - Framework : <img src="https://img.shields.io/badge/Mybatis-000000?style=flat&logoColor=white"/>, <img src="https://img.shields.io/badge/Bootstrap5-512BD4?style=flat&logoColor=white"/>
