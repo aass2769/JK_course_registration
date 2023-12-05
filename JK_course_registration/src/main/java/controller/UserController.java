@@ -79,6 +79,25 @@ public class UserController {
 		}
 	}
 	
+	@GetMapping("/forget_pw")
+	public String forget_pw(@ModelAttribute("forgetUserBean") UserBean forgetUserBean) {
+		
+		return "user/forget_pw";
+	}
+	
+	@PostMapping("/forget_pw_pro")
+	public String forget_pw_pro(Model model, @Valid @ModelAttribute("forgetUserBean") UserBean forgetUserBean, BindingResult result) {
+		
+		if(result.hasErrors()) {
+			return "user/forget_pw";
+		}
+		
+		String password = userService.getPassword(forgetUserBean);
+		model.addAttribute("password", password);
+		
+		return "user/forget_pw";
+	}
+	
 	@GetMapping("/modify")
 	public String modify_user(@ModelAttribute("modifyUserBean") UserBean modifyUserBean) {
 		

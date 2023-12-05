@@ -37,4 +37,10 @@ public class UserDao {
 		System.out.println("dao");
 		userMapper.setModifyUserInfo(modifyUserBean);
 	}
+	
+	//비밀번호찾기 메서드
+	public String getPassword(UserBean forgetUserBean) {
+		String password = userMapper.getPassword(forgetUserBean);
+		return password;
+	}
 }

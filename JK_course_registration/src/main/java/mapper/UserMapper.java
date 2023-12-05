@@ -37,4 +37,9 @@ public interface UserMapper {
 			+ "WHERE user_key = #{user_key} AND user_id = #{user_id}")
 	void setModifyUserInfo(UserBean modifyUserBean);
 	
+	//비밀번호찾기 메서드
+	@Select("SELECT USER_PW FROM user_table "
+			+ "WHERE USER_ID = #{user_id} AND USER_NAME = #{user_name}")
+	String getPassword(UserBean forgetUserBean);
+	
 }

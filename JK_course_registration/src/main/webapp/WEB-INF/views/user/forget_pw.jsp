@@ -21,8 +21,6 @@
 <link
 	href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
 	rel="stylesheet">
-
-
 </head>
 <body>
 	<!-- 상단 메뉴 부분 -->
@@ -44,34 +42,32 @@
 					<!--accounts_forms-->
 					<div class="accounts_forms  w-100 h-100" id="login">
 						<div class="title  mt-4 p-4 w-100">
-							<h1>수강신청 사이트</h1>
-							<p class="mt-3">COURSE REGISTRATION</p>
-							<c:if test="${fail == true }">
-								<p style="color:red">아이디 또는 비밀번호를 잘못입력했습니다.</p>
-							</c:if>
+							<h1>비밀번호 찾기</h1>
+							<p class="mt-3">Forgot Password</p>
 						</div>
 						<!--title-->
-						<form:form action="${root }user/login_pro" method="post" modelAttribute="loginUserBean" class="form  w-100 p-4" id="form">
+						<form:form action="${root }user/forget_pw_pro" method="post" modelAttribute="forgetUserBean" class="form  w-100 p-4" id="form">
 							<div class="form-group">
 								<form:label path="user_id">ID</form:label>
 								<form:input path="user_id" class="form-control"/>
 								<form:errors path="user_id" style="color:red"/>
 							</div>
 							<div class="form-group">
-								<form:label path="user_pw">Password</form:label>
-								 <i class="fa fa-eye-slash" id="eye_icon_login"></i> 
-								<form:password path="user_pw" class="form-control"/>
-								<form:errors path="user_pw" style="color:red"/>
+								<form:label path="user_name">Name</form:label>
+								<form:input path="user_name" class="form-control"/>
+								<form:errors path="user_name" style="color:red"/>
 							</div>
 							<div class="form-group mb-0">
-								<form:button class="btn btn-primary register_btn w-100">Sign In</form:button>
+								<form:button class="btn btn-primary register_btn w-100">비밀번호 찾기</form:button>
 							</div>
+							<c:if test="${password != null }">
+								<p style="margin-top:20px; margin-bottom:0px;">비밀번호는 <span style="color:#670AC5; font-weight:bold;">${password}</span> 입니다.</p>
+							</c:if>
 						</form:form>
-						
 						<div
 							class="already_member_box d-flex justify-content-between px-4">
-							<span class="text-center" id="to_signup"><a href="${root }/user/join">Create an account?</a></span> 
-							<span class="text-center"><a href="${root }/user/forget_pw">Forgot password</a></span>
+							<span class="text-center" id="to_signup"><a href="${root }/user/login">Go Login</a></span> 
+							<span class="text-center"><a href="${root }/user/join">Go Join</a></span>
 						</div>
 					</div>
 				</div>

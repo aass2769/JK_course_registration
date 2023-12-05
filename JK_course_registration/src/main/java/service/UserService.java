@@ -66,4 +66,10 @@ public class UserService {
 		System.out.println(userSession.getUser_key());
 		userDao.setModifyUserInfo(modifyUserBean);
 	}
+	
+	//비밀번호찾기 메서드
+	public String getPassword(UserBean forgetUserBean) {
+		String password = userDao.getPassword(forgetUserBean);
+		return password;
+	}
 }
