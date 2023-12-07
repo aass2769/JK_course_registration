@@ -16,16 +16,27 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
 </head>
 <body>
-<!-- 상단 메뉴 부분 -->
-<c:import url="/WEB-INF/views/include/top_menu.jsp"/>
+	<!-- 상단 메뉴 부분 -->
+	<c:import url="/WEB-INF/views/include/top_menu.jsp" />
 
-<div class="container" style="margin-top:100px">
-	<div class="row">
-		<div class="col-sm-3"></div>
-		<div class="col-sm-6">
-			<div class="card shadow">
-				<div class="card-body">
-					<form:form action="${root }user/modify_pro" method="post" modelAttribute="modifyUserBean">
+	<section class="login_section">
+		<div class="container outer_container accounts_container">
+			<div class="row h-100" style="margin-top: 70px;">
+				<div
+					class="col col-sm-12 col-md-12 col-lg-8 m-0 p-0 w-100 h-100 accounts_col">
+					<div class="accounts_image w-100 h-100">
+						<img src="${root}image/loginlogo.jpg" width="755" height="505" />
+					</div>
+					<!--accounts_image-->
+				</div>
+				<!--account_col-->
+				<div class="col col-sm-12 col-md-12 col-lg-4 m-0 p-0 accounts_col">
+					<div class="accounts_forms signup_form w-100 h-100" id="signup">
+						<div class="title mt-4 p-4 w-100" style="padding-top: 0 !important; padding-bottom: 0 !important;">
+							<h1>Sign Up</h1>
+						</div>
+						<!--title-->
+						<form:form action="${root }user/modify_pro" method="post" modelAttribute="modifyUserBean" class="form w-100 p-4" style="padding-top: 0 !important; padding-bottom: 0 !important;">
 						<div class="form-group">
 							<form:label path="user_name">Name</form:label>
 							<form:input path="user_name" class="form-control" readonly="true"/>
@@ -46,18 +57,17 @@
 						</div>
 						<div class="form-group">
 							<div class="text-right">
-								<form:button class="btn btn-primary">Modify Info</form:button>
+								<form:button class="btn btn-primary register_btn w-100">수정</form:button>
 							</div>
 						</div>
-					</form:form>					
+					</form:form>
+					</div>
 				</div>
 			</div>
 		</div>
-		<div class="col-sm-3"></div>
-	</div>
-</div>
+	</section>
 
-<!-- 하단 정보 부분 -->
-<c:import url="/WEB-INF/views/include/bottom_info.jsp"/>
+		<!-- 하단 정보 부분 -->
+	<c:import url="/WEB-INF/views/include/bottom_info.jsp" />
 </body>
 </html>

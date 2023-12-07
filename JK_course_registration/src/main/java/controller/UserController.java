@@ -92,9 +92,13 @@ public class UserController {
 			return "user/forget_pw";
 		}
 		
+		//비밀번호 찾기 메서드
 		String password = userService.getPassword(forgetUserBean);
 		model.addAttribute("password", password);
-		
+		if(password == null) {
+			return "user/forget_pw_fail";
+		}
+				
 		return "user/forget_pw";
 	}
 	
