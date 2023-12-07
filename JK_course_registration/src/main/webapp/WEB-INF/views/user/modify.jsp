@@ -33,7 +33,7 @@
 				<div class="col col-sm-12 col-md-12 col-lg-4 m-0 p-0 accounts_col">
 					<div class="accounts_forms signup_form w-100 h-100" id="signup">
 						<div class="title mt-4 p-4 w-100" style="padding-top: 0 !important; padding-bottom: 0 !important;">
-							<h1>Sign Up</h1>
+							<h1>정보 수정</h1>
 						</div>
 						<!--title-->
 						<form:form action="${root }user/modify_pro" method="post" modelAttribute="modifyUserBean" class="form w-100 p-4" style="padding-top: 0 !important; padding-bottom: 0 !important;">
