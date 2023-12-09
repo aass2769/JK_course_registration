@@ -185,7 +185,7 @@ function submitForm(brd_ct_key, brd_ct_content) {
 			<hr>
 				<c:if test="${readBoard.brd_file != null}">
 					<div class="form-group">
-					<img src="${root}upload/${readBoard.brd_file}" width="20%" height="20%"/>
+					<img src="${root}upload/${readBoard.brd_file}" width="300px" height="300px"/>
 					</div>
 				</c:if>
 			<p>${readBoard.brd_content}</p>
