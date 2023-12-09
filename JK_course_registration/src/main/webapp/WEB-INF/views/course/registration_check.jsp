@@ -65,7 +65,7 @@ function subjectChange() {
 	
 	<section class="py-5 text-center container ">
 	    <div class="row py-lg-5">
-		<h1 class="text-start registration_h2" style="border-bottom:2px solid #670AC5;">수강신청조회</h1>
+		<h1 class="text-start registration_h2" style="border-bottom:2px solid #670AC5;">수강신청 내역 조회</h1>
 		<div class="col-lg-12 col-md-8 mx-auto" style="margin-top:15px;">
 			<div class="card shadow">
 				<div class="card-body">

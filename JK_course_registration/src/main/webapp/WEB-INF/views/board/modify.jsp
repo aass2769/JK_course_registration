@@ -51,7 +51,7 @@
 							<div class="text-right">
 								<form:hidden path="brd_key"/>
 								<form:button class="btn btn-primary">수정완료</form:button>
-								<a href="${root}board/read" class="btn btn-info">취소</a>
+								<a href="${root}board/read?brd_key=${editBoardBean.brd_key}" class="btn btn-info">취소</a>
 							</div>
 						</div>
 					</form:form>

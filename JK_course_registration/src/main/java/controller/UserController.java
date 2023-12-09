@@ -113,13 +113,15 @@ public class UserController {
 	
 	@PostMapping("/modify_pro")
 	public String modify_pro(@Valid @ModelAttribute("modifyUserBean") UserBean modifyUserBean,
-							BindingResult result) {
+							BindingResult result, HttpSession session) {
 		
 		if(result.hasErrors()) {
 			return "user/modify"; 
 		}
 		 
 		userService.setModifyUserInfo(modifyUserBean);
+		//세션을 종료(무효)시키는 메서드
+		session.invalidate();
 		
 		return "user/modify_success";
 	}
