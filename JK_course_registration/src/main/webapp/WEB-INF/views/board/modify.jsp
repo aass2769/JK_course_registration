@@ -25,14 +25,14 @@
 		<div class="col-sm-6">
 			<div class="card shadow">
 				<div class="card-body">
-				<form:form action="${root}board/modify_pro" method="post" modelAttribute="editBoardBean">
+				<form:form action="${root}board/modify_pro" method="post" modelAttribute="editBoardBean" enctype="multipart/form-data">
 						<div class="form-group">
 							<form:label path="user_name">작성자</form:label>
-							<form:input path="user_name"  class="form-control" disabled="disabled"/>
+							<form:input path="user_name"  class="form-control" readonly="true"/>
 						</div>
 						<div class="form-group">
 							<form:label path="brd_date">작성 날짜</form:label>
-							<form:input path="brd_date" class="form-control" disabled="disabled"/>
+							<form:input path="brd_date" class="form-control" readonly="true"/>
 						</div>
 						<div class="form-group">
 							<form:label path="brd_title">제목</form:label>
@@ -44,14 +44,17 @@
 						</div>
 						<div class="form-group">
 							<form:label path="brd_file">첨부 이미지</form:label>
-							<img src="image/logo.png" width="100%"/>	
-							<form:input path="brd_file" class="form-control" accept="image/*"/>
+							<c:if test="${editBoardBean.brd_file != null }">
+								<img src="${root }upload/${editBoardBean.brd_file}" width="100%"/>
+								<form:hidden path="brd_file"/>
+							</c:if>
+							<form:input path="upload_File" type="file" class="form-control" accept="image/*"/>
 						</div>
 						<div class="form-group">
 							<div class="text-right">
 								<form:hidden path="brd_key"/>
-								<form:button class="btn btn-primary">수정완료</form:button>
-								<a href="${root}board/read?brd_key=${editBoardBean.brd_key}" class="btn btn-info">취소</a>
+								<form:button class="btn btn-primary" style="background-color: #670AC5;">수정완료</form:button>
+								<a href="${root}board/read?brd_key=${editBoardBean.brd_key}" class="btn btn-info" style="background-color: #1D202E;">취소</a>
 							</div>
 						</div>
 					</form:form>

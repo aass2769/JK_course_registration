@@ -141,7 +141,7 @@
                                 </c:forEach>
                             </tbody>
 						</table> 
-						<a href="board_main.html" class="btn btn-primary" style="background-color: #1D202E; ">더보기</a>
+						<a href="${root }board/detail?cr_key=${duplicateList[idx.index].cr_key}&cr_course=${duplicateList[idx.index].cr_course}" class="btn btn-primary" style="background-color: #1D202E; ">더보기</a>
 										</div>
 								</div>
 							</div>

@@ -99,12 +99,16 @@ public interface BoardMapper {
 	public void addHit(int brd_key);
 	
 	/*글 수정 쿼리*/
-	@Update("update board_table set brd_title = #{brd_title}, brd_content = #{brd_content} where brd_key = #{brd_key}")
+	@Update("update board_table set brd_title = #{brd_title}, brd_content = #{brd_content}, BRD_FILE = #{brd_file, jdbcType=VARCHAR} where brd_key = #{brd_key}")
 	public void editBoard(BoardBean editBoardBean);
 	
 	/*글 삭제 쿼리*/
 	@Delete("delete from board_table where brd_key = #{brd_key}")
 	public void delBoard(int brd_key);
+	
+	/*댓글 전체 삭제 쿼리(게시글 삭제 시)*/
+	@Delete("delete from board_comment_table where brd_key = #{brd_key}")
+	public void delAllCmt(int brd_key);
 	
 	/*좋아요가 있을시의 좋아요 삭제 쿼리*/
 	@Delete("delete from board_like_table where brd_key = #{brd_key}")

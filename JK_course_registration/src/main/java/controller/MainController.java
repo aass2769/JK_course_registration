@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import beans.BoardBean;
 import beans.CourseBean;
-import service.BoardService;
 import service.CourseService;
 import service.MainService;
+import service.TopService;
 
 @Controller
 public class MainController {
@@ -22,6 +22,9 @@ public class MainController {
 	
 	@Autowired
 	private CourseService courseService;
+	
+	@Autowired
+	private TopService topService;
 	
 	@GetMapping("/main")
 	public String main(Model model) {
@@ -43,6 +46,9 @@ public class MainController {
 		
 		List<CourseBean> subjectsList = courseService.getSubjectCategory();
 		model.addAttribute("subjectsList", subjectsList);
+		
+		List<CourseBean> duplicateList = topService.courseList();
+		model.addAttribute("duplicateList", duplicateList);
 		
 		return "main";
 	}

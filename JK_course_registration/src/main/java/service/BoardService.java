@@ -177,12 +177,26 @@ public class BoardService {
 	
 	//게시글 수정 코드
 	public void editBoard(BoardBean editBoardBean) {
+		
+		//파일업로드
+		MultipartFile upload_file = editBoardBean.getUpload_File();
+		
+		if(upload_file.getSize() > 0) {
+			//파일업로드 한거 저장하는 메서드인 saveUploadFile메서드를 호출함.
+			String file_name = saveUploadFile(upload_file);
+			editBoardBean.setBrd_file(file_name);
+		}
 		boardDao.editBoard(editBoardBean);
 	}
 	
 	//게시글 삭제 코드
 	public void delBoard(int brd_key) {
 		boardDao.delBoard(brd_key);
+	}
+	
+	//댓글 전체 삭제(게시글 삭제 시)
+	public void delAllCmt(int brd_key) {
+		boardDao.delAllCmt(brd_key);
 	}
 	
 	//좋아요가 있을 시, 게시글 삭제 코드
@@ -288,7 +302,7 @@ public class BoardService {
 		
 		boardDao.deleteComment(brd_ct_key);
 		
-		}
+	}
 	
 	//작성자 이름으로 검색
 	public List<BoardBean> nameSearch(int cr_key, String user_name, int page){

@@ -95,6 +95,11 @@ public class BoardDao {
 		boardMapper.delBoard(brd_key);
 	}
 	
+	//댓글 전체 삭제(게시글 삭제 시)
+	public void delAllCmt(int brd_key) {
+		boardMapper.delAllCmt(brd_key);
+	}
+	
 	//좋아요가 있을 시 글 삭제
 	public void delBoardLike(int brd_key) {
 		boardMapper.delBoardLike(brd_key);

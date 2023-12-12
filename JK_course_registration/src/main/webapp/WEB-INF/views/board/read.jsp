@@ -22,25 +22,31 @@ function changeToInput(loopId, commentId, buttonId, brdId) {
     // <p> 태그 요소 가져오기
     var paragraph = document.getElementById(commentId);
     
-    var  brd = document.getElementById(brdId);
+    var brd = document.getElementById(brdId);
     var brd_ct_key = brd.value;
     
     // 새로운 <input> 태그 생성
-    var inputElement = document.createElement("input");
+    var inputElement = document.createElement("textarea");
 
     // 기존 <p> 태그의 속성 복사
     inputElement.setAttribute("id", paragraph.id);
-    inputElement.setAttribute("value", paragraph.textContent);
+    inputElement.textContent = paragraph.textContent; // <textarea>의 내용을 기존 <p>의 텍스트 내용으로 설정
 
-    // <p> 태그를 <input> 태그로 교체
+    // <p> 태그를 <textarea> 태그로 교체
     paragraph.parentNode.replaceChild(inputElement, paragraph);
 
+    // <textarea>의 스타일 조정 예시
+    inputElement.style.width = "800px"; // 너비 조정
+    inputElement.style.height = "100px"; // 높이 조정
+    inputElement.style.border = "1px solid #ccc"; // 테두리 스타일 조정
+    inputElement.style.resize = "none"; // 크기 조정 비활성화
+    
     // 수정 버튼을 숨김
     document.getElementById(buttonId).style.display = "none";
 
     // 제출 버튼 생성
     var submitButton = document.createElement("button");
-    submitButton.textContent = "제출";
+    submitButton.textContent = "수정";
     submitButton.onclick = function() {
     	var brd_ct_content = inputElement.value;
         // 여기에서 폼 제출을 처리하는 함수를 호출하거나 필요한 작업을 수행
@@ -238,12 +244,25 @@ function submitForm(brd_ct_key, brd_ct_content) {
 			<div class="comment-header">
 				<h3>댓글 ${totalComment}</h3>
 				<div class="sort-buttons">
-					<a href="${root}board/read?brd_key=${readBoard.brd_key}&cr_key=${readBoard.cr_key}&cr_course=${readBoard.cr_course}&user_key=${user_key}">
-						<button class="sort-button active" id="sort-oldest">등록순</button>
-					</a>
-					<a href="${root}board/read?brd_key=${readBoard.brd_key}&cr_key=${readBoard.cr_key}&cr_course=${readBoard.cr_course}&user_key=${user_key}&sort=최신순">
-						<button class="sort-button" id="sort-newest">최신순</button>
-					</a>
+					<c:choose>
+						<c:when test="${sort == '등록순' }">
+							<a href="${root}board/read?brd_key=${readBoard.brd_key}&cr_key=${readBoard.cr_key}&cr_course=${readBoard.cr_course}&user_key=${user_key}">
+								<button class="sort-button active" id="sort-oldest">등록순</button>
+							</a>
+							<a href="${root}board/read?brd_key=${readBoard.brd_key}&cr_key=${readBoard.cr_key}&cr_course=${readBoard.cr_course}&user_key=${user_key}&sort=최신순">
+								<button class="sort-button" id="sort-newest">최신순</button>
+							</a>
+						</c:when>
+						<c:otherwise>
+							<a href="${root}board/read?brd_key=${readBoard.brd_key}&cr_key=${readBoard.cr_key}&cr_course=${readBoard.cr_course}&user_key=${user_key}">
+								<button class="sort-button" id="sort-oldest">등록순</button>
+							</a>
+							<a href="${root}board/read?brd_key=${readBoard.brd_key}&cr_key=${readBoard.cr_key}&cr_course=${readBoard.cr_course}&user_key=${user_key}&sort=최신순">
+								<button class="sort-button active" id="sort-newest">최신순</button>
+							</a>
+						</c:otherwise>
+					</c:choose>
+					
 				</div>
 			</div>
 			<%-- 댓글  수정과 삭제--%>

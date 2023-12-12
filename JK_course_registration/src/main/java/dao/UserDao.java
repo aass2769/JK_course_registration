@@ -34,7 +34,6 @@ public class UserDao {
 	
 	//정보수정하는 메서드
 	public void setModifyUserInfo(UserBean modifyUserBean) {
-		System.out.println("dao");
 		userMapper.setModifyUserInfo(modifyUserBean);
 	}
 	

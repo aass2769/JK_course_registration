@@ -105,7 +105,7 @@ function subjectChange() {
 		          <thead>
 		            <tr>
 		              <th class="course_th" scope="col">과정분류</th>
-		              <th class="course_th" scope="col">과정명</th>
+		              <th class="course_th" scope="col">과목명</th>
 		              <th class="course_th" scope="col">교육기간</th>
 		              <th class="course_th" scope="col">인원</th>
 		              <th class="course_th" scope="col">수강신청</th>

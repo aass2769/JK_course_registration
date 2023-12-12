@@ -44,8 +44,7 @@
 					<!--accounts_forms-->
 					<div class="accounts_forms  w-100 h-100" id="login">
 						<div class="title  mt-4 p-4 w-100">
-							<h1>수강신청 사이트</h1>
-							<p class="mt-3">COURSE REGISTRATION</p>
+							<h1>Login</h1>
 							<c:if test="${fail == true }">
 								<p style="color:red">아이디 또는 비밀번호를 잘못입력했습니다.</p>
 							</c:if>
@@ -59,7 +58,6 @@
 							</div>
 							<div class="form-group">
 								<form:label path="user_pw">Password</form:label>
-								 <i class="fa fa-eye-slash" id="eye_icon_login"></i> 
 								<form:password path="user_pw" class="form-control"/>
 								<form:errors path="user_pw" style="color:red"/>
 							</div>

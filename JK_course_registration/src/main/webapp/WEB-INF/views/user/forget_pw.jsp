@@ -42,8 +42,7 @@
 					<!--accounts_forms-->
 					<div class="accounts_forms  w-100 h-100" id="login">
 						<div class="title  mt-4 p-4 w-100">
-							<h1>비밀번호 찾기</h1>
-							<p class="mt-3">Forgot Password</p>
+							<h1>Find a password</h1>
 						</div>
 						<!--title-->
 						<form:form action="${root }user/forget_pw_pro" method="post" modelAttribute="forgetUserBean" class="form  w-100 p-4" id="form">
@@ -58,7 +57,7 @@
 								<form:errors path="user_name" style="color:red"/>
 							</div>
 							<div class="form-group mb-0">
-								<form:button class="btn btn-primary register_btn w-100">비밀번호 찾기</form:button>
+								<form:button class="btn btn-primary register_btn w-100">Find a password</form:button>
 							</div>
 							<c:if test="${password != null }">
 								<p style="margin-top:20px; margin-bottom:0px;">비밀번호는 <span style="color:#670AC5; font-weight:bold;">${password}</span> 입니다.</p>

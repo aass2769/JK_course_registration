@@ -61,9 +61,7 @@ public class UserService {
 	
 	//정보수정하는 메서드
 	public void setModifyUserInfo(UserBean modifyUserBean) {
-		System.out.println("service");
 		modifyUserBean.setUser_key(userSession.getUser_key());
-		System.out.println(userSession.getUser_key());
 		userDao.setModifyUserInfo(modifyUserBean);
 	}
 	

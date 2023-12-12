@@ -17,8 +17,6 @@ public class RestBoardController {
 	@GetMapping("/board/modifyComment/{brd_ct_key}/{brd_ct_content}")
 	public String modifyComment(@PathVariable int brd_ct_key, @PathVariable String brd_ct_content) {
 		
-		System.out.println(brd_ct_key + "key");
-		System.out.println(brd_ct_content + "content");
 		BoardBean modifyCommentBean = new BoardBean();
 		modifyCommentBean.setBrd_ct_key(brd_ct_key);
 		modifyCommentBean.setBRD_CT_CONTENT(brd_ct_content);

@@ -14,11 +14,22 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
   <style>
-
-		.create_form{
-			max-width: 800px;
-			margin-left: 400px;
-		}
+		.create_form {
+	      display: flex;
+	      justify-content: center;
+	      margin-top :"20px";
+	      height: 700px;
+	      margin: 0;
+	    }
+	
+	    .centered-div {
+	      width: 300px; /* 원하는 너비 지정 */
+	      height: 200px; /* 원하는 높이 지정 */
+	      border: 1px solid #ccc;
+	      text-align: center;
+	      padding: 20px;
+	    }
+		
    
         .divider {
             margin: 20px 0;
@@ -44,12 +55,9 @@
 	<!-- 상단 메뉴 부분 -->
 	<c:import url="/WEB-INF/views/include/top_menu.jsp" />
 	<div class="create_form">
-        <div class="form-header">
-            <form class="form-inline">
-            	<h2>게시판 글쓰기</h2>
-            	</form>
-        </div>
+        
         <form:form class="form-inline" method="post" action="${root}board/create_pro" modelAttribute="addBoardBean" enctype="multipart/form-data">
+        <h2>게시판 글쓰기</h2>
        <form:button class="btn btn-primary"  style="background-color: #670AC5; margin-left: 740px;">등록</form:button>
         <div class="divider"></div>
         <div class="form-group">

@@ -15,15 +15,11 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 
 <style>
-	.pagination .page-link {
-        color: white;
-        background-color: #1D202E; /* 페이지네이션 배경색을 #670AC5로 설정 */
-        border: none; /* 테두리 없애기 */
-    }
-
-    .pagination .page-item.active .page-link {
-        background-color: #670AC5;
+	
+    .pagination .page-item .page-link {
         border: none;
+        background-color:#1D202E;
+        color:white; 
     }
     
 	td a {
@@ -134,39 +130,89 @@
 							</li>
 						</c:otherwise>
 					</c:choose>
+					<!-- 모두 null일때 -->
 					<c:if test="${total == '전체' }">
 						<c:forEach var="idx" begin="${boardPageBean.min}" end="${boardPageBean.max}">
-							<li class="page-item">
-								<a href="${root}board/detail?cr_key=${cr_key}&cr_course=${cr_course}&page=${idx}&brd_search_category=글작성자&brd_search_content=${user_name}" class="page-link">${idx}</a>
-							</li>
+							<c:choose>
+								<c:when test="${idx == boardPageBean.currentPage }">
+									<li class="page-item active">
+										<a href="${root}board/detail?cr_key=${cr_key}&cr_course=${cr_course}&page=${idx}" class="page-link" style="background-color:white; color:#1D202E;">${idx}</a>
+									</li>
+								</c:when>
+								<c:otherwise>
+									<li class="page-item">
+										<a href="${root}board/detail?cr_key=${cr_key}&cr_course=${cr_course}&page=${idx}" class="page-link">${idx}</a>
+									</li>
+								</c:otherwise>					
+							</c:choose>
 						</c:forEach>
 					</c:if>
+					<!-- 글 작성자 검색 -->
 					<c:if test="${user_name != null && brd_title == null && brd_content == null}">
-						<c:forEach var = "idx" begin="${boardPageBean.min}" end="${boardPageBean.max}">
-								<li class="page-item">
-									<a href="${root}board/detail?cr_key=${cr_key}&cr_course=${cr_course}&page=${idx}&brd_search_category=글작성자&brd_search_content=${user_name}" class="page-link">${idx}</a>
-								</li>
+						<c:forEach var="idx" begin="${boardPageBean.min}" end="${boardPageBean.max}">
+							<c:choose>
+								<c:when test="${idx == boardPageBean.currentPage }">
+									<li class="page-item active">
+										<a href="${root}board/detail?cr_key=${cr_key}&cr_course=${cr_course}&page=${idx}&brd_search_category=글작성자&brd_search_content=${user_name}" class="page-link" style="background-color:white; color:#1D202E;">${idx}</a>
+									</li>
+								</c:when>
+								<c:otherwise>
+									<li class="page-item">
+										<a href="${root}board/detail?cr_key=${cr_key}&cr_course=${cr_course}&page=${idx}&brd_search_category=글작성자&brd_search_content=${user_name}" class="page-link">${idx}</a>
+									</li>
+								</c:otherwise>					
+							</c:choose>
 						</c:forEach>
 					</c:if>
+					<!-- 글 제목 검색 -->
 					<c:if test="${brd_title != null && user_name == null && brd_content == null}">
-						<c:forEach var = "idx" begin="${boardPageBean.min}" end="${boardPageBean.max}">
-								<li class="page-item">
-									<a href="${root}board/detail?cr_key=${cr_key}&cr_course=${cr_course}&page=${idx}&brd_search_category=제목&brd_search_content=${brd_title}" class="page-link">${idx}</a>
-								</li>
+						<c:forEach var="idx" begin="${boardPageBean.min}" end="${boardPageBean.max}">
+							<c:choose>
+								<c:when test="${idx == boardPageBean.currentPage }">
+									<li class="page-item active">
+										<a href="${root}board/detail?cr_key=${cr_key}&cr_course=${cr_course}&page=${idx}&brd_search_category=제목&brd_search_content=${brd_title}" class="page-link" style="background-color:white; color:#1D202E;">${idx}</a>
+									</li>
+								</c:when>
+								<c:otherwise>
+									<li class="page-item">
+										<a href="${root}board/detail?cr_key=${cr_key}&cr_course=${cr_course}&page=${idx}&brd_search_category=제목&brd_search_content=${brd_title}" class="page-link">${idx}</a>
+									</li>
+								</c:otherwise>					
+							</c:choose>
 						</c:forEach>
 					</c:if>
+					<!-- 글 내용 검색 -->
 					<c:if test="${brd_content != null && brd_title == null && user_name == null}">
-						<c:forEach var = "idx" begin="${boardPageBean.min}" end="${boardPageBean.max}">
-								<li class="page-item">
-									<a href="${root}board/detail?cr_key=${cr_key}&cr_course=${cr_course}&page=${idx}&brd_search_category=제목&brd_search_content=${brd_content}" class="page-link">${idx}</a>
-								</li>
+						<c:forEach var="idx" begin="${boardPageBean.min}" end="${boardPageBean.max}">
+							<c:choose>
+								<c:when test="${idx == boardPageBean.currentPage }">
+									<li class="page-item active">
+										<a href="${root}board/detail?cr_key=${cr_key}&cr_course=${cr_course}&page=${idx}&brd_search_category=제목&brd_search_content=${brd_content}" class="page-link" style="background-color:white; color:#1D202E;">${idx}</a>
+									</li>
+								</c:when>
+								<c:otherwise>
+									<li class="page-item">
+										<a href="${root}board/detail?cr_key=${cr_key}&cr_course=${cr_course}&page=${idx}&brd_search_category=제목&brd_search_content=${brd_content}" class="page-link">${idx}</a>
+									</li>
+								</c:otherwise>					
+							</c:choose>
 						</c:forEach>
 					</c:if>
+					<!-- 전체 검색 -->
 					<c:if test="${user_name != null && brd_title != null && brd_content != null}">
-						<c:forEach var = "idx" begin="${boardPageBean.min}" end="${boardPageBean.max}">
-								<li class="page-item">
-									<a href="${root}board/detail?cr_key=${cr_key}&cr_course=${cr_course}&page=${idx}&brd_search_category=전체&brd_search_content=${brd_content}" class="page-link">${idx}</a>
-								</li>
+						<c:forEach var="idx" begin="${boardPageBean.min}" end="${boardPageBean.max}">
+							<c:choose>
+								<c:when test="${idx == boardPageBean.currentPage }">
+									<li class="page-item active">
+										<a href="${root}board/detail?cr_key=${cr_key}&cr_course=${cr_course}&page=${idx}&brd_search_category=전체&brd_search_content=${brd_content}" class="page-link" style="background-color:white; color:#1D202E;">${idx}</a>
+									</li>
+								</c:when>
+								<c:otherwise>
+									<li class="page-item">
+										<a href="${root}board/detail?cr_key=${cr_key}&cr_course=${cr_course}&page=${idx}&brd_search_category=전체&brd_search_content=${brd_content}" class="page-link">${idx}</a>
+									</li>
+								</c:otherwise>					
+							</c:choose>
 						</c:forEach>
 					</c:if>
 					<c:choose>

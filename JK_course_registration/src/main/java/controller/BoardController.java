@@ -40,7 +40,7 @@ public class BoardController {
 	@GetMapping("/detail")
 	public String detail(@RequestParam("cr_key") int cr_key, @RequestParam("cr_course") String cr_course,
 									@ModelAttribute("searchBean") BoardBean searchBean, Model model,
-									@RequestParam(value = "page", required = false, defaultValue = "1") int page) {
+									@RequestParam(value = "page", defaultValue = "1") int page) {
 		
 		//게시판 카테고리 식별을 위한 키
 		model.addAttribute("cr_key", cr_key);
@@ -50,11 +50,13 @@ public class BoardController {
 		/*게시글 전체 목록 불러오기*/
 		List<BoardBean> board_list = boardService.getBoardList(cr_key, page);
 		model.addAttribute("board_list", board_list);
-		
 		BoardPageBean boardPageBean = boardService.getTotalContentCnt(cr_key, page);
 		
 		model.addAttribute("boardPageBean", boardPageBean);
 		model.addAttribute("total", "전체");
+		model.addAttribute("page", page);
+		
+		
 		}
 		
 		else if(searchBean.getBrd_search_category().equals("글작성자")) {
@@ -63,13 +65,13 @@ public class BoardController {
 			/*게시글 이름 검색*/
 			List<BoardBean> board_list_name = boardService.nameSearch(cr_key, user_name, page);
 			model.addAttribute("board_list", board_list_name);
-			
 			BoardPageBean boardPageBean = boardService.getUserContentCnt(cr_key, page, user_name);
 			if(boardPageBean.getPageCnt() == 0) {
 				return "board/fail_search";
 			}
 			model.addAttribute("boardPageBean", boardPageBean);
 			model.addAttribute("user_name", user_name);
+			model.addAttribute("page", page);
 		}
 		
 		else if(searchBean.getBrd_search_category().equals("제목")) {
@@ -78,13 +80,13 @@ public class BoardController {
 			/*게시글 제목 검색*/
 			List<BoardBean> board_list_title = boardService.titleSearch(cr_key, brd_title, page);
 			model.addAttribute("board_list", board_list_title);
-			
 			BoardPageBean boardPageBean = boardService.getTitleContentCnt(cr_key, page, brd_title);
 			if(boardPageBean.getPageCnt() == 0) {
 				return "board/fail_search";
 			}
 			model.addAttribute("boardPageBean", boardPageBean);
 			model.addAttribute("brd_title", brd_title);
+			model.addAttribute("page", page);
 			
 		}
 
@@ -94,13 +96,13 @@ public class BoardController {
 			/*게시글의 내용 검색*/
 			List<BoardBean> board_list_content = boardService.contentSearch(cr_key, brd_content, page);
 			model.addAttribute("board_list", board_list_content);
-			
 			BoardPageBean boardPageBean = boardService.getContentCnt(cr_key, page, brd_content);
 			if(boardPageBean.getPageCnt() == 0) {
 				return "board/fail_search";
 			}
 			model.addAttribute("boardPageBean", boardPageBean);
 			model.addAttribute("brd_content", brd_content);
+			model.addAttribute("page", page);
 			
 		}
 		
@@ -112,7 +114,6 @@ public class BoardController {
 			/*게시글 제목 검색*/
 			List<BoardBean> board_list_total = boardService.totalSearch(cr_key, brd_content, user_name, brd_title, page);
 			model.addAttribute("board_list", board_list_total);
-			
 			BoardPageBean boardPageBean = boardService.getTotalSearchContentCnt(cr_key, page, user_name, brd_content, brd_title);
 			if(boardPageBean.getPageCnt() == 0) {
 				return "board/fail_search";
@@ -121,6 +122,7 @@ public class BoardController {
 			model.addAttribute("user_name", user_name);
 			model.addAttribute("brd_content", brd_content);
 			model.addAttribute("brd_title", brd_title);
+			model.addAttribute("page", page);
 			
 		}
 		
@@ -182,9 +184,11 @@ public class BoardController {
 		if(sort.equals("등록순")) {
 			List<BoardBean> commentList = boardService.ascComment(brd_key);
 			model.addAttribute("commentList", commentList);
+			model.addAttribute("sort",sort);
 		} else if(sort.equals("최신순")) {
 			List<BoardBean> commentList = boardService.descComment(brd_key);
 			model.addAttribute("commentList", commentList);
+			model.addAttribute("sort",sort);
 		}
 		
 		//댓글 총 갯수
@@ -206,6 +210,7 @@ public class BoardController {
 		editBoardBean.setBrd_date(readBoard.getBrd_date());
 		editBoardBean.setBrd_title(readBoard.getBrd_title());
 		editBoardBean.setBrd_content(readBoard.getBrd_content());
+		editBoardBean.setBrd_file(readBoard.getBrd_file());
 		
 		//글 수정 메서드
 		
@@ -223,11 +228,15 @@ public class BoardController {
 
 	//게시글 삭제하는 메서드
 	@GetMapping("/delete")
-	public String delete(@RequestParam("brd_key") int brd_key, @RequestParam("cr_key") int cr_key, @RequestParam("cr_course") String cr_course, Model model) {
+	public String delete(@RequestParam("brd_key") int brd_key, @RequestParam("cr_key") int cr_key, 
+						 @RequestParam("cr_course") String cr_course, Model model) {
 		
-		//좋아요 있을 시, 게시글 삭제
+		//좋아요 있을 시, 좋아요 먼저 삭제
 		boardService.delBoardLike(brd_key);
 
+		//댓글 있을 시, 댓글 먼저 삭제
+		boardService.delAllCmt(brd_key);
+		
 		//좋아요 없을 시, 게시글 삭제
 		boardService.delBoard(brd_key);
 		
